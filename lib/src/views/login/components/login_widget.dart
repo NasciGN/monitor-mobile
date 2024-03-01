@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
+import 'package:monitor_mobile/src/core/themes/custom_dark_theme.dart';
 import 'package:monitor_mobile/src/views/login/components/login_form_widget.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -7,13 +9,14 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(1),
+      padding: const EdgeInsets.all(32),
       decoration: _buildDecoration(),
       child: const LoginForm(),
     );
   }
 
   _buildDecoration() {
-    return const BoxDecoration();
+    return BoxDecoration(
+        color: darkScdBgColor, borderRadius: BorderRadius.circular(15));
   }
 }

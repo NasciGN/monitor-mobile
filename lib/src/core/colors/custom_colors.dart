@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
-const darkBgColor = Color(0x000E1012);
-const darkScdBgColor = Color(0x002B2B2B);
-const darkTrdBgColor = Color(0x00454545);
-const darkIcnColor = Color(0x00D0D0D0);
-const darkBtnColor = Color(0x0069808D);
+const darkBgColor = Color.fromARGB(255, 23, 23, 24);
+const darkScdBgColor = Color(0xFF2B2B2B);
+const darkTrdBgColor = Color(0xFF454545);
+const darkIcnColor = Color(0xFFD0D0D0);
+const darkBtnColor = Color(0xFF69808D);
 
-const whiteBgColor = Color(0x00EBEEF0);
-const whiteScdBgColor = Color(0x00FFFFFF);
-const whiteTrdBgColor = Color(0x000A466A);
-const whiteIcnColor = Color(0x008CB2CA);
-const whiteBtnColor = Color(0x000275B8);
+const whiteBgColor = Color(0xFFEBEEF0);
+const whiteScdBgColor = Color(0xFFFFFFFF);
+const whiteTrdBgColor = Color(0xFF0A466A);
+const whiteIcnColor = Color(0xFF8CB2CA);
+const whiteBtnColor = Color(0xFF0275B8);
 
-const activeItmColor = Color(0x0042C039);
-const inactiveItmColor = Color(0x00FF485A);
-const linkColor = Color(0x003B96BA);
+const activeItmColor = Color(0xFF42C039);
+const inactiveItmColor = Color(0xFFFF485A);
+const linkColor = Color(0xFF3B96BA);
 
 const notClassified = {
   "txtColor": 0x0,
-  "bgColor": 0x0097AAB3,
+  "bgColor": 0xFF97AAB3,
 };
 const information = {
-  "txtColor": 0x0000268E,
-  "bgColor": 0x007499FF,
+  "txtColor": Color(0xFF00268E),
+  "bgColor": Color(0xFF7499FF),
 };
 const warning = {
-  "txtColor": 0x008A4D1D,
-  "bgColor": 0x00FFC859,
+  "txtColor": Color(0xFF8A4D1D),
+  "bgColor": Color(0xFFFFC859),
 };
 const average = {
-  "txtColor": 0x00BB5100,
-  "bgColor": 0x00FFA059,
+  "txtColor": Color(0xFFBB5100),
+  "bgColor": Color(0xFFFFA059),
 };
 const high = {
-  "txtColor": 0x0052190B,
-  "bgColor": 0x00FFA059,
+  "txtColor": Color(0xFF52190B),
+  "bgColor": Color(0xFFFFA059),
 };
 const disaster = {
-  "txtColor": 0x0,
-  "bgColor": 0x00FFA059,
+  "txtColor": Color(0x0),
+  "bgColor": Color(0xFFFFA059),
 };
 
 Object map<String, int>(String severity) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/user/user_api.dart';
 import 'package:monitor_mobile/src/views/login/components/server_url_dialog_widget.dart';
 
 class LoginForm extends StatefulWidget {
@@ -10,6 +11,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  late String serverResult;
+  final UserApi userapi = Get.find<UserApi>();
   final _formKey = GlobalKey<FormState>();
   final _controllerUrl = TextEditingController().obs;
   final _controllerUser = TextEditingController();
@@ -21,30 +24,60 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          _buildUserField(),
-          _buildPassField(),
-          _buildServerRegistrationBtn(),
-          _buildLoginBtn()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildUserField(),
+            const SizedBox(
+              height: 30,
+            ),
+            _buildPassField(),
+            const SizedBox(
+              height: 16,
+            ),
+            _buildServerRegistrationBtn(),
+            _buildLoginBtn()
+          ],
+        ),
       ),
     );
   }
 
   _buildUserField() {
     return TextFormField(
+      cursorColor: Colors.white,
+      style: const TextStyle(color: Colors.white),
       controller: _controllerUser,
-      decoration: const InputDecoration(label: Text('Usuário')),
+      decoration: _buildTextFormFieldDecoration('Usuário'),
     );
   }
 
   _buildPassField() {
     return TextFormField(
+      cursorColor: Colors.white,
+      style: const TextStyle(color: Colors.white),
       controller: _controllerPass,
       obscureText: isObscure ? true : false,
-      decoration: const InputDecoration(label: Text('Senha')),
+      decoration: _buildTextFormFieldDecoration('Senha'),
     );
+  }
+
+  _buildTextFormFieldDecoration(String label) {
+    return InputDecoration(
+        label: Text(label),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+              color:
+                  Colors.white), // Define a cor da borda quando não selecionado
+        ),
+        labelStyle: const TextStyle(color: Colors.white),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context)
+                  .colorScheme
+                  .tertiary), // Define a cor da borda quando selecionado
+        ),
+        focusColor: Theme.of(context).colorScheme.tertiary);
   }
 
   _buildServerRegistrationBtn() {
@@ -52,18 +85,26 @@ class _LoginFormState extends State<LoginForm> {
         alignment: Alignment.centerLeft,
         child: GestureDetector(
           onTap: () async {
-            final result = _buildGetUrlFromDialog;
-            print(result);
+            final result =
+                await Get.dialog<String>(ServerRegistration(_controllerUrl));
+
+            setState(() {
+              serverResult = result!;
+            });
           },
-          child: Container(
-            height: 20,
-            width: 70,
-            child: const Text(
-              'Cadastrar Servidor',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          child: _buildTextBtn(),
         ));
+  }
+
+  _buildTextBtn() {
+    return const SizedBox(
+      height: 50,
+      width: 200,
+      child: Text(
+        'Cadastrar Servidor',
+        style: TextStyle(color: Colors.white),
+      ),
+    );
   }
 
   _buildLoginBtn() {
@@ -75,12 +116,13 @@ class _LoginFormState extends State<LoginForm> {
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 111, 116, 111),
-            borderRadius: BorderRadius.circular(2)),
+            color: Theme.of(context).colorScheme.tertiary,
+            borderRadius: BorderRadius.circular(10)),
         child: const Center(
             child: Text(
           'Acessar',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         )),
       ),
     );
@@ -101,11 +143,8 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  _buildCallLoginApi() {
-    return '';
-  }
-
-  _buildGetUrlFromDialog() {
-    return Get.dialog<String>(ServerRegistration(_controllerUrl));
+  _buildCallLoginApi() async {
+    return await userapi.login(
+        _controllerPass.text, _controllerPass.text, serverResult);
   }
 }

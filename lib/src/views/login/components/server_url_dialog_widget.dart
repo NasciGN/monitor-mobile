@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 
 class ServerRegistration extends StatelessWidget {
   final Rx<TextEditingController> controllerUrl;
@@ -9,20 +10,25 @@ class ServerRegistration extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _urlController = TextEditingController();
     return AlertDialog(
-      title: const Text('Configurar Servidor'),
-      backgroundColor: Theme.of(context).dialogBackgroundColor,
+      title: const Text(
+        'Configurar Servidor',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: darkScdBgColor,
+      shape: const BeveledRectangleBorder(),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextFormField(
+            style: TextStyle(color: Colors.white),
             controller: _urlController,
-            decoration: const InputDecoration(labelText: 'URL do Servidor'),
+            decoration: _buildTextFormFieldDecoration('URL do Servidor'),
           ),
           const SizedBox(height: 10),
         ],
       ),
       actions: [
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -37,5 +43,21 @@ class ServerRegistration extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _buildTextFormFieldDecoration(String label) {
+    return InputDecoration(
+        label: Text(label),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+              color:
+                  Colors.white), // Define a cor da borda quando não selecionado
+        ),
+        labelStyle: const TextStyle(color: Colors.white),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+              color: darkBtnColor), // Define a cor da borda quando selecionado
+        ),
+        focusColor: darkBtnColor);
   }
 }

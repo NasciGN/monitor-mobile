@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/themes/custom_dark_theme.dart';
 
 import 'package:monitor_mobile/src/views/login/components/login_widget.dart';
@@ -15,14 +16,27 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: darkBgColor,
       body: _buildBody(),
     );
   }
 
   _buildBody() {
-    return const Column(
-      children: [LogoWidget(), LoginWidget()],
+    return const SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 150),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            LogoWidget(),
+            SizedBox(
+              height: 40,
+            ),
+            LoginWidget()
+          ],
+        ),
+      ),
     );
   }
 }
