@@ -20,6 +20,7 @@ class ServerRegistration extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextFormField(
+            cursorColor: Colors.white,
             style: TextStyle(color: Colors.white),
             controller: _urlController,
             decoration: _buildTextFormFieldDecoration('URL do Servidor'),

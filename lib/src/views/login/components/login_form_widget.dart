@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/user/user_api.dart';
 import 'package:monitor_mobile/src/views/login/components/server_url_dialog_widget.dart';
@@ -48,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
       cursorColor: Colors.white,
       style: const TextStyle(color: Colors.white),
       controller: _controllerUser,
-      decoration: _buildTextFormFieldDecoration('Usuário'),
+      decoration: _buildTextFieldUserdDecoration('Usuário'),
     );
   }
 
@@ -58,12 +59,52 @@ class _LoginFormState extends State<LoginForm> {
       style: const TextStyle(color: Colors.white),
       controller: _controllerPass,
       obscureText: isObscure ? true : false,
-      decoration: _buildTextFormFieldDecoration('Senha'),
+      decoration: _buildTextFieldPassdDecoration('Senha'),
     );
   }
 
-  _buildTextFormFieldDecoration(String label) {
+  _buildTextFieldUserdDecoration(String label) {
     return InputDecoration(
+        label: Text(label),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+              color:
+                  Colors.white), // Define a cor da borda quando não selecionado
+        ),
+        labelStyle: const TextStyle(color: Colors.white),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context)
+                  .colorScheme
+                  .tertiary), // Define a cor da borda quando selecionado
+        ),
+        focusColor: Theme.of(context).colorScheme.tertiary);
+  }
+
+  _buildTextFieldPassdDecoration(String label) {
+    return InputDecoration(
+        suffixIcon: Align(
+          widthFactor: 3.0,
+          heightFactor: 1.0,
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                isObscure = !isObscure;
+              });
+            },
+            child: isObscure
+                ? const FaIcon(
+                    FontAwesomeIcons.eye,
+                    color: Colors.white,
+                    size: 20,
+                  )
+                : const FaIcon(
+                    FontAwesomeIcons.solidEye,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+          ),
+        ),
         label: Text(label),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -139,12 +180,14 @@ class _LoginFormState extends State<LoginForm> {
       setState(() {
         isLoading = false;
       });
-      Get.offNamed("/home_dashboard");
+      if (userapi.apicode.isNotEmpty) {
+        Get.offNamed("/home");
+      }
     }
   }
 
   _buildCallLoginApi() async {
     return await userapi.login(
-        _controllerPass.text, _controllerPass.text, serverResult);
+        _controllerUser.text, _controllerPass.text, serverResult);
   }
 }

@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   _buildColumn() {
     return Column(
-      children: [],
+      children: [Text('data')],
     );
   }
 }
