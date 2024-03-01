@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
-import 'package:monitor_mobile/src/core/themes/custom_dark_theme.dart';
 
 import 'package:monitor_mobile/src/views/login/components/login_widget.dart';
 import 'package:monitor_mobile/src/views/login/components/logo_widget.dart';

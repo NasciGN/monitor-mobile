@@ -27,9 +27,9 @@ class Host {
         id: json['hostid'],
         host: json['host'],
         name: json['name'] ?? json['host'],
-        status: json['status'],
-        inventoryMode: json['inventory_mode'],
-        activeAvailable: json['active_available'],
+        status: json['status'] ?? '',
+        inventoryMode: json['inventory_mode'] ?? '',
+        activeAvailable: json['active_available'] ?? '',
       );
     } else {
       return Host(

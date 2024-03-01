@@ -10,9 +10,9 @@ class ServerRegistration extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _urlController = TextEditingController();
     return AlertDialog(
-      title: const Text(
+      title: Text(
         'Configurar Servidor',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.labelMedium,
       ),
       backgroundColor: darkScdBgColor,
       shape: const BeveledRectangleBorder(),
@@ -21,9 +21,10 @@ class ServerRegistration extends StatelessWidget {
         children: [
           TextFormField(
             cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
+            style: Theme.of(context).textTheme.labelMedium,
             controller: _urlController,
-            decoration: _buildTextFormFieldDecoration('URL do Servidor'),
+            decoration:
+                _buildTextFormFieldDecoration('URL do Servidor', context),
           ),
           const SizedBox(height: 10),
         ],
@@ -46,7 +47,7 @@ class ServerRegistration extends StatelessWidget {
     );
   }
 
-  _buildTextFormFieldDecoration(String label) {
+  _buildTextFormFieldDecoration(String label, context) {
     return InputDecoration(
         label: Text(label),
         enabledBorder: const OutlineInputBorder(
@@ -54,7 +55,7 @@ class ServerRegistration extends StatelessWidget {
               color:
                   Colors.white), // Define a cor da borda quando não selecionado
         ),
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: Theme.of(context).textTheme.labelMedium,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
               color: darkBtnColor), // Define a cor da borda quando selecionado

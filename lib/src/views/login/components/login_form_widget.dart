@@ -47,7 +47,7 @@ class _LoginFormState extends State<LoginForm> {
   _buildUserField() {
     return TextFormField(
       cursorColor: Colors.white,
-      style: const TextStyle(color: Colors.white),
+      style: Theme.of(context).textTheme.labelMedium,
       controller: _controllerUser,
       decoration: _buildTextFieldUserdDecoration('Usuário'),
     );
@@ -56,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
   _buildPassField() {
     return TextFormField(
       cursorColor: Colors.white,
-      style: const TextStyle(color: Colors.white),
+      style: Theme.of(context).textTheme.labelMedium,
       controller: _controllerPass,
       obscureText: isObscure ? true : false,
       decoration: _buildTextFieldPassdDecoration('Senha'),
@@ -65,13 +65,16 @@ class _LoginFormState extends State<LoginForm> {
 
   _buildTextFieldUserdDecoration(String label) {
     return InputDecoration(
-        label: Text(label),
+        label: Text(
+          label,
+          style: _buildTextLabelStyle(),
+        ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
               color:
                   Colors.white), // Define a cor da borda quando não selecionado
         ),
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: _buildTextLabelStyle(),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: Theme.of(context)
@@ -105,13 +108,16 @@ class _LoginFormState extends State<LoginForm> {
                   ),
           ),
         ),
-        label: Text(label),
+        label: Text(
+          label,
+          style: _buildTextLabelStyle(),
+        ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
               color:
                   Colors.white), // Define a cor da borda quando não selecionado
         ),
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: _buildTextLabelStyle(),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: Theme.of(context)
@@ -119,6 +125,10 @@ class _LoginFormState extends State<LoginForm> {
                   .tertiary), // Define a cor da borda quando selecionado
         ),
         focusColor: Theme.of(context).colorScheme.tertiary);
+  }
+
+  _buildTextLabelStyle() {
+    return Theme.of(context).textTheme.labelMedium;
   }
 
   _buildServerRegistrationBtn() {
@@ -138,44 +148,32 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   _buildTextBtn() {
-    return const SizedBox(
-      height: 50,
-      width: 200,
+    return SizedBox(
+      height: 60,
+      width: 500,
       child: Text(
         'Cadastrar Servidor',
-        style: TextStyle(color: Colors.white),
+        style: Theme.of(context).textTheme.labelSmall,
       ),
     );
   }
 
   _buildLoginBtn() {
-    return GestureDetector(
-      onTap: () async {
-        _buildValidateForm();
-      },
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.tertiary,
-            borderRadius: BorderRadius.circular(10)),
-        child: const Center(
-            child: Text(
+    return ElevatedButton(
+        onPressed: () => _buildValidateForm(),
+        child: const Text(
           'Acessar',
-          style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-        )),
-      ),
-    );
+          style: TextStyle(color: Colors.white),
+        ));
   }
 
-  _buildValidateForm() {
+  _buildValidateForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });
 
-      _buildCallLoginApi();
+      await _buildCallLoginApi();
 
       setState(() {
         isLoading = false;

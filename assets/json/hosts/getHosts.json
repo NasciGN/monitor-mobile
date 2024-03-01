@@ -1,0 +1,23 @@
+{
+    "jsonrpc": "2.0",
+    "method": "host.get",
+    "params": {
+        "output": [
+            "hostid",
+            "host",
+            "name",
+            "inventoryMode",
+            "activeAvailable"
+        ],
+        "search": {
+            "name": ""
+        },
+        "selectHostGroups": "extend",
+        "selectParentTemplates": [
+            "templateid",
+            "name"
+        ]
+    },
+    "id": 1,
+    "auth": ""
+}
