@@ -17,8 +17,8 @@ class InterfaceDetails {
     };
   }
 
-  factory InterfaceDetails.fromJson(Map<String, dynamic>? json) {
-    if (json != null && json.isNotEmpty) {
+  factory InterfaceDetails.fromJson(Map<String, dynamic> json) {
+    if (json.isNotEmpty) {
       return InterfaceDetails(
         version: json['version'],
         bulk: json['bulk'],

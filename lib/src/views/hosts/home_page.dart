@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
 import 'package:monitor_mobile/src/models/host.dart';
-import 'package:monitor_mobile/src/views/home/widgets/drawer_widget.dart';
-import 'package:monitor_mobile/src/views/home/widgets/host_card.dart';
+import 'package:monitor_mobile/src/views/hosts/widgets/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/widgets/host_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,17 +41,49 @@ class _HomePageState extends State<HomePage> {
       Host newHost = Host.fromJson(host);
       hosts.add(newHost);
     }
+
+    await _getHostInterfaces();
+
+    for (int i = 0; i < 10; i++) {
+      print(hosts[i].hostInterfaces);
+    }
+
     setState(() {
       searchHosts = List.from(hosts);
       isLoading = false;
     });
   }
 
+  Future<void> _getHostInterfaces() async {
+    final List<Future> futureHostInterfaces = [];
+    String getCall = await rootBundle
+        .loadString('assets/json/host_interface/getHostInterfaces.json');
+    final json = await jsonDecode(getCall);
+
+    for (var host in hosts) {
+      json["params"]["hostids"] = host.id;
+      futureHostInterfaces.add(getData.getData(json));
+    }
+
+    final List<dynamic> data = await Future.wait(futureHostInterfaces);
+
+    for (int i = 0; i < hosts.length; i++) {
+      Host host = hosts[i];
+      var interfaceData = data[i];
+      host.hostInterfaces = Host.interfaceFromJson(interfaceData);
+    }
+  }
+
   void _searchData(String query) {
     setState(() {
       searchHosts = hosts
           .where((element) =>
-              element.name.toLowerCase().contains(query.toLowerCase()))
+              element.host.toLowerCase().contains(query.toLowerCase()) ||
+              element.name.toLowerCase().contains(query.toLowerCase()) ||
+              element.hostInterfaces
+                  .any((element) => element.ip.contains(query)) ||
+              element.hostGroups.any((element) =>
+                  element.name.toLowerCase().contains(query.toLowerCase())))
           .toList();
     });
   }
@@ -91,7 +124,7 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 20,
         ),
-        isLoading && searchHosts.isNotEmpty
+        isLoading && searchHosts.isEmpty
             ? _buildCircularLoading()
             : _buildHostsListView()
       ],

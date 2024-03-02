@@ -7,7 +7,8 @@ ThemeData customDarkTheme() {
       background: darkBgColor,
       primary: darkScdBgColor,
       secondary: darkTrdBgColor,
-      tertiary: darkBtnColor,
+      tertiary: activeItmColor,
+      error: inactiveItmColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -31,7 +32,7 @@ ThemeData customDarkTheme() {
       titleSmall: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
       displayLarge: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60),
       displayMedium: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
       displaySmall: TextStyle(

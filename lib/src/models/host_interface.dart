@@ -49,8 +49,8 @@ class Interface {
     };
   }
 
-  factory Interface.fromJson(Map<String, dynamic>? json) {
-    if (json != null && json.isNotEmpty) {
+  factory Interface.fromJson(Map<String, dynamic> json) {
+    if (json.isNotEmpty) {
       return Interface(
         interfaceId: json['interfaceid'],
         hostId: json['hostid'],
@@ -64,7 +64,9 @@ class Interface {
         error: json['error'],
         errorsFrom: json['errors_from'],
         disableUntil: json['disable_until'],
-        details: InterfaceDetails.fromJson(json['details']),
+        details: json['type'] == "2"
+            ? InterfaceDetails.fromJson(json['details'])
+            : InterfaceDetails(version: '', bulk: '', community: ''),
       );
     } else {
       return Interface(

@@ -1,3 +1,5 @@
+import 'host_interface.dart';
+
 import 'group.dart';
 import 'template.dart';
 
@@ -5,6 +7,7 @@ class Host {
   String id, host, name, description, status, inventoryMode, activeAvailable;
   List<Template> parentTemplates;
   List<Group> hostGroups;
+  List<Interface> hostInterfaces;
 
   Host({
     required this.id,
@@ -16,6 +19,7 @@ class Host {
     required this.activeAvailable,
     this.parentTemplates = const [],
     this.hostGroups = const [],
+    this.hostInterfaces = const [],
   });
 
   Map<String, dynamic> toMap() {
@@ -31,6 +35,18 @@ class Host {
           parentTemplates.map((template) => template.toMap()).toList(),
       'host_groups': hostGroups.map((group) => group.toMap()).toList(),
     };
+  }
+
+  static List<Interface> interfaceFromJson(List<dynamic> jsonList) {
+    List<Interface> hostInterfaces = [];
+
+    for (var interfaceData in jsonList) {
+      print(interfaceData["ip"]);
+      Interface newInterface = Interface.fromJson(interfaceData);
+      hostInterfaces.add(newInterface);
+    }
+
+    return hostInterfaces;
   }
 
   factory Host.fromJson(Map<String, dynamic>? json) {
