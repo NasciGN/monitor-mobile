@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 
-import 'package:monitor_mobile/src/views/login/components/login_widget.dart';
+import 'package:monitor_mobile/src/views/login/components/form/login_widget.dart';
 import 'package:monitor_mobile/src/views/login/components/logo_widget.dart';
 
 class LoginPage extends StatefulWidget {

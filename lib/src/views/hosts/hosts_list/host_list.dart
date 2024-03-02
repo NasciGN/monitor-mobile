@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
 import 'package:monitor_mobile/src/models/host.dart';
-import 'package:monitor_mobile/src/views/hosts/widgets/drawer_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/widgets/host_card.dart';
+import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/hosts_list/components/host_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   List<Host> searchHosts = [];
   GetData getData = GetData();
   bool isLoading = true;
+  var teste;
 
   Future<void> _fetchHosts() async {
     setState(() {
@@ -35,19 +37,12 @@ class _HomePageState extends State<HomePage> {
     String getCall =
         await rootBundle.loadString('assets/json/hosts/getHosts.json');
     final json = await jsonDecode(getCall);
-
     List<dynamic> data = await getData.getData(json);
     for (var host in data) {
       Host newHost = Host.fromJson(host);
       hosts.add(newHost);
     }
-
     await _getHostInterfaces();
-
-    for (int i = 0; i < 10; i++) {
-      print(hosts[i].hostInterfaces);
-    }
-
     setState(() {
       searchHosts = List.from(hosts);
       isLoading = false;
@@ -131,6 +126,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  _buildHostsListView() {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: searchHosts.length,
+        itemBuilder: (context, index) {
+          return HostCard(host: searchHosts[index]);
+        },
+      ),
+    );
+  }
+
+  Align _buildCircularLoading() {
+    return const Align(
+      alignment: Alignment.center,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
   TextField _buildTextField() {
     return TextField(
       onChanged: (value) => _searchData(value),
@@ -160,27 +177,5 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white), // Define a cor da borda quando selecionado
         ),
         focusColor: Theme.of(context).colorScheme.tertiary);
-  }
-
-  Expanded _buildHostsListView() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: searchHosts.length,
-        itemBuilder: (context, index) {
-          return HostCard(host: searchHosts[index]);
-        },
-      ),
-    );
-  }
-
-  Align _buildCircularLoading() {
-    return const Align(
-      alignment: Alignment.center,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
-        ),
-      ),
-    );
   }
 }

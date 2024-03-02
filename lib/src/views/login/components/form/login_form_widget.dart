@@ -70,17 +70,12 @@ class _LoginFormState extends State<LoginForm> {
           style: _buildTextLabelStyle(),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-              color:
-                  Colors.white), // Define a cor da borda quando não selecionado
+          borderSide: BorderSide(color: Colors.white),
         ),
         labelStyle: _buildTextLabelStyle(),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Theme.of(context)
-                  .colorScheme
-                  .tertiary), // Define a cor da borda quando selecionado
-        ),
+            borderSide:
+                BorderSide(color: Theme.of(context).colorScheme.tertiary)),
         focusColor: Theme.of(context).colorScheme.tertiary);
   }
 
@@ -113,16 +108,11 @@ class _LoginFormState extends State<LoginForm> {
           style: _buildTextLabelStyle(),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-              color:
-                  Colors.white), // Define a cor da borda quando não selecionado
+          borderSide: BorderSide(color: Colors.white),
         ),
         labelStyle: _buildTextLabelStyle(),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Theme.of(context)
-                  .colorScheme
-                  .tertiary), // Define a cor da borda quando selecionado
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.tertiary),
         ),
         focusColor: Theme.of(context).colorScheme.tertiary);
   }

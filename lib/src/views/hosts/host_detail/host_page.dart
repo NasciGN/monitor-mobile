@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/models/host.dart';
-import 'package:monitor_mobile/src/views/host_page/widgets/card_info_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/host_detail/components/widgets/card_info_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/host_detail/components/widgets/host_detail_form.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({super.key});
@@ -37,10 +38,7 @@ class _HostPageState extends State<HostPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                host.name,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
+              _buildPageTitle(context),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
                 padding:
@@ -51,44 +49,60 @@ class _HostPageState extends State<HostPage> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Geral',
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                      Expanded(
-                        child: GridView.count(
-                          physics: const NeverScrollableScrollPhysics(),
-                          primary: false,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 30,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: CardInfo(
-                                  title: 'Itens',
-                                  theme:
-                                      Theme.of(context).colorScheme.tertiary),
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: CardInfo(
-                                  title: 'Incidentes',
-                                  theme: Theme.of(context).colorScheme.error),
-                            ),
-                          ],
-                        ),
-                      ),
+                      _buildCardTitle(context, 'Geral'),
+                      _buildGridView(context),
                     ]),
               ),
               Container(
                 height: 1000,
                 width: double.infinity,
                 decoration: _buildContainerDecoration(context),
+                child: HostDetailForm(
+                  host: host,
+                ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Text _buildPageTitle(BuildContext context) {
+    return Text(
+      host.name,
+      style: Theme.of(context).textTheme.displayMedium,
+    );
+  }
+
+  Text _buildCardTitle(BuildContext context, String title) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.displayMedium,
+    );
+  }
+
+  Expanded _buildGridView(BuildContext context) {
+    return Expanded(
+      child: GridView.count(
+        physics: const NeverScrollableScrollPhysics(),
+        primary: false,
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 30,
+        children: [
+          GestureDetector(
+            onTap: () {},
+            child: CardInfo(
+                title: 'Itens', theme: Theme.of(context).colorScheme.tertiary),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: CardInfo(
+                title: 'Incidentes',
+                theme: Theme.of(context).colorScheme.error),
+          ),
+        ],
       ),
     );
   }
