@@ -6,8 +6,10 @@
             "hostid",
             "host",
             "name",
-            "inventoryMode",
-            "activeAvailable"
+            "description",
+            "status",
+            "inventory_mode",
+            "active_available"
         ],
         "search": {
             "name": ""

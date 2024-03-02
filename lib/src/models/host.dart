@@ -1,39 +1,72 @@
+import 'group.dart';
+import 'template.dart';
+
 class Host {
-  String id, host, name, status, inventoryMode, activeAvailable;
+  String id, host, name, description, status, inventoryMode, activeAvailable;
+  List<Template> parentTemplates;
+  List<Group> hostGroups;
 
   Host({
     required this.id,
     required this.host,
     this.name = '',
+    this.description = '',
     required this.status,
     required this.inventoryMode,
     required this.activeAvailable,
+    this.parentTemplates = const [],
+    this.hostGroups = const [],
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'hostid': id,
       'host': host,
       'name': name,
+      'description': description,
       'status': status,
       'inventory_mode': inventoryMode,
       'active_available': activeAvailable,
+      'parent_templates':
+          parentTemplates.map((template) => template.toMap()).toList(),
+      'host_groups': hostGroups.map((group) => group.toMap()).toList(),
     };
   }
 
   factory Host.fromJson(Map<String, dynamic>? json) {
     if (json!.isNotEmpty) {
+      // Processar os parent templates
+      List<Template> parentTemplates =
+          (json['parentTemplates'] as List<dynamic>)
+              .map((templateJson) => Template.fromJson(templateJson))
+              .toList();
+
+      // Processar os host groups
+      List<Group> hostGroups = (json['hostgroups'] as List<dynamic>)
+          .map((groupJson) => Group.fromJson(groupJson))
+          .toList();
+
       return Host(
         id: json['hostid'],
-        host: json['host'],
-        name: json['name'] ?? json['host'],
+        host: json['host'] ?? '',
+        name: json['name'] ?? '',
+        description: json['description'] ?? '',
         status: json['status'] ?? '',
         inventoryMode: json['inventory_mode'] ?? '',
         activeAvailable: json['active_available'] ?? '',
+        parentTemplates: parentTemplates,
+        hostGroups: hostGroups,
       );
     } else {
       return Host(
-          id: '', host: '', status: '', inventoryMode: '', activeAvailable: '');
+        id: '',
+        host: '',
+        status: '',
+        inventoryMode: '',
+        activeAvailable: '',
+        parentTemplates: [],
+        hostGroups: [],
+      );
     }
   }
 }
