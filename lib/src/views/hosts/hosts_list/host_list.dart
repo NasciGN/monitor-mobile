@@ -44,9 +44,15 @@ class _HomePageState extends State<HomePage> {
     }
     await _getHostInterfaces();
     setState(() {
+      sort();
       searchHosts = List.from(hosts);
+
       isLoading = false;
     });
+  }
+
+  void sort() {
+    hosts.sort((Host a, Host b) => a.host.compareTo(b.host));
   }
 
   Future<void> _getHostInterfaces() async {
@@ -76,9 +82,7 @@ class _HomePageState extends State<HomePage> {
               element.host.toLowerCase().contains(query.toLowerCase()) ||
               element.name.toLowerCase().contains(query.toLowerCase()) ||
               element.hostInterfaces
-                  .any((element) => element.ip.contains(query)) ||
-              element.hostGroups.any((element) =>
-                  element.name.toLowerCase().contains(query.toLowerCase())))
+                  .any((element) => element.ip.contains(query)))
           .toList();
     });
   }
@@ -96,6 +100,7 @@ class _HomePageState extends State<HomePage> {
   _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
+      scrolledUnderElevation: 0,
       elevation: 0,
       title: Text(
         'Dashboard',

@@ -22,15 +22,12 @@ class _CustomHostFormState extends State<CustomHostForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: TextFormField(
-        style: Theme.of(context).textTheme.labelMedium,
-        enabled: _hostFormControler.isEdit,
-        textInputAction: TextInputAction.next,
-        controller: _hostFormControler.host,
-        decoration: _buildDecoration(context),
-      ),
+    return TextFormField(
+      style: Theme.of(context).textTheme.labelMedium,
+      enabled: _hostFormControler.isEdit,
+      textInputAction: TextInputAction.next,
+      controller: _hostFormControler.host,
+      decoration: _buildDecoration(context),
     );
   }
 

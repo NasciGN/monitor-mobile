@@ -5,17 +5,16 @@ import 'package:monitor_mobile/src/models/template.dart';
 
 class HostFormController extends GetxController {
   bool isEdit = false;
-
-  TextEditingController id = TextEditingController();
   TextEditingController host = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController description = TextEditingController();
   final parentTemplates = List<Template>;
   final ihostGroups = List<Group>;
 
   @override
   onClose() {
-    id.dispose();
     host.dispose();
     name.dispose();
+    description.dispose();
   }
 }

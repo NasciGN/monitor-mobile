@@ -3,33 +3,37 @@ import 'package:get/get.dart';
 
 import '../../../../../controllers/hosts/hosts_form_controller.dart';
 
-class CustomHostNameForm extends StatefulWidget {
-  const CustomHostNameForm({super.key, required this.name});
-
-  final String name;
+class CustomDescriptionForm extends StatefulWidget {
+  const CustomDescriptionForm({super.key, required this.host});
+  final String host;
 
   @override
-  State<CustomHostNameForm> createState() => _CustomHostNameFormState();
+  State<CustomDescriptionForm> createState() => _CustomDescriptionFormState();
 }
 
-class _CustomHostNameFormState extends State<CustomHostNameForm> {
+class _CustomDescriptionFormState extends State<CustomDescriptionForm> {
   final _hostFormControler = Get.put(HostFormController());
-  bool isEdit = false;
 
   @override
   void initState() {
     super.initState();
-    _hostFormControler.name.text = widget.name;
+    _hostFormControler.description.text = widget.host;
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      enabled: _hostFormControler.isEdit,
-      style: Theme.of(context).textTheme.labelMedium,
-      textInputAction: TextInputAction.next,
-      controller: _hostFormControler.name,
-      decoration: _buildDecoration(context),
+    return Column(
+      children: [
+        TextFormField(
+          style: Theme.of(context).textTheme.labelMedium,
+          minLines: 1,
+          maxLines: 10,
+          enabled: _hostFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostFormControler.description,
+          decoration: _buildDecoration(context),
+        ),
+      ],
     );
   }
 
@@ -38,7 +42,7 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
         fillColor: Theme.of(context).colorScheme.primary,
         filled: true,
         label: Text(
-          'Nome visível',
+          'Descrição',
           style: Theme.of(context).textTheme.labelMedium,
         ),
         enabledBorder: const OutlineInputBorder(

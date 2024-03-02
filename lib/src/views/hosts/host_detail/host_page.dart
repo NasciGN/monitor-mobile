@@ -12,13 +12,14 @@ class HostPage extends StatefulWidget {
   State<HostPage> createState() => _HostPageState();
 }
 
-final Host host = Get.arguments;
-
 class _HostPageState extends State<HostPage> {
+  final Host host = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -54,7 +55,6 @@ class _HostPageState extends State<HostPage> {
                     ]),
               ),
               Container(
-                height: 1000,
                 width: double.infinity,
                 decoration: _buildContainerDecoration(context),
                 child: HostDetailForm(

@@ -41,7 +41,6 @@ class Host {
     List<Interface> hostInterfaces = [];
 
     for (var interfaceData in jsonList) {
-      print(interfaceData["ip"]);
       Interface newInterface = Interface.fromJson(interfaceData);
       hostInterfaces.add(newInterface);
     }

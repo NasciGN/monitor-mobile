@@ -18,7 +18,8 @@
         "selectParentTemplates": [
             "templateid",
             "name"
-        ]
+        ],
+        "limit": ""
     },
     "id": 1,
     "auth": ""
