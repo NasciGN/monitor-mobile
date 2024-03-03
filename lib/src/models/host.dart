@@ -1,14 +1,14 @@
 import 'host_interface.dart';
-
 import 'group.dart';
 import 'template.dart';
+import 'host_inventory.dart';
 
 class Host {
   String id, host, name, description, status, inventoryMode, activeAvailable;
   List<Template> parentTemplates;
   List<Group> hostGroups;
   List<Interface> hostInterfaces;
-
+  Inventory? inventory;
   Host({
     required this.id,
     required this.host,
@@ -20,6 +20,7 @@ class Host {
     this.parentTemplates = const [],
     this.hostGroups = const [],
     this.hostInterfaces = const [],
+    this.inventory,
   });
 
   Map<String, dynamic> toMap() {
@@ -50,16 +51,19 @@ class Host {
 
   factory Host.fromJson(Map<String, dynamic>? json) {
     if (json!.isNotEmpty) {
-      // Processar os parent templates
       List<Template> parentTemplates =
           (json['parentTemplates'] as List<dynamic>)
               .map((templateJson) => Template.fromJson(templateJson))
               .toList();
-
-      // Processar os host groups
       List<Group> hostGroups = (json['hostgroups'] as List<dynamic>)
           .map((groupJson) => Group.fromJson(groupJson))
           .toList();
+
+      Map<String, dynamic>? inventoryJson = json['inventory'];
+      Inventory? inventory;
+      if (inventoryJson != null && inventoryJson.isNotEmpty) {
+        inventory = Inventory.fromJson(inventoryJson);
+      }
 
       return Host(
         id: json['hostid'],
@@ -71,6 +75,7 @@ class Host {
         activeAvailable: json['active_available'] ?? '',
         parentTemplates: parentTemplates,
         hostGroups: hostGroups,
+        inventory: inventory,
       );
     } else {
       return Host(

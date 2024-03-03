@@ -8,7 +8,7 @@ class ServerRegistration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _urlController = TextEditingController();
+    TextEditingController urlController = TextEditingController();
     return AlertDialog(
       title: Text(
         'Configurar Servidor',
@@ -22,7 +22,7 @@ class ServerRegistration extends StatelessWidget {
           TextFormField(
             cursorColor: Colors.white,
             style: Theme.of(context).textTheme.labelMedium,
-            controller: _urlController,
+            controller: urlController,
             decoration:
                 _buildTextFormFieldDecoration('URL do Servidor', context),
           ),
@@ -38,7 +38,7 @@ class ServerRegistration extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            String url = _urlController.text;
+            String url = urlController.text;
             Get.back(result: url);
           },
           child: const Text('Salvar'),

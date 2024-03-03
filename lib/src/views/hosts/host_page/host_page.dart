@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/models/host.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail/components/widgets/card_info_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail/components/widgets/host_detail_form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/card_info_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/host_details/host_detail_form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/host_inventory_form.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({super.key});
@@ -60,6 +61,11 @@ class _HostPageState extends State<HostPage> {
                 child: HostDetailForm(
                   host: host,
                 ),
+              ),
+              Container(
+                width: double.infinity,
+                decoration: _buildContainerDecoration(context),
+                child: HostInventoryForm(host: host),
               )
             ],
           ),

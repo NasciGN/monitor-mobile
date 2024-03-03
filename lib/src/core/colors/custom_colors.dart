@@ -37,7 +37,7 @@ const high = {
   "bgColor": Color(0xFFFFA059),
 };
 const disaster = {
-  "txtColor": Color(0x0),
+  "txtColor": Color(0xFFFFA059),
   "bgColor": Color(0xFFFFA059),
 };
 

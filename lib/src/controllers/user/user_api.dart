@@ -17,8 +17,6 @@ class UserApi extends GetxController {
     String result = await jsonStringRequest(requestBody, urlAPI);
     apicode.value = result;
     url.value = urlAPI;
-
-    print('API Code: ${apicode.value}');
     update();
   }
 
