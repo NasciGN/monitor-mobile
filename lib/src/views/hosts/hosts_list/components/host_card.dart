@@ -39,6 +39,7 @@ class _HostCardState extends State<HostCard> {
                 Expanded(
                   child: Text(
                     widget.host.name,
+                    maxLines: 2,
                     style: Theme.of(context).textTheme.displaySmall,
                     overflow: TextOverflow.ellipsis,
                   ),

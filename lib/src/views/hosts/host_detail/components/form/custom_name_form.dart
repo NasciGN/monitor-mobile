@@ -29,6 +29,7 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
       style: Theme.of(context).textTheme.labelMedium,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.name,
+      maxLines: 2,
       decoration: _buildDecoration(context),
     );
   }
@@ -39,6 +40,8 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
         filled: true,
         label: Text(
           'Nome visível',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
           style: Theme.of(context).textTheme.labelMedium,
         ),
         enabledBorder: const OutlineInputBorder(

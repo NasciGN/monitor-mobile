@@ -27,6 +27,7 @@ class _CustomHostFormState extends State<CustomHostForm> {
       enabled: _hostFormControler.isEdit,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.host,
+      maxLines: 2,
       decoration: _buildDecoration(context),
     );
   }
@@ -37,6 +38,8 @@ class _CustomHostFormState extends State<CustomHostForm> {
         filled: true,
         label: Text(
           'Host',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
           style: Theme.of(context).textTheme.labelMedium,
         ),
         enabledBorder: const OutlineInputBorder(

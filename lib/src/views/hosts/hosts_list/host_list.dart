@@ -1,13 +1,12 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/hosts_data_controller.dart';
 import 'package:monitor_mobile/src/models/host.dart';
 import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
 import 'package:monitor_mobile/src/views/hosts/hosts_list/components/host_card.dart';
+import 'package:shimmer/shimmer.dart';
+import 'components/host_card_skeleton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,73 +16,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GetData getData = GetData();
+  final HostsDataController hostsDataController = HostsDataController();
+  List<Host> hosts = [];
+  List<Host> searchHosts = [];
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
     _fetchHosts();
   }
 
-  List<Host> hosts = [];
-  List<Host> searchHosts = [];
-  GetData getData = GetData();
-  bool isLoading = true;
-  var teste;
-
   Future<void> _fetchHosts() async {
     setState(() {
       isLoading = true;
     });
-    hosts.clear();
-    String getCall =
-        await rootBundle.loadString('assets/json/hosts/getHosts.json');
-    final json = await jsonDecode(getCall);
-    List<dynamic> data = await getData.getData(json);
-    for (var host in data) {
-      Host newHost = Host.fromJson(host);
-      hosts.add(newHost);
-    }
-    await _getHostInterfaces();
-    setState(() {
-      sort();
-      searchHosts = List.from(hosts);
-
-      isLoading = false;
-    });
-  }
-
-  void sort() {
-    hosts.sort((Host a, Host b) => a.host.compareTo(b.host));
-  }
-
-  Future<void> _getHostInterfaces() async {
-    final List<Future> futureHostInterfaces = [];
-    String getCall = await rootBundle
-        .loadString('assets/json/host_interface/getHostInterfaces.json');
-    final json = await jsonDecode(getCall);
-
-    for (var host in hosts) {
-      json["params"]["hostids"] = host.id;
-      futureHostInterfaces.add(getData.getData(json));
-    }
-
-    final List<dynamic> data = await Future.wait(futureHostInterfaces);
-
-    for (int i = 0; i < hosts.length; i++) {
-      Host host = hosts[i];
-      var interfaceData = data[i];
-      host.hostInterfaces = Host.interfaceFromJson(interfaceData);
+    try {
+      hosts = await hostsDataController.fetchHosts();
+      setState(() {
+        searchHosts = List.from(hosts);
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Erro:: $e');
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
   void _searchData(String query) {
     setState(() {
-      searchHosts = hosts
-          .where((element) =>
-              element.host.toLowerCase().contains(query.toLowerCase()) ||
-              element.name.toLowerCase().contains(query.toLowerCase()) ||
-              element.hostInterfaces
-                  .any((element) => element.ip.contains(query)))
-          .toList();
+      searchHosts = hostsDataController.searchFilter(query, hosts);
     });
   }
 
@@ -125,7 +90,18 @@ class _HomePageState extends State<HomePage> {
           height: 20,
         ),
         isLoading && searchHosts.isEmpty
-            ? _buildCircularLoading()
+            ? Expanded(
+                child: Shimmer.fromColors(
+                baseColor: const Color.fromARGB(26, 214, 214, 214),
+                highlightColor: Theme.of(context).colorScheme.primary,
+                child: ListView.separated(
+                    itemBuilder: (context, index) =>
+                        CardHostSkeleton(context: context),
+                    separatorBuilder: ((context, index) => const SizedBox(
+                          height: 16,
+                        )),
+                    itemCount: 6),
+              ))
             : _buildHostsListView()
       ],
     );
@@ -142,16 +118,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Align _buildCircularLoading() {
-    return const Align(
-      alignment: Alignment.center,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
+  // Align _buildCircularLoading() {
+  //   return const Center(
+  //     child: CircularProgressIndicator(
+  //       color: Colors.white,
+  //     ),
+  //   );
+  // }
 
   TextField _buildTextField() {
     return TextField(
@@ -172,14 +145,11 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.displayMedium,
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-              color:
-                  Colors.white), // Define a cor da borda quando não selecionado
+          borderSide: BorderSide(color: Colors.white),
         ),
         labelStyle: Theme.of(context).textTheme.displayMedium,
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Colors.white), // Define a cor da borda quando selecionado
+          borderSide: BorderSide(color: Colors.white),
         ),
         focusColor: Theme.of(context).colorScheme.tertiary);
   }
