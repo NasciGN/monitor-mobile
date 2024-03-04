@@ -2,8 +2,7 @@
     "jsonrpc": "2.0",
     "method": "hostinterface.get",
     "params": {
-        "output": "extend",
-        "hostids": ""
+        "output": "extend"
     },
     "id": 1,
     "auth": ""

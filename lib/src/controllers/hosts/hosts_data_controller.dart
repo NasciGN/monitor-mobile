@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
@@ -22,25 +23,36 @@ class HostsDataController {
     }
   }
 
+  Future<List<Host>> fetchHostsByName() async {
+    try {
+      String getHostsCall =
+          await rootBundle.loadString('assets/json/hosts/getHosts.json');
+      final hostsJson = await jsonDecode(getHostsCall);
+      hostsJson["params"]["search"]["name"] = "";
+      List<dynamic> hostsData = await apiGet.getData(hostsJson);
+      List<Host> hosts = hostsData.map((host) => Host.fromJson(host)).toList();
+      await fetchHostInterfaces(hosts);
+      sortByNameHosts(hosts);
+      return hosts;
+    } catch (e) {
+      print('Erro: $e');
+      return [];
+    }
+  }
+
   Future<void> fetchHostInterfaces(List<Host> hosts) async {
     try {
       String getInterfacesCall = await rootBundle
           .loadString('assets/json/host_interface/getHostInterfaces.json');
       final interfacesJson = await jsonDecode(getInterfacesCall);
-
-      final List<Future> futureHostInterfaces = [];
-
-      for (var host in hosts) {
-        interfacesJson["params"]["hostids"] = host.id;
-        futureHostInterfaces.add(apiGet.getData(interfacesJson));
-      }
-
-      final List<dynamic> interfacesData =
-          await Future.wait(futureHostInterfaces);
+      List<dynamic> hostsInterface = await apiGet.getData(interfacesJson);
 
       for (int i = 0; i < hosts.length; i++) {
+        List<dynamic> interfaceData;
         Host host = hosts[i];
-        var interfaceData = interfacesData[i];
+        interfaceData = hostsInterface
+            .where((element) => element["hostid"].contains(host.id))
+            .toList();
         host.hostInterfaces = Host.interfaceFromJson(interfaceData);
       }
     } catch (e) {
