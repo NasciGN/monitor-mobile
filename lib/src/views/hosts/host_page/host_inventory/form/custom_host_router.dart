@@ -23,7 +23,7 @@ class _CustomInventoryHostRouterFormState extends State<CustomInventoryHostRoute
   @override
   Widget build(BuildContext context) {
    if (widget.hostRouter.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

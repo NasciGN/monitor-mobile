@@ -23,7 +23,7 @@ class _CustomInventorySoftwareAppBFormState extends State<CustomInventorySoftwar
   @override
   Widget build(BuildContext context) {
    if (widget.softwareAppB.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

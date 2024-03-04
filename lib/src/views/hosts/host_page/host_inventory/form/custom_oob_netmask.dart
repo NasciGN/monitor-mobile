@@ -23,7 +23,7 @@ class _CustomInventoryOobNetmaskFormState extends State<CustomInventoryOobNetmas
   @override
   Widget build(BuildContext context) {
    if (widget.oobNetmask.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

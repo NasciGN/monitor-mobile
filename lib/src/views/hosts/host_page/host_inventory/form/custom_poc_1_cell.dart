@@ -23,7 +23,7 @@ class _CustomInventoryPoc1Cell1cellFormState extends State<CustomInventoryPoc1Ce
   @override
   Widget build(BuildContext context) {
    if (widget.poc_1Cell.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

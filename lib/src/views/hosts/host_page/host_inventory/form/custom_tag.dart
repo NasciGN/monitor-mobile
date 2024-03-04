@@ -23,7 +23,7 @@ class _CustomInventoryTagFormState extends State<CustomInventoryTagForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.tag.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

@@ -23,7 +23,7 @@ class _CustomInventoryNotesFormState extends State<CustomInventoryNotesForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.notes.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

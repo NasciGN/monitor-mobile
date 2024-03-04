@@ -23,7 +23,7 @@ class _CustomInventorySiteStateFormState extends State<CustomInventorySiteStateF
   @override
   Widget build(BuildContext context) {
    if (widget.siteState.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

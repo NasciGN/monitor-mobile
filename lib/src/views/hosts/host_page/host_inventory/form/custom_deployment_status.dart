@@ -23,7 +23,7 @@ class _CustomInventoryDeploymentStatusFormState extends State<CustomInventoryDep
   @override
   Widget build(BuildContext context) {
    if (widget.deploymentStatus.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

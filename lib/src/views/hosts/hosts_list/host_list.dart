@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
 import 'package:monitor_mobile/src/controllers/hosts/hosts_data_controller.dart';
-import 'package:monitor_mobile/src/models/host.dart';
 import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
 import 'package:monitor_mobile/src/views/hosts/hosts_list/components/host_card.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../models/host.dart';
 import 'components/host_card_skeleton.dart';
 
 class HomePage extends StatefulWidget {
@@ -117,14 +117,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  // Align _buildCircularLoading() {
-  //   return const Center(
-  //     child: CircularProgressIndicator(
-  //       color: Colors.white,
-  //     ),
-  //   );
-  // }
 
   TextField _buildTextField() {
     return TextField(

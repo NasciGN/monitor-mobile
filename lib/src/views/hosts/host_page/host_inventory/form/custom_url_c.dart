@@ -23,7 +23,7 @@ class _CustomInventoryUrlCFormState extends State<CustomInventoryUrlCForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.urlC.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

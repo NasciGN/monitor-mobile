@@ -23,7 +23,7 @@ class _CustomInventoryOsFullFormState extends State<CustomInventoryOsFullForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.osFull.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

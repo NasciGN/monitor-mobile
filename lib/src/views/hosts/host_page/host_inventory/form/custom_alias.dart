@@ -23,7 +23,7 @@ class _CustomInventoryAliasFormState extends State<CustomInventoryAliasForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.alias.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

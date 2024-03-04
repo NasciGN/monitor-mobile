@@ -4,14 +4,17 @@ import 'package:get/get.dart';
 import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
 
 class CustomInventoryHardwareFullForm extends StatefulWidget {
-  const CustomInventoryHardwareFullForm({super.key, required this.hardwareFull});
+  const CustomInventoryHardwareFullForm(
+      {super.key, required this.hardwareFull});
   final String hardwareFull;
 
   @override
-  State<CustomInventoryHardwareFullForm> createState() => _CustomInventoryHardwareFullFormState();
+  State<CustomInventoryHardwareFullForm> createState() =>
+      _CustomInventoryHardwareFullFormState();
 }
 
-class _CustomInventoryHardwareFullFormState extends State<CustomInventoryHardwareFullForm> {
+class _CustomInventoryHardwareFullFormState
+    extends State<CustomInventoryHardwareFullForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +25,19 @@ class _CustomInventoryHardwareFullFormState extends State<CustomInventoryHardwar
 
   @override
   Widget build(BuildContext context) {
-   if (widget.hardwareFull.isEmpty) {
-      return SizedBox();
+    if (widget.hardwareFull.isEmpty) {
+      return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.hardwareFull,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.hardwareFull,
+          minLines: 1,
+          maxLines: 10,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

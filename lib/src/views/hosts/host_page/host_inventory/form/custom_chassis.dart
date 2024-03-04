@@ -23,7 +23,7 @@ class _CustomInventoryChassisFormState extends State<CustomInventoryChassisForm>
   @override
   Widget build(BuildContext context) {
    if (widget.chassis.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

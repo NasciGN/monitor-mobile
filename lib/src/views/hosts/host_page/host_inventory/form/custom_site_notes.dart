@@ -8,10 +8,12 @@ class CustomInventorySiteNotesForm extends StatefulWidget {
   final String siteNotes;
 
   @override
-  State<CustomInventorySiteNotesForm> createState() => _CustomInventorySiteNotesFormState();
+  State<CustomInventorySiteNotesForm> createState() =>
+      _CustomInventorySiteNotesFormState();
 }
 
-class _CustomInventorySiteNotesFormState extends State<CustomInventorySiteNotesForm> {
+class _CustomInventorySiteNotesFormState
+    extends State<CustomInventorySiteNotesForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +24,19 @@ class _CustomInventorySiteNotesFormState extends State<CustomInventorySiteNotesF
 
   @override
   Widget build(BuildContext context) {
-   if (widget.siteNotes.isEmpty) {
-      return SizedBox();
+    if (widget.siteNotes.isEmpty) {
+      return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.siteNotes,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.siteNotes,
+          minLines: 1,
+          maxLines: 5,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

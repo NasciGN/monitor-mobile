@@ -23,7 +23,7 @@ class _CustomInventorySiteRackFormState extends State<CustomInventorySiteRackFor
   @override
   Widget build(BuildContext context) {
    if (widget.siteRack.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

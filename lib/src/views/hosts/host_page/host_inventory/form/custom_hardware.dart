@@ -23,7 +23,7 @@ class _CustomInventoryHardwareFormState extends State<CustomInventoryHardwareFor
   @override
   Widget build(BuildContext context) {
    if (widget.hardware.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

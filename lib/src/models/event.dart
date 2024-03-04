@@ -1,5 +1,5 @@
 class Event {
-  String eventId, name, clock, severity, objectid;
+  String eventId, name, clock, severity, objectid, suppressed;
 
   Event({
     required this.eventId,
@@ -7,6 +7,7 @@ class Event {
     required this.clock,
     required this.severity,
     required this.objectid,
+    required this.suppressed,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,10 +28,16 @@ class Event {
         clock: json['clock'] ?? '',
         severity: json['severity'] ?? '',
         objectid: json['objectid'] ?? '',
+        suppressed: json['suppressed'] ?? '',
       );
     } else {
       return Event(
-          eventId: '', name: '', clock: '', severity: '', objectid: '');
+          eventId: '',
+          name: '',
+          clock: '',
+          severity: '',
+          objectid: '',
+          suppressed: '');
     }
   }
 

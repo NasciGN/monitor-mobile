@@ -23,7 +23,7 @@ class _CustomInventoryHostNetworksFormState extends State<CustomInventoryHostNet
   @override
   Widget build(BuildContext context) {
    if (widget.hostNetworks.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

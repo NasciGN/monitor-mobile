@@ -23,7 +23,7 @@ class _CustomInventoryContractNumberFormState extends State<CustomInventoryContr
   @override
   Widget build(BuildContext context) {
    if (widget.contractNumber.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

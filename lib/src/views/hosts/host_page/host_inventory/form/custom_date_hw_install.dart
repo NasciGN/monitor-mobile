@@ -23,7 +23,7 @@ class _CustomInventoryDateHwInstallFormState extends State<CustomInventoryDateHw
   @override
   Widget build(BuildContext context) {
    if (widget.dateHwInstall.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

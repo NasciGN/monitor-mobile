@@ -23,7 +23,7 @@ class _CustomInventoryHwArchFormState extends State<CustomInventoryHwArchForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.hwArch.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

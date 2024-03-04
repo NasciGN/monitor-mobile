@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
-import '../../models/host.dart';
+import 'package:monitor_mobile/src/models/models.dart';
 
 class HostsDataController {
   final GetData apiGet = GetData();
@@ -45,6 +45,56 @@ class HostsDataController {
       }
     } catch (e) {
       print('Erro: $e');
+    }
+  }
+
+  Future<List<Item>> getHostItens(String hostId) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/host_item/getHostItens.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+
+      jsonRequest["params"]["hostids"] = hostId;
+      List<dynamic> itensData = await apiGet.getData(jsonRequest);
+      List<Item> itens = itensData.map((item) => Item.fromJson(item)).toList();
+      return itens;
+    } catch (e) {
+      print('Erro: $e');
+      return [];
+    }
+  }
+
+  Future<List<Event>> getHostEvents(String hostId) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/host_event/getHostEvents.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+
+      jsonRequest["params"]["hostids"] = hostId;
+      List<dynamic> eventsData = await apiGet.getData(jsonRequest);
+      List<Event> events =
+          eventsData.map((item) => Event.fromJson(item)).toList();
+      return events;
+    } catch (e) {
+      print('Erro: $e');
+      return [];
+    }
+  }
+
+  Future<List<Problem>> getHostProblems(String hostId) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/host_problem/getHostProblems.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+
+      jsonRequest["params"]["hostids"] = hostId;
+      List<dynamic> eventsData = await apiGet.getData(jsonRequest);
+      List<Problem> problems =
+          eventsData.map((item) => Problem.fromJson(item)).toList();
+      return problems;
+    } catch (e) {
+      print('Erro: $e');
+      return [];
     }
   }
 

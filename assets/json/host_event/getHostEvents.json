@@ -1,0 +1,16 @@
+{
+    "jsonrpc": "2.0",
+    "method": "event.get",
+    "params": {
+        "output": "extend",
+        "hostsid": "",
+        "suppressed": 0,
+        "sortfield": [
+            "clock",
+            "eventid"
+        ],
+        "sortorder": "DESC"
+    },
+    "id": 1,
+    "auth": ""
+}

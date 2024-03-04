@@ -23,7 +23,7 @@ class _CustomInventoryNameFormState extends State<CustomInventoryNameForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.name.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

@@ -23,7 +23,7 @@ class _CustomInventoryPoc2Email2emailFormState extends State<CustomInventoryPoc2
   @override
   Widget build(BuildContext context) {
    if (widget.poc_2Email.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

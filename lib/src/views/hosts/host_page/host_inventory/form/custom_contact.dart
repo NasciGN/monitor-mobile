@@ -23,7 +23,7 @@ class _CustomInventoryContactFormState extends State<CustomInventoryContactForm>
   @override
   Widget build(BuildContext context) {
    if (widget.contact.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

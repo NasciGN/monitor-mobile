@@ -23,7 +23,7 @@ class _CustomInventoryAssetTagFormState extends State<CustomInventoryAssetTagFor
   @override
   Widget build(BuildContext context) {
    if (widget.assetTag.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

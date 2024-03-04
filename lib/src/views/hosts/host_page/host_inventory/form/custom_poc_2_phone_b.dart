@@ -23,7 +23,7 @@ class _CustomInventoryPoc2PhoneB2phonebFormState extends State<CustomInventoryPo
   @override
   Widget build(BuildContext context) {
    if (widget.poc_2PhoneB.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

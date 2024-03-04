@@ -23,7 +23,7 @@ class _CustomInventoryDateHwDecommFormState extends State<CustomInventoryDateHwD
   @override
   Widget build(BuildContext context) {
    if (widget.dateHwDecomm.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

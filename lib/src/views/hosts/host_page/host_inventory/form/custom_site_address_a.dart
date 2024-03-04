@@ -23,7 +23,7 @@ class _CustomInventorySiteAddressAFormState extends State<CustomInventorySiteAdd
   @override
   Widget build(BuildContext context) {
    if (widget.siteAddressA.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

@@ -1,0 +1,15 @@
+{
+    "jsonrpc": "2.0",
+    "method": "item.get",
+    "params": {
+        "output": "extend",
+        "hostids": "",
+        "with_triggers": true,
+        "search": {
+            "key_": ""
+        },
+        "sortfield": "name"
+    },
+    "id": 1,
+    "auth": ""
+}

@@ -23,7 +23,7 @@ class _CustomInventoryDateHwExpiryFormState extends State<CustomInventoryDateHwE
   @override
   Widget build(BuildContext context) {
    if (widget.dateHwExpiry.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

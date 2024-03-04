@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../models/host.dart';
+import '../../../../models/models.dart';
 import '../host_details/host_detail_form.dart';
 import '../host_inventory/host_inventory_form.dart';
 

@@ -23,7 +23,7 @@ class _CustomInventoryOobIpFormState extends State<CustomInventoryOobIpForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.oobIp.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

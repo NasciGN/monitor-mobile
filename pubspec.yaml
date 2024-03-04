@@ -67,6 +67,9 @@ flutter:
   assets:
      - assets/json/hosts/getHosts.json
      - assets/json/host_interface/getHostInterfaces.json
+     - assets/json/host_item/getHostItens.json
+     - assets/json/host_event/getHostEvents.json
+     - assets/json/host_problem/getHostProblems.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

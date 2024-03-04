@@ -23,7 +23,7 @@ class _CustomInventoryHostNetmaskFormState extends State<CustomInventoryHostNetm
   @override
   Widget build(BuildContext context) {
    if (widget.hostNetmask.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

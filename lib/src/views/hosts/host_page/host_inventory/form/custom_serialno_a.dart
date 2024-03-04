@@ -23,7 +23,7 @@ class _CustomInventorySerialnoAFormState extends State<CustomInventorySerialnoAF
   @override
   Widget build(BuildContext context) {
    if (widget.serialnoA.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

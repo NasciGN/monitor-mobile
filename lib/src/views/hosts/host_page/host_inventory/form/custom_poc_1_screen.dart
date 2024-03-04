@@ -23,7 +23,7 @@ class _CustomInventoryPoc1Screen1screenFormState extends State<CustomInventoryPo
   @override
   Widget build(BuildContext context) {
    if (widget.poc_1Screen.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

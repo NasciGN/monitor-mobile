@@ -6,12 +6,16 @@ class CardInfo extends StatelessWidget {
     super.key,
     required this.theme,
     required this.title,
+    required this.number,
   });
 
   final Color theme;
   final String title;
+  final String number;
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.symmetric(vertical: 15),
@@ -34,10 +38,10 @@ class CardInfo extends StatelessWidget {
         const Spacer(),
         Align(
           alignment: Alignment.bottomRight,
-          child: Text(
-            '0',
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
+          child: Text(number == '' ? '0' : number,
+              style: Theme.of(context).textTheme.displayLarge,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1),
         )
       ]),
     );

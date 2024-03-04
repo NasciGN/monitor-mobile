@@ -23,7 +23,7 @@ class _CustomInventoryInstallerNameFormState extends State<CustomInventoryInstal
   @override
   Widget build(BuildContext context) {
    if (widget.installerName.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

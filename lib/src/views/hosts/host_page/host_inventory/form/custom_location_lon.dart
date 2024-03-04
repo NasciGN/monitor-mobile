@@ -23,7 +23,7 @@ class _CustomInventoryLocationLonFormState extends State<CustomInventoryLocation
   @override
   Widget build(BuildContext context) {
    if (widget.locationLon.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

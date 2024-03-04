@@ -23,7 +23,7 @@ class _CustomInventoryOobRouterFormState extends State<CustomInventoryOobRouterF
   @override
   Widget build(BuildContext context) {
    if (widget.oobRouter.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

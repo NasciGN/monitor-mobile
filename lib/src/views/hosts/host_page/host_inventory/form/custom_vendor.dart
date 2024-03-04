@@ -23,7 +23,7 @@ class _CustomInventoryVendorFormState extends State<CustomInventoryVendorForm> {
   @override
   Widget build(BuildContext context) {
    if (widget.vendor.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

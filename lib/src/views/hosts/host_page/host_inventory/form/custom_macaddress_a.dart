@@ -23,7 +23,7 @@ class _CustomInventoryMacaddressAFormState extends State<CustomInventoryMacaddre
   @override
   Widget build(BuildContext context) {
    if (widget.macaddressA.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [

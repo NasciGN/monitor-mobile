@@ -23,7 +23,7 @@ class _CustomInventorySiteZipFormState extends State<CustomInventorySiteZipForm>
   @override
   Widget build(BuildContext context) {
    if (widget.siteZip.isEmpty) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Column(
       children: [
