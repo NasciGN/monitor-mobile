@@ -2,8 +2,9 @@
     "jsonrpc": "2.0",
     "method": "item.get",
     "params": {
+        "countOutput": false,
         "output": "extend",
-        "hostids": "",
+        "hostids": "10603",
         "with_triggers": true,
         "search": {
             "key_": ""

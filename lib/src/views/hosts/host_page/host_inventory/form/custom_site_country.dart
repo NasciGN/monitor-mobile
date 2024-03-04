@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventorySiteCountryForm extends StatefulWidget {
   const CustomInventorySiteCountryForm({super.key, required this.siteCountry});
   final String siteCountry;
 
   @override
-  State<CustomInventorySiteCountryForm> createState() => _CustomInventorySiteCountryFormState();
+  State<CustomInventorySiteCountryForm> createState() =>
+      _CustomInventorySiteCountryFormState();
 }
 
-class _CustomInventorySiteCountryFormState extends State<CustomInventorySiteCountryForm> {
+class _CustomInventorySiteCountryFormState
+    extends State<CustomInventorySiteCountryForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventorySiteCountryFormState extends State<CustomInventorySiteCoun
 
   @override
   Widget build(BuildContext context) {
-   if (widget.siteCountry.isEmpty) {
+    if (widget.siteCountry.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.siteCountry,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.siteCountry,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/models.dart';
+import '../../../models/models.dart';
 
 class HostFormController extends GetxController {
   bool isEdit = false;

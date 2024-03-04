@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryPoc2PhoneB2phonebForm extends StatefulWidget {
-  const CustomInventoryPoc2PhoneB2phonebForm({super.key, required this.poc_2PhoneB});
+  const CustomInventoryPoc2PhoneB2phonebForm(
+      {super.key, required this.poc_2PhoneB});
   final String poc_2PhoneB;
 
   @override
-  State<CustomInventoryPoc2PhoneB2phonebForm> createState() => _CustomInventoryPoc2PhoneB2phonebFormState();
+  State<CustomInventoryPoc2PhoneB2phonebForm> createState() =>
+      _CustomInventoryPoc2PhoneB2phonebFormState();
 }
 
-class _CustomInventoryPoc2PhoneB2phonebFormState extends State<CustomInventoryPoc2PhoneB2phonebForm> {
+class _CustomInventoryPoc2PhoneB2phonebFormState
+    extends State<CustomInventoryPoc2PhoneB2phonebForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +24,19 @@ class _CustomInventoryPoc2PhoneB2phonebFormState extends State<CustomInventoryPo
 
   @override
   Widget build(BuildContext context) {
-   if (widget.poc_2PhoneB.isEmpty) {
+    if (widget.poc_2PhoneB.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.poc_2PhoneB,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.poc_2PhoneB,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

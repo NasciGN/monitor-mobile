@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryUrlAForm extends StatefulWidget {
   const CustomInventoryUrlAForm({super.key, required this.urlA});
   final String urlA;
 
   @override
-  State<CustomInventoryUrlAForm> createState() => _CustomInventoryUrlAFormState();
+  State<CustomInventoryUrlAForm> createState() =>
+      _CustomInventoryUrlAFormState();
 }
 
 class _CustomInventoryUrlAFormState extends State<CustomInventoryUrlAForm> {
@@ -22,19 +22,19 @@ class _CustomInventoryUrlAFormState extends State<CustomInventoryUrlAForm> {
 
   @override
   Widget build(BuildContext context) {
-   if (widget.urlA.isEmpty) {
+    if (widget.urlA.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.urlA,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.urlA,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

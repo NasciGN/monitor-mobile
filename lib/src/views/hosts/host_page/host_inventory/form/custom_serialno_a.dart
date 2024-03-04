@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventorySerialnoAForm extends StatefulWidget {
   const CustomInventorySerialnoAForm({super.key, required this.serialnoA});
   final String serialnoA;
 
   @override
-  State<CustomInventorySerialnoAForm> createState() => _CustomInventorySerialnoAFormState();
+  State<CustomInventorySerialnoAForm> createState() =>
+      _CustomInventorySerialnoAFormState();
 }
 
-class _CustomInventorySerialnoAFormState extends State<CustomInventorySerialnoAForm> {
+class _CustomInventorySerialnoAFormState
+    extends State<CustomInventorySerialnoAForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventorySerialnoAFormState extends State<CustomInventorySerialnoAF
 
   @override
   Widget build(BuildContext context) {
-   if (widget.serialnoA.isEmpty) {
+    if (widget.serialnoA.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.serialnoA,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.serialnoA,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

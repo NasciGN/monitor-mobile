@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryLocationLatForm extends StatefulWidget {
   const CustomInventoryLocationLatForm({super.key, required this.locationLat});
   final String locationLat;
 
   @override
-  State<CustomInventoryLocationLatForm> createState() => _CustomInventoryLocationLatFormState();
+  State<CustomInventoryLocationLatForm> createState() =>
+      _CustomInventoryLocationLatFormState();
 }
 
-class _CustomInventoryLocationLatFormState extends State<CustomInventoryLocationLatForm> {
+class _CustomInventoryLocationLatFormState
+    extends State<CustomInventoryLocationLatForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventoryLocationLatFormState extends State<CustomInventoryLocation
 
   @override
   Widget build(BuildContext context) {
-   if (widget.locationLat.isEmpty) {
+    if (widget.locationLat.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.locationLat,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.locationLat,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

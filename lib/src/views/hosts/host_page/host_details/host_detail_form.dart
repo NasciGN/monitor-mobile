@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/host_details/form/form.dart';
-import '../../../../controllers/hosts/hosts_form_controller.dart';
+
+import '../../../../controllers/hosts/forms/hosts_form_controller.dart';
 import '../../../../models/models.dart';
 import 'form/custom_description_form.dart';
+import 'form/form.dart';
 
 class HostDetailForm extends StatelessWidget {
   HostDetailForm({super.key, required this.host});

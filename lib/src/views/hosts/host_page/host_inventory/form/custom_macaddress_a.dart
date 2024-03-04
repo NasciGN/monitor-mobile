@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryMacaddressAForm extends StatefulWidget {
   const CustomInventoryMacaddressAForm({super.key, required this.macaddressA});
   final String macaddressA;
 
   @override
-  State<CustomInventoryMacaddressAForm> createState() => _CustomInventoryMacaddressAFormState();
+  State<CustomInventoryMacaddressAForm> createState() =>
+      _CustomInventoryMacaddressAFormState();
 }
 
-class _CustomInventoryMacaddressAFormState extends State<CustomInventoryMacaddressAForm> {
+class _CustomInventoryMacaddressAFormState
+    extends State<CustomInventoryMacaddressAForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventoryMacaddressAFormState extends State<CustomInventoryMacaddre
 
   @override
   Widget build(BuildContext context) {
-   if (widget.macaddressA.isEmpty) {
+    if (widget.macaddressA.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.macaddressA,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.macaddressA,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

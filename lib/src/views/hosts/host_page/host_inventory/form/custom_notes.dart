@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryNotesForm extends StatefulWidget {
   const CustomInventoryNotesForm({super.key, required this.notes});
   final String notes;
 
   @override
-  State<CustomInventoryNotesForm> createState() => _CustomInventoryNotesFormState();
+  State<CustomInventoryNotesForm> createState() =>
+      _CustomInventoryNotesFormState();
 }
 
 class _CustomInventoryNotesFormState extends State<CustomInventoryNotesForm> {
@@ -22,19 +22,19 @@ class _CustomInventoryNotesFormState extends State<CustomInventoryNotesForm> {
 
   @override
   Widget build(BuildContext context) {
-   if (widget.notes.isEmpty) {
+    if (widget.notes.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.notes,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.notes,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

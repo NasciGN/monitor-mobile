@@ -6,30 +6,16 @@ import 'package:monitor_mobile/src/models/models.dart';
 class HostsDataController {
   final GetData apiGet = GetData();
 
-  Future<List<Host>> fetchHosts() async {
+  Future<List<Host>> fetchHosts({
+    String name = "",
+  }) async {
     try {
-      String getHostsCall =
+      String getHostsJson =
           await rootBundle.loadString('assets/json/hosts/get_hosts.json');
-      final hostsJson = await jsonDecode(getHostsCall);
-      List<dynamic> hostsData = await apiGet.getData(hostsJson);
-      List<Host> hosts = hostsData.map((host) => Host.fromJson(host)).toList();
-      await fetchHostInterfaces(hosts);
-      sortByNameHosts(hosts);
-      return hosts;
-    } catch (e) {
-      print('Erro: $e');
-      return [];
-    }
-  }
-
-  Future<List<Host>> fetchHostsByName(String name) async {
-    try {
-      String getHostsCall =
-          await rootBundle.loadString('assets/json/hosts/get_hosts.json');
-      final hostsJson = await jsonDecode(getHostsCall);
-      hostsJson["params"]["search"]["name"] = name;
-      List<dynamic> hostsData = await apiGet.getData(hostsJson);
-      List<Host> hosts = hostsData.map((host) => Host.fromJson(host)).toList();
+      final getHostsRequest = await jsonDecode(getHostsJson);
+      List<dynamic> getHostsResponse = await apiGet.getData(getHostsRequest);
+      List<Host> hosts =
+          getHostsResponse.map((host) => Host.fromJson(host)).toList();
       await fetchHostInterfaces(hosts);
       sortByNameHosts(hosts);
       return hosts;
@@ -41,8 +27,8 @@ class HostsDataController {
 
   Future<void> fetchHostInterfaces(List<Host> hosts) async {
     try {
-      String getInterfacesCall = await rootBundle.loadString(
-          'assets/json/host_interface/get_host_interfaces.json.json');
+      String getInterfacesCall = await rootBundle
+          .loadString('assets/json/host_interface/get_host_interfaces.json');
       final interfacesJson = await jsonDecode(getInterfacesCall);
       List<dynamic> hostsInterface = await apiGet.getData(interfacesJson);
 
@@ -59,7 +45,9 @@ class HostsDataController {
     }
   }
 
-  Future<List<Item>> getHostItens(String hostId) async {
+  Future<List<Item>> getHostItens(
+    String hostId,
+  ) async {
     try {
       String getHostItensCall = await rootBundle
           .loadString('assets/json/host_item/get_host_itens.json');
@@ -75,7 +63,9 @@ class HostsDataController {
     }
   }
 
-  Future<List<Event>> getHostEvents(String hostId) async {
+  Future<List<Event>> getHostEvents(
+    String hostId,
+  ) async {
     try {
       String getHostItensCall = await rootBundle
           .loadString('assets/json/host_event/get_host_events.json');

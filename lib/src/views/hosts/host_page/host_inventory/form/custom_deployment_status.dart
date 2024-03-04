@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryDeploymentStatusForm extends StatefulWidget {
-  const CustomInventoryDeploymentStatusForm({super.key, required this.deploymentStatus});
+  const CustomInventoryDeploymentStatusForm(
+      {super.key, required this.deploymentStatus});
   final String deploymentStatus;
 
   @override
-  State<CustomInventoryDeploymentStatusForm> createState() => _CustomInventoryDeploymentStatusFormState();
+  State<CustomInventoryDeploymentStatusForm> createState() =>
+      _CustomInventoryDeploymentStatusFormState();
 }
 
-class _CustomInventoryDeploymentStatusFormState extends State<CustomInventoryDeploymentStatusForm> {
+class _CustomInventoryDeploymentStatusFormState
+    extends State<CustomInventoryDeploymentStatusForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +24,19 @@ class _CustomInventoryDeploymentStatusFormState extends State<CustomInventoryDep
 
   @override
   Widget build(BuildContext context) {
-   if (widget.deploymentStatus.isEmpty) {
+    if (widget.deploymentStatus.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.deploymentStatus,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.deploymentStatus,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

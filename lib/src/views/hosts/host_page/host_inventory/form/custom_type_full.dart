@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryTypeFullForm extends StatefulWidget {
   const CustomInventoryTypeFullForm({super.key, required this.typeFull});
   final String typeFull;
 
   @override
-  State<CustomInventoryTypeFullForm> createState() => _CustomInventoryTypeFullFormState();
+  State<CustomInventoryTypeFullForm> createState() =>
+      _CustomInventoryTypeFullFormState();
 }
 
-class _CustomInventoryTypeFullFormState extends State<CustomInventoryTypeFullForm> {
+class _CustomInventoryTypeFullFormState
+    extends State<CustomInventoryTypeFullForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventoryTypeFullFormState extends State<CustomInventoryTypeFullFor
 
   @override
   Widget build(BuildContext context) {
-   if (widget.typeFull.isEmpty) {
+    if (widget.typeFull.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.typeFull,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.typeFull,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

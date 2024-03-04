@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryOobIpForm extends StatefulWidget {
   const CustomInventoryOobIpForm({super.key, required this.oobIp});
   final String oobIp;
 
   @override
-  State<CustomInventoryOobIpForm> createState() => _CustomInventoryOobIpFormState();
+  State<CustomInventoryOobIpForm> createState() =>
+      _CustomInventoryOobIpFormState();
 }
 
 class _CustomInventoryOobIpFormState extends State<CustomInventoryOobIpForm> {
@@ -22,19 +22,19 @@ class _CustomInventoryOobIpFormState extends State<CustomInventoryOobIpForm> {
 
   @override
   Widget build(BuildContext context) {
-   if (widget.oobIp.isEmpty) {
+    if (widget.oobIp.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.oobIp,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.oobIp,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

@@ -9,8 +9,10 @@ class GetData {
   late String url;
 
   GetData() : userapi = Get.find<UserApi>() {
-    token = userapi.apicode.value;
-    url = '${userapi.url.value}/api_jsonrpc.php';
+    // token = userapi.apicode.value;
+    // url = '${userapi.url.value}/api_jsonrpc.php';
+    token = "0f534b2a253935a559d0e5e4d5e2e9ad";
+    url = 'http://177.129.127.1:65002/api_jsonrpc.php';
   }
 
   Future<dynamic> getData(var json) async {

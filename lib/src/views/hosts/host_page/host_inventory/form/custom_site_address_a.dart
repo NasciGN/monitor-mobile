@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventorySiteAddressAForm extends StatefulWidget {
-  const CustomInventorySiteAddressAForm({super.key, required this.siteAddressA});
+  const CustomInventorySiteAddressAForm(
+      {super.key, required this.siteAddressA});
   final String siteAddressA;
 
   @override
-  State<CustomInventorySiteAddressAForm> createState() => _CustomInventorySiteAddressAFormState();
+  State<CustomInventorySiteAddressAForm> createState() =>
+      _CustomInventorySiteAddressAFormState();
 }
 
-class _CustomInventorySiteAddressAFormState extends State<CustomInventorySiteAddressAForm> {
+class _CustomInventorySiteAddressAFormState
+    extends State<CustomInventorySiteAddressAForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +24,19 @@ class _CustomInventorySiteAddressAFormState extends State<CustomInventorySiteAdd
 
   @override
   Widget build(BuildContext context) {
-   if (widget.siteAddressA.isEmpty) {
+    if (widget.siteAddressA.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.siteAddressA,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.siteAddressA,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

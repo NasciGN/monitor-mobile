@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/hosts/hosts_form_controller.dart';
+import '../../../../../controllers/hosts/forms/hosts_form_controller.dart';
 
 class CustomHostForm extends StatefulWidget {
   const CustomHostForm({super.key, required this.host});

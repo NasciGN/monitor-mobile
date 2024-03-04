@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryHwArchForm extends StatefulWidget {
   const CustomInventoryHwArchForm({super.key, required this.hwArch});
   final String hwArch;
 
   @override
-  State<CustomInventoryHwArchForm> createState() => _CustomInventoryHwArchFormState();
+  State<CustomInventoryHwArchForm> createState() =>
+      _CustomInventoryHwArchFormState();
 }
 
 class _CustomInventoryHwArchFormState extends State<CustomInventoryHwArchForm> {
@@ -22,19 +22,19 @@ class _CustomInventoryHwArchFormState extends State<CustomInventoryHwArchForm> {
 
   @override
   Widget build(BuildContext context) {
-   if (widget.hwArch.isEmpty) {
+    if (widget.hwArch.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.hwArch,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.hwArch,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

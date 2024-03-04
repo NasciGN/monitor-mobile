@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryChassisForm extends StatefulWidget {
   const CustomInventoryChassisForm({super.key, required this.chassis});
   final String chassis;
 
   @override
-  State<CustomInventoryChassisForm> createState() => _CustomInventoryChassisFormState();
+  State<CustomInventoryChassisForm> createState() =>
+      _CustomInventoryChassisFormState();
 }
 
-class _CustomInventoryChassisFormState extends State<CustomInventoryChassisForm> {
+class _CustomInventoryChassisFormState
+    extends State<CustomInventoryChassisForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +23,19 @@ class _CustomInventoryChassisFormState extends State<CustomInventoryChassisForm>
 
   @override
   Widget build(BuildContext context) {
-   if (widget.chassis.isEmpty) {
+    if (widget.chassis.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.chassis,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.chassis,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../controllers/hosts/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryPoc1Email1emailForm extends StatefulWidget {
-  const CustomInventoryPoc1Email1emailForm({super.key, required this.poc_1Email});
+  const CustomInventoryPoc1Email1emailForm(
+      {super.key, required this.poc_1Email});
   final String poc_1Email;
 
   @override
-  State<CustomInventoryPoc1Email1emailForm> createState() => _CustomInventoryPoc1Email1emailFormState();
+  State<CustomInventoryPoc1Email1emailForm> createState() =>
+      _CustomInventoryPoc1Email1emailFormState();
 }
 
-class _CustomInventoryPoc1Email1emailFormState extends State<CustomInventoryPoc1Email1emailForm> {
+class _CustomInventoryPoc1Email1emailFormState
+    extends State<CustomInventoryPoc1Email1emailForm> {
   final _hostInventoryFormControler = Get.put(HostInvetoryFormController());
 
   @override
@@ -22,19 +24,19 @@ class _CustomInventoryPoc1Email1emailFormState extends State<CustomInventoryPoc1
 
   @override
   Widget build(BuildContext context) {
-   if (widget.poc_1Email.isEmpty) {
+    if (widget.poc_1Email.isEmpty) {
       return const SizedBox();
     }
     return Column(
       children: [
         TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
-      enabled: _hostInventoryFormControler.isEdit,
-      textInputAction: TextInputAction.next,
-      controller: _hostInventoryFormControler.poc_1Email,
-      minLines: 1,
-      maxLines: 2,
-      decoration: _buildDecoration(context),
+          style: Theme.of(context).textTheme.labelMedium,
+          enabled: _hostInventoryFormControler.isEdit,
+          textInputAction: TextInputAction.next,
+          controller: _hostInventoryFormControler.poc_1Email,
+          minLines: 1,
+          maxLines: 2,
+          decoration: _buildDecoration(context),
         ),
         const SizedBox(
           height: 20,
