@@ -84,6 +84,12 @@ class _HostCardState extends State<HostCard> {
                   ),
                 ),
                 const Spacer(),
+                Text(
+                  widget.host.hostInterfaces[0].ip != ''
+                      ? widget.host.hostInterfaces[0].ip
+                      : '',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
               ],
             )
           ],

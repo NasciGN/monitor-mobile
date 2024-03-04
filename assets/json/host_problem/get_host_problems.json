@@ -2,8 +2,9 @@
     "jsonrpc": "2.0",
     "method": "problem.get",
     "params": {
+        "countOutput": true,
         "output": "extend",
-        "hostsid": "",
+        "hostids": "",
         "recent": "true",
         "sortfield": [
             "eventid"
