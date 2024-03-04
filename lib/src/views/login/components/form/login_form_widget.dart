@@ -49,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
       cursorColor: Colors.white,
       style: Theme.of(context).textTheme.labelMedium,
       controller: _controllerUser,
-      decoration: _buildTextFieldUserdDecoration('Usuário'),
+      decoration: _buildTextFieldDecoration('Usuário', false),
     );
   }
 
@@ -59,12 +59,35 @@ class _LoginFormState extends State<LoginForm> {
       style: Theme.of(context).textTheme.labelMedium,
       controller: _controllerPass,
       obscureText: isObscure ? true : false,
-      decoration: _buildTextFieldPassdDecoration('Senha'),
+      decoration: _buildTextFieldDecoration('Senha', true),
     );
   }
 
-  _buildTextFieldUserdDecoration(String label) {
+  _buildTextFieldDecoration(String label, bool isPass) {
     return InputDecoration(
+        suffixIcon: isPass == true
+            ? Align(
+                widthFactor: 3.0,
+                heightFactor: 1.0,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  child: isObscure
+                      ? const FaIcon(
+                          FontAwesomeIcons.eye,
+                          color: Colors.white,
+                          size: 20,
+                        )
+                      : const FaIcon(
+                          FontAwesomeIcons.solidEye,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                ))
+            : const SizedBox.shrink(),
         label: Text(
           label,
           style: _buildTextLabelStyle(),
@@ -73,48 +96,10 @@ class _LoginFormState extends State<LoginForm> {
           borderSide: BorderSide(color: Colors.white),
         ),
         labelStyle: _buildTextLabelStyle(),
-        focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).colorScheme.tertiary)),
-        focusColor: Theme.of(context).colorScheme.tertiary);
-  }
-
-  _buildTextFieldPassdDecoration(String label) {
-    return InputDecoration(
-        suffixIcon: Align(
-          widthFactor: 3.0,
-          heightFactor: 1.0,
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                isObscure = !isObscure;
-              });
-            },
-            child: isObscure
-                ? const FaIcon(
-                    FontAwesomeIcons.eye,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                : const FaIcon(
-                    FontAwesomeIcons.solidEye,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-          ),
-        ),
-        label: Text(
-          label,
-          style: _buildTextLabelStyle(),
-        ),
-        enabledBorder: const OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        labelStyle: _buildTextLabelStyle(),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.tertiary),
-        ),
-        focusColor: Theme.of(context).colorScheme.tertiary);
+        focusColor: Colors.white);
   }
 
   _buildTextLabelStyle() {
@@ -133,11 +118,11 @@ class _LoginFormState extends State<LoginForm> {
               serverResult = result!;
             });
           },
-          child: _buildTextBtn(),
+          child: _buildRegisterServerBTn(),
         ));
   }
 
-  _buildTextBtn() {
+  _buildRegisterServerBTn() {
     return SizedBox(
       height: 60,
       width: 500,
