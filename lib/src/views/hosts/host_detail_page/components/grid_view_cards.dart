@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:monitor_mobile/src/models/models.dart';
 import 'card_info_widget.dart';
 
 class GridViewCards extends StatelessWidget {
   const GridViewCards({
     super.key,
-    required this.numberOfItens,
-    required this.numberOfIncidents,
+    required this.itens,
+    required this.problems,
   });
 
-  final String numberOfItens;
-  final String numberOfIncidents;
+  final List<Item> itens;
+  final List<Problem> problems;
   @override
   Widget build(BuildContext context) {
     return GridView.count(
@@ -20,22 +22,36 @@ class GridViewCards extends StatelessWidget {
       crossAxisSpacing: 30,
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (_buildCheckListNotEmpty(itens)) {
+              Get.toNamed('/host_itens', arguments: itens);
+            }
+          },
           child: CardInfo(
             title: 'Itens',
             theme: Theme.of(context).colorScheme.tertiary,
-            number: numberOfItens,
+            number: itens.length.toString(),
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (_buildCheckListNotEmpty(problems)) {
+              Get.toNamed('/host_incidents', arguments: problems);
+            } else {}
+          },
           child: CardInfo(
             title: 'Incidentes',
             theme: Theme.of(context).colorScheme.error,
-            number: numberOfIncidents,
+            number: problems.length.toString(),
           ),
         ),
       ],
     );
+  }
+}
+
+_buildCheckListNotEmpty(List list) {
+  if (list.isNotEmpty) {
+    return true;
   }
 }

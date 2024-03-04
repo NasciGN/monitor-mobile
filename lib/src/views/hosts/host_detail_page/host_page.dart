@@ -171,8 +171,8 @@ class _HostPageState extends State<HostPage> {
   Expanded _buildGridView(BuildContext context) {
     return Expanded(
       child: GridViewCards(
-        numberOfIncidents: hostProblems.length.toString(),
-        numberOfItens: hostItens.length.toString(),
+        problems: hostProblems,
+        itens: hostItens,
       ),
     );
   }
