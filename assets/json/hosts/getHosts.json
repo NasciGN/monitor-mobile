@@ -12,7 +12,7 @@
             "active_available"
         ],
         "search": {
-            "name": "BULLETINET-MNT-T46-R:A"
+            "name": ""
         },
         "selectInventory": [
             "type",
@@ -91,7 +91,7 @@
             "templateid",
             "name"
         ],
-        "limit": "1"
+        "limit": ""
     },
     "id": 1,
     "auth": ""

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/models/host.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/components/card_info_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/host_details/host_detail_form.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/host_inventory_form.dart';
+import 'components/grid_view_cards.dart';
+import 'components/indexed_stack_pages.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({super.key});
@@ -15,63 +14,121 @@ class HostPage extends StatefulWidget {
 
 class _HostPageState extends State<HostPage> {
   final Host host = Get.arguments;
+  int selectIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const FaIcon(
-            FontAwesomeIcons.arrowLeft,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.offNamed('/home');
-          },
+      appBar: _buildAppBar(),
+      body: _buildBody(context),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      scrolledUnderElevation: 0,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: const FaIcon(
+          FontAwesomeIcons.arrowLeft,
+          color: Colors.white,
         ),
+        onPressed: () {
+          Get.offNamed('/home');
+        },
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildPageTitle(context),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 20),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                height: 220,
-                width: double.infinity,
-                decoration: _buildContainerDecoration(context),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCardTitle(context, 'Geral'),
-                      _buildGridView(context),
-                    ]),
-              ),
-              Container(
-                width: double.infinity,
-                decoration: _buildContainerDecoration(context),
-                child: HostDetailForm(
-                  host: host,
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                decoration: _buildContainerDecoration(context),
-                child: HostInventoryForm(host: host),
-              )
-            ],
-          ),
+    );
+  }
+
+  Padding _buildBody(BuildContext context) {
+    return Padding(
+      padding: _buildPadding(),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildPageTitle(context),
+            Container(
+              height: 220,
+              margin: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              decoration: _buildContainerDecoration(context),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildFirstCardTitle(context, 'Geral'),
+                    _buildGridView(context),
+                  ]),
+            ),
+            _buildInformationSection(context),
+          ],
         ),
       ),
     );
+  }
+
+  EdgeInsets _buildPadding() => const EdgeInsets.all(16);
+
+  Container _buildInformationSection(BuildContext context) {
+    return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: _buildContainerDecoration(context),
+        child: Column(
+          children: [
+            Padding(
+              padding: _buildPadding(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                      onTap: () => _onItemTapped(0),
+                      child: selectIndex == 0
+                          ? _buildSelectOptionIndexedStack(context, 'Host')
+                          : _buildUnselectOptionIndexedStack(context, 'Host')),
+                  GestureDetector(
+                    onTap: () => _onItemTapped(1),
+                    child: selectIndex == 1
+                        ? _buildSelectOptionIndexedStack(context, 'Inventário')
+                        : _buildUnselectOptionIndexedStack(
+                            context, 'Inventário'),
+                  )
+                ],
+              ),
+            ),
+            IndexedStackPages(selectIndex: selectIndex, host: host)
+          ],
+        ));
+  }
+
+  _buildSelectOptionIndexedStack(context, String label) {
+    return Container(
+      height: 60,
+      width: 150,
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(5)),
+      child: Center(
+        child: Text(
+          label,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+      ),
+    );
+  }
+
+  _buildUnselectOptionIndexedStack(context, String label) {
+    return Opacity(
+        opacity: 0.5, child: _buildSelectOptionIndexedStack(context, label));
   }
 
   Text _buildPageTitle(BuildContext context) {
@@ -81,7 +138,7 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  Text _buildCardTitle(BuildContext context, String title) {
+  Text _buildFirstCardTitle(BuildContext context, String title) {
     return Text(
       title,
       style: Theme.of(context).textTheme.displayMedium,
@@ -89,27 +146,8 @@ class _HostPageState extends State<HostPage> {
   }
 
   Expanded _buildGridView(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        primary: false,
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 30,
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: CardInfo(
-                title: 'Itens', theme: Theme.of(context).colorScheme.tertiary),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: CardInfo(
-                title: 'Incidentes',
-                theme: Theme.of(context).colorScheme.error),
-          ),
-        ],
-      ),
+    return const Expanded(
+      child: GridViewCards(),
     );
   }
 

@@ -59,10 +59,13 @@ class Host {
           .map((groupJson) => Group.fromJson(groupJson))
           .toList();
 
-      Map<String, dynamic>? inventoryJson = json['inventory'];
       Inventory? inventory;
-      if (inventoryJson != null && inventoryJson.isNotEmpty) {
+      final dynamic inventoryJson = json['inventory'];
+
+      if (inventoryJson is Map<String, dynamic>) {
         inventory = Inventory.fromJson(inventoryJson);
+      } else {
+        inventory = Inventory();
       }
 
       return Host(

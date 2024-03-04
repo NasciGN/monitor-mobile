@@ -29,6 +29,7 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
       style: Theme.of(context).textTheme.labelMedium,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.name,
+      minLines: 1,
       maxLines: 2,
       decoration: _buildDecoration(context),
     );

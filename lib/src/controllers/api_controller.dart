@@ -27,7 +27,7 @@ class GetData {
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
         final result = responseBody["result"];
-        print(result);
+        print(responseBody);
         return result;
       } else {
         throw Exception(

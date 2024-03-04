@@ -27,6 +27,7 @@ class _CustomHostFormState extends State<CustomHostForm> {
       enabled: _hostFormControler.isEdit,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.host,
+      minLines: 1,
       maxLines: 2,
       decoration: _buildDecoration(context),
     );
