@@ -15,7 +15,7 @@ class ItemPage extends StatefulWidget {
 
 class _ItemPageState extends State<ItemPage> {
   final Item item = Get.arguments;
-  final _itemFormController = Get.put(ItemFormController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,18 +42,24 @@ class _ItemPageState extends State<ItemPage> {
 
   EdgeInsets _buildPadding() => const EdgeInsets.all(16);
 
-  Container _buildInformationSection(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: _buildContainerDecoration(context),
-        child: Column(
-          children: [
-            ItemDetailForm(
-              item: item,
-            )
-          ],
-        ));
+  _buildInformationSection(BuildContext context) {
+    return Padding(
+      padding: _buildPadding(),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            decoration: _buildContainerDecoration(context),
+            child: Column(
+              children: [
+                ItemDetailForm(
+                  item: item,
+                )
+              ],
+            )),
+      ),
+    );
   }
 
   _buildSelectOptionIndexedStack(context, String label) {

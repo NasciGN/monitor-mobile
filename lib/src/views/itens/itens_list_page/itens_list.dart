@@ -17,6 +17,14 @@ class _HostItensListPageState extends State<HostItensListPage> {
   ItemDataController itemDataController = ItemDataController();
   final List<Item> itens = Get.arguments;
   List<Item> searchItens = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    searchItens = itens;
+  }
+
   void _searchData(String query) {
     setState(() {
       searchItens = itemDataController.searchItensFilter(query, itens);

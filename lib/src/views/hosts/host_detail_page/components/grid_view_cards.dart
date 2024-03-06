@@ -25,7 +25,7 @@ class GridViewCards extends StatelessWidget {
           onTap: () {
             if (_buildCheckListNotEmpty(itens)) {
               Get.toNamed('/host_itens', arguments: itens);
-            }
+            } else {}
           },
           child: CardInfo(
             title: 'Itens',

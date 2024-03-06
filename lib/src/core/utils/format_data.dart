@@ -250,7 +250,7 @@ class FormatData {
 
   static percentageConverter(String doubleValue) {
     double value = double.parse(doubleValue);
-    return value.toStringAsFixed(2);
+    return value.toStringAsFixed(1);
   }
 
   interfaceTypeToString(String interfaceType) {
