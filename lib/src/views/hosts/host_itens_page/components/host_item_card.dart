@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/models/item.dart';
 
@@ -19,14 +20,16 @@ class _HostItemCardState extends State<HostItemCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Get.toNamed('/item_page', arguments: widget.hostItem);
+      },
+      onLongPress: () {
         Get.offNamed("");
       },
-      onLongPress: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 100,
+        height: 120,
         width: double.infinity,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(5)),
@@ -47,9 +50,39 @@ class _HostItemCardState extends State<HostItemCard> {
                 const SizedBox(
                   width: 20,
                 ),
+                const FaIcon(
+                  FontAwesomeIcons.chevronRight,
+                  size: 15,
+                ),
               ],
             ),
             const Spacer(),
+            Row(
+              children: [
+                Text(
+                  "Ultimo valor:",
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                const Spacer(),
+                Text(
+                  "Última checagem:",
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                const Spacer(),
+                Text(
+                  widget.hostItem.newLastClock,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            )
           ],
         ),
       ),

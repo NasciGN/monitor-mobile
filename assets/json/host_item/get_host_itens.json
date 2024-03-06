@@ -2,13 +2,12 @@
     "jsonrpc": "2.0",
     "method": "item.get",
     "params": {
-        "countOutput": false,
         "output": "extend",
-        "hostids": "10603",
+        "hostids": "",
         "with_triggers": true,
-        "search": {
-            "key_": ""
-        },
+        "selectValueMap": [
+            "mappings"
+        ],
         "sortfield": "name"
     },
     "id": 1,
