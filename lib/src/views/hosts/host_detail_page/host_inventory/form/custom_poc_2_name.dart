@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/host/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryPoc2Name2nameForm extends StatefulWidget {
   const CustomInventoryPoc2Name2nameForm({super.key, required this.poc_2Name});

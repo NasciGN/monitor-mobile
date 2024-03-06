@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 
-import '../../../../../controllers/hosts/forms/hosts_form_controller.dart';
+import '../../../../../controllers/host/forms/hosts_form_controller.dart';
 
 class CustomHostGroupsForm extends StatefulWidget {
   const CustomHostGroupsForm({super.key, required this.name});

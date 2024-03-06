@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../../../controllers/hosts/hosts_data_controller.dart';
-import '../../../models/models.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/models/models.dart';
+
 import 'components/grid_view_cards.dart';
 import 'components/indexed_stack_pages.dart';
 
@@ -16,7 +17,8 @@ class HostPage extends StatefulWidget {
 class _HostPageState extends State<HostPage> {
   final Host host = Get.arguments;
   int selectIndex = 0;
-  final HostsDataController hostsDataController = HostsDataController();
+  final ItemDataController itemDataController = ItemDataController();
+  final ProblemDataController problemDataController = ProblemDataController();
   List<Item> hostItens = [];
   List<Problem> hostProblems = [];
 
@@ -28,13 +30,13 @@ class _HostPageState extends State<HostPage> {
 
   Future<void> fetchItens() async {
     hostItens.clear();
-    hostItens = await hostsDataController.getHostItens(host.id);
+    hostItens = await itemDataController.fetchItemsByHost(host.id);
     setState(() {});
   }
 
   Future<void> fetchEvents() async {
     hostProblems.clear();
-    hostProblems = await hostsDataController.getHostProblems(host.id);
+    hostProblems = await problemDataController.fetchProblemsByHost(host.id);
     setState(() {});
   }
 

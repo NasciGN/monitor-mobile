@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/hosts/forms/hosts_form_controller.dart';
+import '../../../../controllers/host/forms/hosts_form_controller.dart';
 import '../../../../models/models.dart';
 import 'form/custom_description_form.dart';
 import 'form/form.dart';
@@ -138,17 +138,10 @@ class CustomHostInterfacesList extends StatelessWidget {
                                         ? Theme.of(context).colorScheme.tertiary
                                         : Theme.of(context).colorScheme.error),
                             child: Center(
-                              child: host.hostInterfaces[index].type == "1"
-                                  ? Text(
-                                      'Zabbix',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    )
-                                  : Text('SNMP',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium),
+                              child: Text(
+                                host.hostInterfaces[index].interfaceTypeString,
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
                             )),
                       ],
                     ),

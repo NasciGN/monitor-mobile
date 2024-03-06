@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:monitor_mobile/src/controllers/api_controller.dart';
-import 'package:monitor_mobile/src/controllers/hosts/hosts_data_controller.dart';
+import 'package:monitor_mobile/src/controllers/api/api_controller.dart';
+import 'package:monitor_mobile/src/controllers/host/host_data_controller.dart';
 import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
 import 'package:monitor_mobile/src/views/hosts/hosts_list_page/components/host_card.dart';
 import 'package:shimmer/shimmer.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   void _searchData(String query) {
     setState(() {
-      searchHosts = hostsDataController.searchFilter(query, hosts);
+      searchHosts = hostsDataController.searchHostsFilter(query, hosts);
     });
   }
 

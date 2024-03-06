@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/host/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryMacaddressBForm extends StatefulWidget {
   const CustomInventoryMacaddressBForm({super.key, required this.macaddressB});

@@ -52,12 +52,24 @@ class CardHostSkeleton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
           ),
           const Spacer(),
-          Container(
-            width: 80,
-            height: 30,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(10)),
+          Row(
+            children: [
+              Container(
+                width: 80,
+                height: 30,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              const Spacer(),
+              Container(
+                width: 150,
+                height: 20,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(10)),
+              )
+            ],
           )
         ],
       ),

@@ -8,6 +8,7 @@ class Host {
   List<Template> parentTemplates;
   List<Group> hostGroups;
   List<Interface> hostInterfaces;
+  Interface? mainInterface;
   Inventory? inventory;
   Host({
     required this.id,
@@ -20,6 +21,7 @@ class Host {
     this.parentTemplates = const [],
     this.hostGroups = const [],
     this.hostInterfaces = const [],
+    this.mainInterface,
     this.inventory,
   });
 
@@ -36,17 +38,6 @@ class Host {
           parentTemplates.map((template) => template.toMap()).toList(),
       'host_groups': hostGroups.map((group) => group.toMap()).toList(),
     };
-  }
-
-  static List<Interface> interfaceFromJson(List<dynamic> jsonList) {
-    List<Interface> hostInterfaces = [];
-
-    for (var interfaceData in jsonList) {
-      Interface newInterface = Interface.fromJson(interfaceData);
-      hostInterfaces.add(newInterface);
-    }
-
-    return hostInterfaces;
   }
 
   factory Host.fromJson(Map<String, dynamic>? json) {
@@ -68,7 +59,7 @@ class Host {
         inventory = Inventory();
       }
 
-      return Host(
+      var host = Host(
         id: json['hostid'],
         host: json['host'] ?? '',
         name: json['name'] ?? '',
@@ -80,6 +71,8 @@ class Host {
         hostGroups: hostGroups,
         inventory: inventory,
       );
+
+      return host;
     } else {
       return Host(
         id: '',

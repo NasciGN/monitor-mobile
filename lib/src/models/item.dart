@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
 
 class Item {
   String itemId,
@@ -50,97 +51,6 @@ class Item {
     this.newUnits = '',
     this.newLastClock = '',
   });
-
-  static Map<String, dynamic> convertData(json) {
-    Map<String, dynamic> result = {};
-    if (json["units"] == 'bps') {
-      List<String> convertedValues = convertBitsPerSecond(json["lastvalue"]);
-      result['newValue'] = convertedValues[0];
-      result['newUnits'] = convertedValues[1];
-    } else if (json["units"] == 'B') {
-      List<String> convertedValues = convertBytsPerSecond(json["lastvalue"]);
-      result['newValue'] = convertedValues[0];
-      result['newUnits'] = convertedValues[1];
-    } else if (json["units"] == '%') {
-      result['newValue'] = percentageConverter(json["lastvalue"]);
-      result['newUnits'] = '%';
-    } else {
-      result['newValue'] = json["lastvalue"];
-      result["newUnits"] = json["units"];
-    }
-    return result;
-  }
-
-  static percentageConverter(String doubleValue) {
-    double value = double.parse(doubleValue);
-    return value.toStringAsFixed(2);
-  }
-
-  static convertBytsPerSecond(String stringBps) {
-    int bps = int.parse(stringBps);
-    List<String> values = [];
-    const int bistInKilobit = 1024;
-    const int bitsInMegabit = 1048576;
-    const int bitsInGigabit = 1073741824;
-
-    if (bps < bistInKilobit) {
-      values.clear();
-      values.add(bps.toStringAsFixed(2));
-      values.add('B');
-      return values;
-    } else if (bps < bitsInMegabit) {
-      double mbps = bps / bistInKilobit;
-      values.clear();
-      values.add(mbps.toStringAsFixed(2));
-      values.add('KB');
-      return values;
-    } else if (bps < bitsInGigabit) {
-      double gbps = bps / bitsInMegabit;
-      values.clear();
-      values.add(gbps.toStringAsFixed(2));
-      values.add('MB');
-      return values;
-    } else {
-      double tbps = bps / bitsInGigabit;
-      values.clear();
-      values.add(tbps.toStringAsFixed(2));
-      values.add('GB');
-      return values;
-    }
-  }
-
-  static convertBitsPerSecond(String stringbps) {
-    int bps = int.parse(stringbps);
-    List<String> values = [];
-    const int bistInKilobit = 1000;
-    const int bitsInMegabit = 1000000;
-    const int bitsInGigabit = 1000000000;
-
-    if (bps < bistInKilobit) {
-      values.clear();
-      values.add(bps.toStringAsFixed(2));
-      values.add('bps');
-      return values;
-    } else if (bps < bitsInMegabit) {
-      double mbps = bps / bistInKilobit;
-      values.clear();
-      values.add(mbps.toStringAsFixed(2));
-      values.add('Kbps');
-      return values;
-    } else if (bps < bitsInGigabit) {
-      double gbps = bps / bitsInMegabit;
-      values.clear();
-      values.add(gbps.toStringAsFixed(2));
-      values.add('Mbps');
-      return values;
-    } else {
-      double tbps = bps / bitsInGigabit;
-      values.clear();
-      values.add(tbps.toStringAsFixed(2));
-      values.add('Gbps');
-      return values;
-    }
-  }
 
   static String formatarData(DateTime data) {
     final formatoLocal = DateFormat('yyyy-MM-dd HH:mm:ss');
@@ -207,7 +117,8 @@ class Item {
         lastValue: json['lastvalue'] ?? '',
         prevValue: json['prevvalue'] ?? '',
       );
-      Map<String, dynamic> convertedData = convertData(json);
+      final FormatData formatData = FormatData();
+      Map<String, dynamic> convertedData = formatData.convertData(json);
       item.newLastValue = convertedData["newValue"];
       item.newUnits = convertedData["newUnits"];
       item.newLastClock = calcularTempoDecorrido(json["lastclock"]);

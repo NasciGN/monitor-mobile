@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/controllers/hosts/forms/host_inventory_form_controller.dart';
+import 'package:monitor_mobile/src/controllers/host/forms/host_inventory_form_controller.dart';
 
 class CustomInventoryOobRouterForm extends StatefulWidget {
   const CustomInventoryOobRouterForm({super.key, required this.oobRouter});

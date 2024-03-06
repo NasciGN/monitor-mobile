@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
-import '../api_controller.dart';
+import '../api/api_controller.dart';
 
 class HostInterfaceDataController {
   final GetData apiGet = GetData();
@@ -11,7 +10,7 @@ class HostInterfaceDataController {
   Future<List<Interface>> fetchInterfaces() async {
     try {
       String getInterfacesJson = await rootBundle
-          .loadString('assets/json/host_interface/get_host_interface.json');
+          .loadString('assets/json/host_interface/get_host_interfaces.json');
       final getInterfacesRequest = await jsonDecode(getInterfacesJson);
       List<dynamic> getInterfacesResponse =
           await apiGet.getData(getInterfacesRequest);
@@ -20,7 +19,7 @@ class HostInterfaceDataController {
           .toList();
       return interfaces;
     } catch (e) {
-      print('Erro ao buscar interfaces: $e');
+      print('Erro ao buscar as interfaces de host: $e');
       return [];
     }
   }

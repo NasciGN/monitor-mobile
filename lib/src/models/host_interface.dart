@@ -1,3 +1,4 @@
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
 import 'package:monitor_mobile/src/models/host_interface_detail.dart';
 
 class Interface {
@@ -12,7 +13,8 @@ class Interface {
       available,
       error,
       errorsFrom,
-      disableUntil;
+      disableUntil,
+      interfaceTypeString;
   InterfaceDetails details;
 
   Interface({
@@ -29,6 +31,7 @@ class Interface {
     required this.errorsFrom,
     required this.disableUntil,
     required this.details,
+    this.interfaceTypeString = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -51,7 +54,7 @@ class Interface {
 
   factory Interface.fromJson(Map<String, dynamic> json) {
     if (json.isNotEmpty) {
-      return Interface(
+      var interface = Interface(
         interfaceId: json['interfaceid'],
         hostId: json['hostid'],
         main: json['main'],
@@ -68,6 +71,12 @@ class Interface {
             ? InterfaceDetails.fromJson(json['details'])
             : InterfaceDetails(version: '', bulk: '', community: ''),
       );
+
+      final FormatData formatData = FormatData();
+      interface.interfaceTypeString =
+          formatData.interfaceTypeToString(json["type"]);
+
+      return interface;
     } else {
       return Interface(
         interfaceId: '',

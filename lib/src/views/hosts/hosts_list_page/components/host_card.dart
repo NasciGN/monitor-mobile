@@ -62,32 +62,29 @@ class _HostCardState extends State<HostCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: widget.host.hostInterfaces
-                              .any((element) => element.available.contains('1'))
-                          ? Theme.of(context).colorScheme.tertiary
-                          : Theme.of(context).colorScheme.error,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: widget.host.hostInterfaces
-                            .any((element) => element.type.contains('1'))
-                        ? Text("Zabbix",
-                            style: Theme.of(context).textTheme.displaySmall)
-                        : Text(
-                            "SNMP",
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                  ),
-                ),
+                widget.host.hostInterfaces.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        width: 70,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: widget.host.hostInterfaces.any((element) =>
+                                    element.available.contains('1'))
+                                ? Theme.of(context).colorScheme.tertiary
+                                : Theme.of(context).colorScheme.error,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                            child: Text(
+                                widget.host.mainInterface!.interfaceTypeString,
+                                style:
+                                    Theme.of(context).textTheme.displaySmall)),
+                      )
+                    : const SizedBox.shrink(),
                 const Spacer(),
                 Text(
-                  widget.host.hostInterfaces[0].ip != ''
-                      ? widget.host.hostInterfaces[0].ip
-                      : '',
+                  widget.host.mainInterface!.useIp == '1'
+                      ? widget.host.mainInterface!.ip
+                      : widget.host.mainInterface!.dns,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],

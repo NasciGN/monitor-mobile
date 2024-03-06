@@ -1,0 +1,32 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/models/models.dart';
+
+class ItemDataController {
+  final GetData apiGet = GetData();
+
+  Future<void> fetchItems() async {}
+  Future<List<Item>> fetchItemsByHost(String hostId) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/host_item/get_host_itens.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      jsonRequest["params"]["hostids"] = hostId;
+      List<dynamic> itensData = await apiGet.getData(jsonRequest);
+      List<Item> itens = itensData.map((item) => Item.fromJson(item)).toList();
+      return itens;
+    } catch (e) {
+      print('Erro para buscar itens do host: $e');
+      return [];
+    }
+  }
+
+  List<Item> searchItensFilter(String query, List<Item> items) {
+    return items
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toLowerCase()) ||
+            element.newUnits.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
+}

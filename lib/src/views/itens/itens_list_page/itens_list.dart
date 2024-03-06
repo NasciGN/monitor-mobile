@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 import 'components/item_card.dart';
@@ -13,7 +14,14 @@ class HostItensListPage extends StatefulWidget {
 }
 
 class _HostItensListPageState extends State<HostItensListPage> {
+  ItemDataController itemDataController = ItemDataController();
   final List<Item> itens = Get.arguments;
+  List<Item> searchItens = [];
+  void _searchData(String query) {
+    setState(() {
+      searchItens = itemDataController.searchItensFilter(query, itens);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +74,10 @@ class _HostItensListPageState extends State<HostItensListPage> {
   _buildHostItensListView() {
     return Expanded(
       child: ListView.builder(
-        itemCount: itens.length,
+        itemCount: searchItens.length,
         itemBuilder: (context, index) {
           return HostItemCard(
-            hostItem: itens[index],
+            hostItem: searchItens[index],
           );
         },
       ),
@@ -78,7 +86,7 @@ class _HostItensListPageState extends State<HostItensListPage> {
 
   TextField _buildTextField() {
     return TextField(
-      // onChanged: (value) => _searchData(value),
+      onChanged: (value) => _searchData(value),
       style: Theme.of(context).textTheme.displayMedium,
       decoration: _buildTextFieldDecoration(),
     );

@@ -72,9 +72,12 @@ class _HostItemCardState extends State<HostItemCard> {
             ),
             Row(
               children: [
-                Text(
-                  "${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
-                  style: Theme.of(context).textTheme.labelSmall,
+                Container(
+                  width: 150,
+                  child: Text(
+                      "${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
+                      style: Theme.of(context).textTheme.labelSmall,
+                      overflow: TextOverflow.ellipsis),
                 ),
                 const Spacer(),
                 Text(
