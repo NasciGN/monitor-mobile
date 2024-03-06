@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/item/form/item_form_controller.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/itens/item_page/components/item_detail_form.dart';
-import 'package:monitor_mobile/src/views/itens/item_page/form/form.dart';
+import 'package:monitor_mobile/src/views/itens/item_detail_page/components/item_detail_form.dart';
+import 'package:monitor_mobile/src/views/itens/item_detail_page/form/form.dart';
 
 class ItemPage extends StatefulWidget {
   const ItemPage({super.key});

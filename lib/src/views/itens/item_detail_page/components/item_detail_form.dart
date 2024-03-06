@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/item/form/item_form_controller.dart';
-import 'package:monitor_mobile/src/views/itens/item_page/form/form.dart';
+import 'package:monitor_mobile/src/views/itens/item_detail_page/form/form.dart';
 import '../../../../models/models.dart';
 
 class ItemDetailForm extends StatelessWidget {

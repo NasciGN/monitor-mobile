@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
-import 'components/host_item_card.dart';
+import 'components/item_card.dart';
 
 class HostItensListPage extends StatefulWidget {
   const HostItensListPage({super.key});

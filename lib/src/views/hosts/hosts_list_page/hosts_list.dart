@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/controllers/api_controller.dart';
 import 'package:monitor_mobile/src/controllers/hosts/hosts_data_controller.dart';
 import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/hosts_page/components/host_card.dart';
+import 'package:monitor_mobile/src/views/hosts/hosts_list_page/components/host_card.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../models/host.dart';
 import 'components/host_card_skeleton.dart';
