@@ -31,13 +31,17 @@ class _HostPageState extends State<HostPage> {
   Future<void> fetchItens() async {
     hostItens.clear();
     hostItens = await itemDataController.fetchItemsByHost(host.id);
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> fetchEvents() async {
     hostProblems.clear();
     hostProblems = await problemDataController.fetchProblemsByHost(host.id);
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

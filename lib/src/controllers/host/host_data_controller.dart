@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:collection/collection.dart';
 
 class HostsDataController {
   final GetData apiGet = GetData();
@@ -35,8 +34,10 @@ class HostsDataController {
         Host host = hosts[i];
         host.hostInterfaces =
             interfaces.where((element) => element.hostId == (host.id)).toList();
-        host.mainInterface = interfaces.firstWhere(
-            (element) => element.main == '1' && element.hostId == (host.id));
+        host.mainInterface = interfaces
+            .where(
+                (element) => element.hostId == (host.id) && element.main == '1')
+            .toList();
       }
     } catch (e) {
       print('Erro: $e');

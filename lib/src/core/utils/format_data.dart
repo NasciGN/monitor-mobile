@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class FormatData {
   Map<String, dynamic> convertData(Map<String, dynamic> json) {
     Map<String, dynamic> result = {};
@@ -209,7 +211,8 @@ class FormatData {
     const int millisInSecond = 1000;
 
     if (seconds < 0.001) {
-      values.add("< 1 ms");
+      values.add("< 1");
+      values.add('ms');
     } else if (seconds < secondsInMinute) {
       values.add((seconds * millisInSecond).toStringAsFixed(1));
       values.add('ms');
@@ -244,11 +247,10 @@ class FormatData {
         values.add('h');
       }
     }
-
     return values;
   }
 
-  static percentageConverter(String doubleValue) {
+  percentageConverter(String doubleValue) {
     double value = double.parse(doubleValue);
     return value.toStringAsFixed(1);
   }
@@ -262,5 +264,30 @@ class FormatData {
       _ => '',
     };
     return newValue;
+  }
+
+  String formatarData(DateTime data) {
+    final formatoLocal = DateFormat('yyyy-MM-dd HH:mm:ss');
+    return formatoLocal.format(data);
+  }
+
+  String calcularTempoDecorrido(String timestamp) {
+    DateTime agora = DateTime.now();
+    DateTime timeStamp =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
+
+    Duration diferenca = agora.difference(timeStamp);
+    DateTime dataExata = agora.subtract(diferenca);
+
+    return formatarData(dataExata);
+  }
+
+  String aplicateValueMap(valueMaps, json) {
+    List<dynamic> mappings = valueMaps['mappings'];
+    var matchingMapping = mappings.firstWhere(
+      (mapping) => mapping["value"] == json["lastvalue"],
+      orElse: () => "",
+    );
+    return "${matchingMapping["newvalue"]} (${(json["lastvalue"])})";
   }
 }

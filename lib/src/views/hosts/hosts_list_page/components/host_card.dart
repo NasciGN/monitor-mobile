@@ -75,16 +75,17 @@ class _HostCardState extends State<HostCard> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                             child: Text(
-                                widget.host.mainInterface!.interfaceTypeString,
+                                widget
+                                    .host.mainInterface[0].interfaceTypeString,
                                 style:
                                     Theme.of(context).textTheme.displaySmall)),
                       )
                     : const SizedBox.shrink(),
                 const Spacer(),
                 Text(
-                  widget.host.mainInterface!.useIp == '1'
-                      ? widget.host.mainInterface!.ip
-                      : widget.host.mainInterface!.dns,
+                  widget.host.mainInterface[0].useIp == '1'
+                      ? widget.host.mainInterface[0].ip
+                      : widget.host.mainInterface[0].dns,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],

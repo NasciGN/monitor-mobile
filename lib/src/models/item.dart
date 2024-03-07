@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:monitor_mobile/src/core/utils/format_data.dart';
 
 class Item {
@@ -52,22 +51,6 @@ class Item {
     this.newLastClock = '',
   });
 
-  static String formatarData(DateTime data) {
-    final formatoLocal = DateFormat('yyyy-MM-dd HH:mm:ss');
-    return formatoLocal.format(data);
-  }
-
-  static String calcularTempoDecorrido(String timestamp) {
-    DateTime agora = DateTime.now();
-    DateTime timeStamp =
-        DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
-
-    Duration diferenca = agora.difference(timeStamp);
-    DateTime dataExata = agora.subtract(diferenca);
-
-    return formatarData(dataExata);
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'itemid': itemId,
@@ -117,11 +100,21 @@ class Item {
         lastValue: json['lastvalue'] ?? '',
         prevValue: json['prevvalue'] ?? '',
       );
+
       final FormatData formatData = FormatData();
       Map<String, dynamic> convertedData = formatData.convertData(json);
-      item.newLastValue = convertedData["newValue"];
-      item.newUnits = convertedData["newUnits"];
-      item.newLastClock = calcularTempoDecorrido(json["lastclock"]);
+      final dynamic valuesMap = json['valuemap'];
+
+      if (valuesMap is Map<String, dynamic>) {
+        item.newLastValue = formatData.aplicateValueMap(valuesMap, json);
+        item.newUnits = "";
+      } else {
+        item.newLastValue = convertedData["newValue"];
+        item.newUnits = convertedData["newUnits"];
+      }
+
+      item.newLastClock = formatData.calcularTempoDecorrido(json["lastclock"]);
+
       return item;
     } else {
       return Item(

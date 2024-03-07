@@ -8,7 +8,7 @@ class Host {
   List<Template> parentTemplates;
   List<Group> hostGroups;
   List<Interface> hostInterfaces;
-  Interface? mainInterface;
+  List<Interface> mainInterface;
   Inventory? inventory;
   Host({
     required this.id,
@@ -21,7 +21,7 @@ class Host {
     this.parentTemplates = const [],
     this.hostGroups = const [],
     this.hostInterfaces = const [],
-    this.mainInterface,
+    this.mainInterface = const [],
     this.inventory,
   });
 
