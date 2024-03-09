@@ -23,7 +23,9 @@ class Item {
       prevValue,
       newLastValue,
       newUnits,
-      newLastClock;
+      newLastClock,
+      newStatus,
+      newType;
 
   Item({
     required this.itemId,
@@ -49,6 +51,8 @@ class Item {
     this.newLastValue = '',
     this.newUnits = '',
     this.newLastClock = '',
+    this.newStatus = '',
+    this.newType = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -112,7 +116,8 @@ class Item {
         item.newLastValue = convertedData["newValue"];
         item.newUnits = convertedData["newUnits"];
       }
-
+      item.newStatus = formatData.statusValueMap(json["status"]);
+      item.newType = formatData.typeItensValueMap(json["type"]);
       item.newLastClock = formatData.calcularTempoDecorrido(json["lastclock"]);
 
       return item;

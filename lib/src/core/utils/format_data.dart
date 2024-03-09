@@ -286,8 +286,60 @@ class FormatData {
     List<dynamic> mappings = valueMaps['mappings'];
     var matchingMapping = mappings.firstWhere(
       (mapping) => mapping["value"] == json["lastvalue"],
-      orElse: () => "",
+      orElse: () => {},
     );
-    return "${matchingMapping["newvalue"]} (${(json["lastvalue"])})";
+
+    return "${matchingMapping["newvalue"]} (${json["lastvalue"]})";
+  }
+
+  String statusValueMap(String value) {
+    if (value == '0') {
+      return 'Ativo';
+    } else {
+      return 'Inativo';
+    }
+  }
+
+  String typeItensValueMap(String value) {
+    switch (value) {
+      case "0":
+        return "Zabbix agent";
+      case "2":
+        return "Zabbix trapper";
+      case "3":
+        return "Simple check";
+      case "5":
+        return "Zabbix internal";
+      case "7":
+        return "Zabbix agent (active)";
+      case "9":
+        return "Web item";
+      case "10":
+        return "External check";
+      case "11":
+        return "Database monitor";
+      case "12":
+        return "IPMI agent";
+      case "13":
+        return "SSH agent";
+      case "14":
+        return "TELNET agent";
+      case "15":
+        return "Calculated";
+      case "16":
+        return "JMX agent";
+      case "17":
+        return "SNMP trap";
+      case "18":
+        return "Dependent item";
+      case "19":
+        return "HTTP agent";
+      case "20":
+        return "SNMP agent";
+      case "21":
+        return "Script";
+      default:
+        return "";
+    }
   }
 }

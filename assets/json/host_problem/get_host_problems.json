@@ -2,7 +2,6 @@
     "jsonrpc": "2.0",
     "method": "problem.get",
     "params": {
-        "countOutput": true,
         "output": "extend",
         "hostids": "",
         "recent": "true",

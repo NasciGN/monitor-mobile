@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 import 'components/grid_view_cards.dart';
@@ -98,6 +99,7 @@ class _HostPageState extends State<HostPage> {
                     _buildGridView(context),
                   ]),
             ),
+            _buildGraphSection(context),
             _buildInformationSection(context),
           ],
         ),
@@ -106,12 +108,34 @@ class _HostPageState extends State<HostPage> {
   }
 
   EdgeInsets _buildPadding() => const EdgeInsets.all(16);
+  _buildGraphSection(context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(defaultpd * 2),
+        decoration: _buildContainerDecoration(context),
+        child: Row(children: [
+          Text(
+            'Gráficos',
+            style: Theme.of(context).textTheme.displayMedium,
+          ),
+          const Spacer(),
+          const FaIcon(
+            FontAwesomeIcons.chevronRight,
+            color: Colors.white,
+          ),
+        ]),
+      ),
+    );
+  }
 
   Container _buildInformationSection(BuildContext context) {
     return Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: _buildContainerDecoration(context),
+        margin: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             Padding(

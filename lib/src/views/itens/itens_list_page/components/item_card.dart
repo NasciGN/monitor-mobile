@@ -50,7 +50,7 @@ class _HostItemCardState extends State<HostItemCard> {
             Row(
               children: [
                 Text(
-                  "Ultimo valor: ${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
+                  "Último valor: ${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ],

@@ -14,7 +14,10 @@ class ItemDataController {
       final jsonRequest = await jsonDecode(getHostItensCall);
       jsonRequest["params"]["hostids"] = hostId;
       List<dynamic> itensData = await apiGet.getData(jsonRequest);
-      List<Item> itens = itensData.map((item) => Item.fromJson(item)).toList();
+      List<Item> itens = itensData
+          .map((item) => Item.fromJson(item))
+          .where((element) => element.error == "")
+          .toList();
       return itens;
     } catch (e) {
       print('Erro para buscar itens do host: $e');
