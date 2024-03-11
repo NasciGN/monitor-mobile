@@ -3,9 +3,7 @@
     "method": "history.get",
     "params": {
         "output": "extend",
-        "history": 0,
         "itemids": "",
-        "time_from": "",
         "sortfield": "clock",
         "sortorder": "DESC",
         "limit": 10

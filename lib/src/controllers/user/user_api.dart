@@ -5,9 +5,13 @@ import 'dart:convert';
 class UserApi extends GetxController {
   RxString apicode = ''.obs;
   RxString url = ''.obs;
+  RxString server = ''.obs;
+  RxString apiVersion = ''.obs;
+  RxString usuario = ''.obs;
+  RxString senha = ''.obs;
 
   Future<void> login(String user, String pass, String urlSite) async {
-    String urlAPI = 'http://$urlSite/api_jsonrpc.php';
+    String urlAPI = '$urlSite/api_jsonrpc.php';
     Map<String, dynamic> requestBody = {
       "jsonrpc": "2.0",
       "method": "user.login",
@@ -16,9 +20,14 @@ class UserApi extends GetxController {
     };
     String result = await jsonStringRequest(requestBody, urlAPI);
     apicode.value = result;
-    url.value = urlAPI;
+    url.value = urlSite;
+    usuario.value = user;
+    senha.value = pass;
+
     update();
   }
+
+  Future<void> getApiVersion() async {}
 
   Future<String> jsonStringRequest(jsonBody, String url) async {
     String requestBodyJson = jsonEncode(jsonBody);
@@ -30,6 +39,7 @@ class UserApi extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      print(jsonDecode(response.body)["result"].toString());
       return jsonDecode(response.body)["result"].toString();
     } else {
       return '';

@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         isLoading = false;
       });
     } catch (e) {
-      print('Erro:: $e');
+      print('Erro ao atribuir as listas de hosts para a lista de pesquisa: $e');
       setState(() {
         isLoading = false;
       });

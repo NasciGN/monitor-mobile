@@ -60,7 +60,7 @@ class Host {
       }
 
       var host = Host(
-        id: json['hostid'],
+        id: json['hostid'] ?? '',
         host: json['host'] ?? '',
         name: json['name'] ?? '',
         description: json['description'] ?? '',

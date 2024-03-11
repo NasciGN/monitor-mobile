@@ -18,7 +18,7 @@ class ProblemDataController {
           problemsData.map((item) => Problem.fromJson(item)).toList();
       return problems;
     } catch (e) {
-      print('Erro para buscar itens do host: $e');
+      print('Erro para buscar incidentes do host: $e');
       return [];
     }
   }

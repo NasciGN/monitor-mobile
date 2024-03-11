@@ -8,21 +8,21 @@ class HostsDataController {
   final HostInterfaceDataController interfaceController =
       HostInterfaceDataController();
 
-  Future<List<Host>> fetchHosts({
-    String name = "",
-  }) async {
+  Future<List<Host>> fetchHosts({String name = ''}) async {
     try {
       String getHostsJson =
           await rootBundle.loadString('assets/json/hosts/get_hosts.json');
       final getHostsRequest = await jsonDecode(getHostsJson);
       List<dynamic> getHostsResponse = await apiGet.getData(getHostsRequest);
+      print(getHostsResponse);
       List<Host> hosts =
           getHostsResponse.map((host) => Host.fromJson(host)).toList();
+
       await fetchHostInterfaces(hosts);
       sortByNameHosts(hosts);
       return hosts;
     } catch (e) {
-      print('Erro: $e');
+      print('Erro ao buscar hosts com a API: $e');
       return [];
     }
   }
@@ -40,7 +40,7 @@ class HostsDataController {
             .toList();
       }
     } catch (e) {
-      print('Erro: $e');
+      print('Erro atribuir as interfaces do host: $e');
     }
   }
 

@@ -25,6 +25,19 @@ class ItemDataController {
     }
   }
 
+  Future<List<ItemHistory>> fetchItemHistory(String itemID) async {
+    String getHostItensCall = await rootBundle
+        .loadString('assets/json/item_history/get_item_history.json');
+    final jsonRequest = await jsonDecode(getHostItensCall);
+    jsonRequest["params"]["itemids"] = itemID;
+
+    List<dynamic> historyData = await apiGet.getData(jsonRequest);
+
+    List<ItemHistory> history =
+        historyData.map((item) => ItemHistory.fromJson(item)).toList();
+    return history;
+  }
+
   List<Item> searchItensFilter(String query, List<Item> items) {
     return items
         .where((element) =>

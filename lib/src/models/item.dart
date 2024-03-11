@@ -1,4 +1,5 @@
 import 'package:monitor_mobile/src/core/utils/format_data.dart';
+import 'package:monitor_mobile/src/models/models.dart';
 
 class Item {
   String itemId,
@@ -26,6 +27,7 @@ class Item {
       newLastClock,
       newStatus,
       newType;
+  List<ItemHistory> historyList;
 
   Item({
     required this.itemId,
@@ -53,6 +55,7 @@ class Item {
     this.newLastClock = '',
     this.newStatus = '',
     this.newType = '',
+    this.historyList = const [],
   });
 
   Map<String, dynamic> toMap() {

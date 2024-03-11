@@ -1,16 +1,21 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/api/api_get_cookie.dart';
 import 'package:monitor_mobile/src/controllers/user/user_api.dart';
 
 class GetData {
   UserApi userapi;
+  GetCookie cookiesManager = GetCookie();
   late String token;
   late String url;
+  late String user;
+  late String pass;
 
   GetData() : userapi = Get.find<UserApi>() {
-    // token = userapi.apicode.value;
-    // url = '${userapi.url.value}/api_jsonrpc.php';
+    token = userapi.apicode.value;
+    url = '${userapi.url.value}/api_jsonrpc.php';
   }
 
   Future<dynamic> getData(var json) async {
@@ -35,5 +40,12 @@ class GetData {
     } catch (error) {
       throw Exception('Falha ao buscar dados: $error');
     }
+  }
+
+  Future<String> getCookie() async {
+    String cookie = await cookiesManager.getCookie(
+        userapi.usuario.value, userapi.senha.value, userapi.url.value);
+
+    return cookie;
   }
 }
