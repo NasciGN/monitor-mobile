@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
@@ -18,7 +19,7 @@ class ProblemDataController {
           problemsData.map((item) => Problem.fromJson(item)).toList();
       return problems;
     } catch (e) {
-      print('Erro para buscar incidentes do host: $e');
+      Get.snackbar('Erro', 'Não foi possível buscar os incidentes deste Host.');
       return [];
     }
   }

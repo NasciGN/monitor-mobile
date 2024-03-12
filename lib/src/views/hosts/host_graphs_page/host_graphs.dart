@@ -66,8 +66,7 @@ class _HostGraphsState extends State<HostGraphs> {
     return Padding(
       padding: const EdgeInsets.all(defaultpd * 4),
       child: _isLoading
-          ? Expanded(
-              child: Shimmer.fromColors(
+          ? Shimmer.fromColors(
               baseColor: const Color.fromARGB(26, 240, 240, 240),
               highlightColor: Theme.of(context).colorScheme.primary,
               child: ListView.separated(
@@ -77,7 +76,7 @@ class _HostGraphsState extends State<HostGraphs> {
                         height: 16,
                       )),
                   itemCount: 12),
-            ))
+            )
           : hostGraphs.isNotEmpty
               ? _buildListView()
               : Container(

@@ -57,8 +57,10 @@ class FormatData {
     int seconds = uptimeSeconds % 60;
 
     String uptimeString = '';
-    if (days > 0) {
-      uptimeString += '${days} dias, ';
+    if (days > 0 && days < 2) {
+      uptimeString += '$days dia, ';
+    } else {
+      uptimeString += '$days dias, ';
     }
 
     String hoursString = hours < 10 ? '0$hours' : '$hours';

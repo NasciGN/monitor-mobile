@@ -21,7 +21,6 @@ class _HostItensListPageState extends State<HostItensListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     searchItens = itens;
   }

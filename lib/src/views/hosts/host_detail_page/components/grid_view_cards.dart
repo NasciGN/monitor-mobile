@@ -45,9 +45,3 @@ class GridViewCards extends StatelessWidget {
     );
   }
 }
-
-_buildCheckListNotEmpty(List list) {
-  if (list.isNotEmpty) {
-    return true;
-  }
-}

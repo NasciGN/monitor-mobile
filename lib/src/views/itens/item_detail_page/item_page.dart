@@ -34,7 +34,6 @@ class _ItemPageState extends State<ItemPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getItemHistory();
   }
@@ -115,35 +114,35 @@ class _ItemPageState extends State<ItemPage> {
     );
   }
 
-  _buildHistorySection(context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: defaultpd * 2),
-      padding: const EdgeInsets.symmetric(
-          vertical: defaultpd * 2, horizontal: defaultpd * 2),
-      decoration: _buildContainerDecoration(context),
-      child: Column(children: [
-        SizedBox(
-          width: double.infinity,
-          child: Text('Histórico',
-              style: Theme.of(context).textTheme.displayMedium),
-        ),
-        (history.isEmpty || history.length < 10) && _isLoading
-            ? SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: defaultpd * 4),
-                  child: Center(
-                      child: Text(
-                    'Nenhum histórico para listar',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  )),
-                ),
-              )
-            : _buildCardInformation(
-                context, history[0].newClock, history[0].value)
-      ]),
-    );
-  }
+  // _buildHistorySection(context) {
+  //   return Container(
+  //     margin: const EdgeInsets.symmetric(vertical: defaultpd * 2),
+  //     padding: const EdgeInsets.symmetric(
+  //         vertical: defaultpd * 2, horizontal: defaultpd * 2),
+  //     decoration: _buildContainerDecoration(context),
+  //     child: Column(children: [
+  //       SizedBox(
+  //         width: double.infinity,
+  //         child: Text('Histórico',
+  //             style: Theme.of(context).textTheme.displayMedium),
+  //       ),
+  //       (history.isEmpty || history.length < 10) && _isLoading
+  //           ? SizedBox(
+  //               width: double.infinity,
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: defaultpd * 4),
+  //                 child: Center(
+  //                     child: Text(
+  //                   'Nenhum histórico para listar',
+  //                   style: Theme.of(context).textTheme.labelMedium,
+  //                 )),
+  //               ),
+  //             )
+  //           : _buildCardInformation(
+  //               context, history[0].newClock, history[0].value)
+  //     ]),
+  //   );
+  // }
 
   _buildCardInformation(context, String label, String value) {
     return Container(

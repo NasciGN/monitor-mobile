@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:dio/dio.dart';
 
 class UserApi extends GetxController {
+  final dio = Dio();
   RxString apicode = ''.obs;
   RxString url = ''.obs;
   RxString server = ''.obs;
@@ -19,23 +20,24 @@ class UserApi extends GetxController {
     jsonRequest["params"]["username"] = user;
     jsonRequest["params"]["password"] = pass;
     try {
-      final response = await http
-          .post(
-            Uri.parse('$urlSite/api_jsonrpc.php'),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonEncode(jsonRequest),
-          )
+      final response = await dio
+          .post('$url/api_jsonrpc.php',
+              data: json,
+              options: Options(headers: {
+                'Content-Type': 'application/json',
+              }))
           .timeout(const Duration(seconds: 5));
 
       if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
-        if (responseBody["result"] != null) {
-          result = responseBody["result"].toString();
+        if (response.data["result"] != null) {
+          result = response.data["result"].toString();
         } else {
           throw Exception('Erro ao buscar dados da API');
         }
+        Get.snackbar('Sucesso', 'Usuário logado com sucesso.',
+            backgroundColor: const Color.fromARGB(255, 34, 95, 29),
+            duration: const Duration(seconds: 5),
+            snackPosition: SnackPosition.BOTTOM);
         url.value = urlSite;
         apicode.value = result;
         usuario.value = user;
@@ -50,11 +52,13 @@ class UserApi extends GetxController {
       return;
     } catch (e) {
       if (e.toString().contains('No host specified in URI')) {
-        Get.snackbar('Url inválida',
-            'Verifique a Url cadastrada, ela precisa estar de acordo com o seguinte exemplo: \nhttp(s)://Endereço_ou_Dominio_do_Servidor(/zabbix).',
-            duration: const Duration(seconds: 5),
-            backgroundColor: const Color(0xFFFF485A),
-            snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar(
+          'Url inválida',
+          'Verifique a Url cadastrada, ela precisa estar de acordo com o seguinte exemplo: \nhttp(s)://Endereço_ou_Dominio_do_Servidor(/zabbix).',
+          duration: const Duration(seconds: 5),
+          backgroundColor: const Color.fromARGB(255, 128, 36, 46),
+          snackPosition: SnackPosition.BOTTOM,
+        );
       }
       if (e
           .toString()
@@ -62,6 +66,7 @@ class UserApi extends GetxController {
         Get.snackbar('Url inválida',
             'Preencha o protcolo do endereço corretamente: (http://) ou (https://).',
             duration: const Duration(seconds: 5),
+            backgroundColor: const Color.fromARGB(255, 128, 36, 46),
             snackPosition: SnackPosition.BOTTOM);
       }
     }

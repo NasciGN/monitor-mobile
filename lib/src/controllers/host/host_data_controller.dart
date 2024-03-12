@@ -14,7 +14,6 @@ class HostsDataController {
           await rootBundle.loadString('assets/json/hosts/get_hosts.json');
       final jsonRequest = await jsonDecode(getHostsJson);
       List<dynamic> getHostsResponse = await apiGet.getData(jsonRequest);
-      print(getHostsResponse);
       List<Host> hosts =
           getHostsResponse.map((host) => Host.fromJson(host)).toList();
 

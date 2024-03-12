@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/api/api_get_cookie.dart';
 import 'package:monitor_mobile/src/controllers/user/user_api.dart';
+import 'package:dio/dio.dart';
 
 class GetData {
+  final dio = Dio();
+
   UserApi userapi;
   GetCookie cookiesManager = GetCookie();
   late String token;
@@ -14,6 +15,8 @@ class GetData {
   late String pass;
 
   GetData() : userapi = Get.find<UserApi>() {
+    userapi.apicode.value = "dc3df6b9d1f0872cc83a4656da341fad";
+    userapi.url.value = "http://177.129.127.1:65002";
     token = userapi.apicode.value;
     url = '${userapi.url.value}/api_jsonrpc.php';
     user = userapi.usuario.value;
@@ -23,39 +26,30 @@ class GetData {
   Future<dynamic> getData(var json) async {
     json["auth"] = token;
     try {
-      final response = await http
-          .post(
-            Uri.parse(url),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonEncode(json),
-          )
+      final response = await dio
+          .post(url,
+              data: json,
+              options: Options(headers: {
+                'Content-Type': 'application/json',
+              }))
           .timeout(const Duration(seconds: 5));
-
       if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
-        if (responseBody["result"] != null) {}
-        final result = responseBody["result"];
+        final result = response.data["result"];
         return result;
       } else {
-        throw Exception(
-            'Falha ao buscar dados: ERRO COD. ${response.statusCode}');
+        return {};
       }
-    } on TimeoutException catch (e) {
-      print('Timeout: $e');
+    } on TimeoutException {
+      Get.snackbar('Erro',
+          'O servidor cadastrado não respondeu, verifique se um endereço válido foi preenchido!',
+          duration: const Duration(seconds: 5),
+          snackPosition: SnackPosition.BOTTOM);
+      return;
     } catch (e) {
-      if (e.toString().contains('No host specified in URI')) {
-        print(
-            'Url inválida. Verifique a Url cadastrada, ela precisa estar de acordo com o seguinte exemplo: http(s)://Endereço_ou_Dominio_do_Servidor(/zabbix)');
-      }
-      if (e
-          .toString()
-          .contains('Scheme not starting with alphabetic character')) {
-        print(
-            'URL invalida. Preencha o protcolo do endereço corretamente: (http://) ou (https://)');
-      }
-      throw Exception('Falha ao buscar dados: $e');
+      Get.snackbar('Erro', 'Erro ao buscar os dados no servidor.',
+          duration: const Duration(seconds: 5),
+          snackPosition: SnackPosition.BOTTOM);
+      return;
     }
   }
 
