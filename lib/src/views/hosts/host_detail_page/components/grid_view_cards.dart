@@ -19,13 +19,11 @@ class GridViewCards extends StatelessWidget {
       primary: false,
       crossAxisCount: 2,
       mainAxisSpacing: 10,
-      crossAxisSpacing: 30,
+      crossAxisSpacing: 10,
       children: [
         GestureDetector(
           onTap: () {
-            if (_buildCheckListNotEmpty(itens)) {
-              Get.toNamed('/host_itens', arguments: itens);
-            } else {}
+            Get.toNamed('/host_itens', arguments: itens);
           },
           child: CardInfo(
             title: 'Itens',
@@ -35,9 +33,7 @@ class GridViewCards extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            if (_buildCheckListNotEmpty(problems)) {
-              Get.toNamed('/host_incidents', arguments: problems);
-            } else {}
+            Get.toNamed('/host_incidents', arguments: problems);
           },
           child: CardInfo(
             title: 'Incidentes',

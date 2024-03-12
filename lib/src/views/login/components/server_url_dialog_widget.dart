@@ -29,19 +29,26 @@ class ServerRegistration extends StatelessWidget {
           const SizedBox(height: 10),
         ],
       ),
+      alignment: Alignment.center,
       actions: [
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Cancelar'),
+          child: Text(
+            'Cancelar',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
         ElevatedButton(
           onPressed: () {
             String url = urlController.text;
             Get.back(result: url);
           },
-          child: const Text('Salvar'),
+          child: Text(
+            'Salvar',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
       ],
     );

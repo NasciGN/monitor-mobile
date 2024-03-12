@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 import 'components/item_card.dart';
@@ -34,10 +35,9 @@ class _HostItensListPageState extends State<HostItensListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: _buildAppBar(context),
-      body: _buildBody(),
-    );
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: _buildAppBar(context),
+        body: _buildBody());
   }
 
   _buildAppBar(BuildContext context) {
@@ -74,22 +74,50 @@ class _HostItensListPageState extends State<HostItensListPage> {
         const SizedBox(
           height: 20,
         ),
-        _buildHostItensListView()
+        itens.isNotEmpty
+            ? _buildHostItensListView()
+            : Container(
+                margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+                child: Center(
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Text(
+                      'Esse Host não possui itens ativos',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ),
+                ),
+              )
       ],
     );
   }
 
   _buildHostItensListView() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: searchItens.length,
-        itemBuilder: (context, index) {
-          return HostItemCard(
-            hostItem: searchItens[index],
+    return searchItens.isNotEmpty
+        ? Expanded(
+            child: ListView.builder(
+              itemCount: searchItens.length,
+              itemBuilder: (context, index) {
+                return HostItemCard(
+                  hostItem: searchItens[index],
+                );
+              },
+            ),
+          )
+        : Container(
+            margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+            child: Center(
+              child: Opacity(
+                opacity: 0.5,
+                child: Text(
+                  'Nenhum item ativo encontrado neste Host.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
+            ),
           );
-        },
-      ),
-    );
   }
 
   TextField _buildTextField() {

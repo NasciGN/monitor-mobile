@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-
+import 'package:monitor_mobile/src/views/hosts/host_detail_page/components/host_page_skeleton.dart';
 import 'components/grid_view_cards.dart';
 import 'components/indexed_stack_pages.dart';
 
@@ -22,6 +22,7 @@ class _HostPageState extends State<HostPage> {
   final ProblemDataController problemDataController = ProblemDataController();
   List<Item> hostItens = [];
   List<Problem> hostProblems = [];
+  bool _isLoading = false;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,31 +33,42 @@ class _HostPageState extends State<HostPage> {
   Future<void> fetchItens() async {
     hostItens.clear();
     hostItens = await itemDataController.fetchItemsByHost(host.id);
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> fetchEvents() async {
     hostProblems.clear();
     hostProblems = await problemDataController.fetchProblemsByHost(host.id);
+  }
+
+  Future<void> fetchData() async {
     if (mounted) {
-      setState(() {});
+      setState(() {
+        _isLoading = true;
+      });
+    }
+    await fetchEvents();
+    await fetchItens();
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   @override
   void initState() {
     super.initState();
-    fetchItens();
-    fetchEvents();
+    fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: _buildBody(context),
+      body: Padding(
+        padding: _buildPadding(),
+        child: _isLoading ? const HostPageSkeleton() : _buildBody(context),
+      ),
     );
   }
 

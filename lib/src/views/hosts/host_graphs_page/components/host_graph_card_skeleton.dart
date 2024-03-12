@@ -19,13 +19,17 @@ class HostGraphCardSkeleton extends StatelessWidget {
         Container(
           height: 20,
           width: 250,
-          color: Theme.of(context).colorScheme.primary,
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(defaultpd * 2)),
         ),
         const Spacer(),
         Container(
           height: 20,
           width: 40,
-          color: Theme.of(context).colorScheme.primary,
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(defaultpd * 2)),
         )
       ]),
     );

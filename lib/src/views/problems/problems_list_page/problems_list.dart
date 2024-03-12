@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/problems/problems_list_page/components/problem_card.dart';
 
@@ -44,7 +45,21 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
   _buildBody() {
     return Padding(
       padding: const EdgeInsets.all(8 * 4),
-      child: _buildColumn(),
+      child: problems.isNotEmpty
+          ? _buildColumn()
+          : Container(
+              margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+              child: Center(
+                child: Opacity(
+                  opacity: 0.5,
+                  child: Text(
+                    'Este Host não possui incidentes ativos.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+              ),
+            ),
     );
   }
 

@@ -145,16 +145,27 @@ class _LoginFormState extends State<LoginForm> {
   _buildValidateForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
-        isLoading = true;
+        if (mounted) {
+          isLoading = true;
+        }
       });
+      try {
+        await _buildCallLoginApi();
 
-      await _buildCallLoginApi();
-
-      setState(() {
-        isLoading = false;
-      });
-      if (userapi.apicode.isNotEmpty) {
-        Get.offNamed("/home");
+        setState(() {
+          if (mounted) {
+            isLoading = false;
+          }
+        });
+        if (userapi.apicode.isNotEmpty) {
+          Get.offNamed("/home");
+        }
+      } catch (e) {
+        setState(() {
+          if (mounted) {
+            isLoading = false;
+          }
+        });
       }
     }
   }

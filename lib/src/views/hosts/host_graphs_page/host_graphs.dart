@@ -42,10 +42,7 @@ class _HostGraphsState extends State<HostGraphs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-    );
+    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
   }
 
   ListView _buildListView() {
@@ -81,7 +78,21 @@ class _HostGraphsState extends State<HostGraphs> {
                       )),
                   itemCount: 12),
             ))
-          : _buildListView(),
+          : hostGraphs.isNotEmpty
+              ? _buildListView()
+              : Container(
+                  margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+                  child: Center(
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: Text(
+                        'Este Host não possui gráficos.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ),
+                  ),
+                ),
     );
   }
 
