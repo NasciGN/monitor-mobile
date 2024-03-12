@@ -46,13 +46,10 @@ class _HostItemCardState extends State<HostItemCard> {
             const SizedBox(
               height: 5,
             ),
-            Row(
-              children: [
-                Text(
-                  "Último valor: ${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ],
+            Text(
+              "Último valor: ${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",
+              style: Theme.of(context).textTheme.labelSmall,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

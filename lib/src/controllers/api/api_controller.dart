@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/api/api_get_cookie.dart';
@@ -16,6 +15,8 @@ class GetData {
   GetData() : userapi = Get.find<UserApi>() {
     token = userapi.apicode.value;
     url = '${userapi.url.value}/api_jsonrpc.php';
+    user = userapi.usuario.value;
+    pass = userapi.senha.value;
   }
 
   Future<dynamic> getData(var json) async {
@@ -43,9 +44,8 @@ class GetData {
   }
 
   Future<String> getCookie() async {
-    String cookie = await cookiesManager.getCookie(
-        userapi.usuario.value, userapi.senha.value, userapi.url.value);
-
+    String cookie =
+        await cookiesManager.getCookie(user, pass, userapi.url.value);
     return cookie;
   }
 }

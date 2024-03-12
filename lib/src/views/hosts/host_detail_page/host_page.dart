@@ -110,7 +110,9 @@ class _HostPageState extends State<HostPage> {
   EdgeInsets _buildPadding() => const EdgeInsets.all(16);
   _buildGraphSection(context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed('/host_graphs', arguments: host.id);
+      },
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(defaultpd * 2),

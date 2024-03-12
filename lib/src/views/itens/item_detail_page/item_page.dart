@@ -89,8 +89,9 @@ class _ItemPageState extends State<ItemPage> {
                         item.valueType == "0" || item.valueType == "3"
                             ? IconButton(
                                 onPressed: () {
-                                  Get.offNamed('item_graph',
-                                      arguments: item.itemId);
+                                  Get.toNamed('/item_graph',
+                                      arguments:
+                                          '/chart.php?itemids%5B0%5D=${item.itemId}');
                                 },
                                 icon: const FaIcon(
                                   FontAwesomeIcons.chartColumn,

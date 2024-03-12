@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class ItemGraph extends StatefulWidget {
-  const ItemGraph({super.key});
+class Graph extends StatefulWidget {
+  const Graph({super.key});
 
   @override
-  State<ItemGraph> createState() => _ItemGraphState();
+  State<Graph> createState() => _GraphState();
 }
 
-class _ItemGraphState extends State<ItemGraph> {
+class _GraphState extends State<Graph> {
   final String itemID = Get.arguments;
   final getData = GetData();
   bool _isLoading = false;
@@ -51,29 +51,20 @@ class _ItemGraphState extends State<ItemGraph> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-    String itemID = Get.arguments;
+    // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+    String urlType = Get.arguments;
+    UserApi userApi = Get.find<UserApi>();
+    String genericUrl =
+        '&from=now-2d&to=now&type=0&width=1082&height=200&profileIdx=web.item.graph.filter';
 
-    String url =
-        'http://177.129.127.1:65002/chart.php?from=now-2d&to=now&itemids%5B0%5D=$itemID&type=0&width=1082&height=200&profileIdx=web.item.graph.filter';
+    String url = "${userApi.url.value}$urlType$genericUrl";
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        leading: IconButton(
-          icon: const FaIcon(
-            FontAwesomeIcons.arrowLeft,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
+      appBar: _buildAppBar(),
       body: _isLoading
-          ? const Text('Carregando...')
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : FutureBuilder<void>(
               future: setLoginCookies(url),
               builder: (context, snapshot) {
@@ -102,6 +93,23 @@ class _ItemGraphState extends State<ItemGraph> {
                 }
               },
             ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      leading: IconButton(
+        icon: const FaIcon(
+          FontAwesomeIcons.arrowLeft,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Get.back();
+        },
+      ),
     );
   }
 }

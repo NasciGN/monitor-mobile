@@ -71,7 +71,7 @@ class FormatData {
   }
 
   static convertBytes(String stringBps) {
-    int bps = int.parse(stringBps);
+    double bps = double.parse(stringBps);
     List<String> values = [];
     const int bistInKilobit = 1024;
     const int bitsInMegabit = 1048576;
@@ -298,6 +298,35 @@ class FormatData {
     } else {
       return 'Inativo';
     }
+  }
+
+  String formatDuration(String timestamp) {
+    String formattedDuration = '';
+    DateTime now = DateTime.now();
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestamp)! * 1000);
+    Duration duration = now.difference(dateTime);
+    if (duration.inDays >= 30) {
+      int months = duration.inDays ~/ 30;
+      formattedDuration = '${months}m ';
+      duration -= Duration(days: months * 30);
+    }
+    if (duration.inDays >= 1) {
+      formattedDuration += '${duration.inDays}d ';
+      duration -= Duration(days: duration.inDays);
+    }
+    if (duration.inHours >= 1) {
+      formattedDuration += '${duration.inHours}h ';
+      duration -= Duration(hours: duration.inHours);
+    }
+    if (duration.inMinutes >= 1) {
+      formattedDuration += '${duration.inMinutes}m ';
+      duration -= Duration(minutes: duration.inMinutes);
+    }
+    if (duration.inSeconds > 0 && duration.inDays < 1) {
+      formattedDuration += '${duration.inSeconds}s';
+    }
+    return formattedDuration.trim();
   }
 
   String typeItensValueMap(String value) {

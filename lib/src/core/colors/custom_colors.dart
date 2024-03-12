@@ -17,8 +17,8 @@ const inactiveItmColor = Color(0xFFFF485A);
 const linkColor = Color(0xFF3B96BA);
 
 const notClassified = {
-  "txtColor": 0x0,
-  "bgColor": 0xFF97AAB3,
+  "txtColor": Color(0xFF97AAB3),
+  "bgColor": Color(0xFF97AAB3),
 };
 const information = {
   "txtColor": Color(0xFF00268E),

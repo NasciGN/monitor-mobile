@@ -9,3 +9,4 @@ export 'item.dart';
 export 'problem.dart';
 export 'template.dart';
 export 'item_history.dart';
+export 'graph.dart';

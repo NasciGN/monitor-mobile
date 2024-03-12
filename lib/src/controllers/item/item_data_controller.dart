@@ -8,21 +8,16 @@ class ItemDataController {
 
   Future<void> fetchItems() async {}
   Future<List<Item>> fetchItemsByHost(String hostId) async {
-    try {
-      String getHostItensCall = await rootBundle
-          .loadString('assets/json/host_item/get_host_itens.json');
-      final jsonRequest = await jsonDecode(getHostItensCall);
-      jsonRequest["params"]["hostids"] = hostId;
-      List<dynamic> itensData = await apiGet.getData(jsonRequest);
-      List<Item> itens = itensData
-          .map((item) => Item.fromJson(item))
-          .where((element) => element.error == "")
-          .toList();
-      return itens;
-    } catch (e) {
-      print('Erro para buscar itens do host: $e');
-      return [];
-    }
+    String getHostItensCall = await rootBundle
+        .loadString('assets/json/host_item/get_host_itens.json');
+    final jsonRequest = await jsonDecode(getHostItensCall);
+    jsonRequest["params"]["hostids"] = hostId;
+    List<dynamic> itensData = await apiGet.getData(jsonRequest);
+    List<Item> itens = itensData
+        .map((item) => Item.fromJson(item))
+        .where((element) => element.error == "")
+        .toList();
+    return itens;
   }
 
   Future<List<ItemHistory>> fetchItemHistory(String itemID) async {
@@ -30,9 +25,7 @@ class ItemDataController {
         .loadString('assets/json/item_history/get_item_history.json');
     final jsonRequest = await jsonDecode(getHostItensCall);
     jsonRequest["params"]["itemids"] = itemID;
-
     List<dynamic> historyData = await apiGet.getData(jsonRequest);
-
     List<ItemHistory> history =
         historyData.map((item) => ItemHistory.fromJson(item)).toList();
     return history;

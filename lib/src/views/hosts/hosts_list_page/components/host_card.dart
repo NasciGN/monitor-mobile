@@ -82,12 +82,14 @@ class _HostCardState extends State<HostCard> {
                       )
                     : const SizedBox.shrink(),
                 const Spacer(),
-                Text(
-                  widget.host.mainInterface[0].useIp == '1'
-                      ? widget.host.mainInterface[0].ip
-                      : widget.host.mainInterface[0].dns,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
+                widget.host.mainInterface.isNotEmpty
+                    ? Text(
+                        widget.host.mainInterface[0].useIp == '1'
+                            ? widget.host.mainInterface[0].ip
+                            : widget.host.mainInterface[0].dns,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      )
+                    : const SizedBox.shrink(),
               ],
             )
           ],

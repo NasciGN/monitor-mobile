@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
 import 'package:monitor_mobile/src/views/hosts/hosts_list_page/components/host_card.dart';
@@ -46,9 +47,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _searchData(String query) {
-    setState(() {
-      searchHosts = hostsDataController.searchHostsFilter(query, hosts);
-    });
+    if (mounted) {
+      setState(() {
+        searchHosts = hostsDataController.searchHostsFilter(query, hosts);
+      });
+    }
   }
 
   @override
@@ -76,7 +79,7 @@ class _HomePageState extends State<HomePage> {
 
   _buildBody() {
     return Padding(
-      padding: const EdgeInsets.all(8 * 4),
+      padding: const EdgeInsets.all(defaultpd * 4),
       child: _buildColumn(),
     );
   }
