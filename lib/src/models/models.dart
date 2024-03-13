@@ -10,3 +10,4 @@ export 'problem.dart';
 export 'template.dart';
 export 'item_history.dart';
 export 'graph.dart';
+export 'adapters/user_login_adapter.dart';

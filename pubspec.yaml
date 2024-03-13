@@ -39,15 +39,24 @@ dependencies:
   dio: ^5.4.1
   font_awesome_flutter: ^10.7.0
   get: ^4.6.6
-  intl: ^0.19.0
+  #intl: ^0.19.0
   multi_dropdown: ^2.1.4
   shimmer: ^3.0.0
   webview_flutter: ^4.7.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  intl: ^0.19.0
+  path_provider: ^2.1.2
+
+
+  
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator:
+  build_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

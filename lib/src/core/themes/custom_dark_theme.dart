@@ -23,7 +23,7 @@ ThemeData customDarkTheme() {
     ),
     dialogTheme: const DialogTheme(backgroundColor: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),
-    drawerTheme: const DrawerThemeData(backgroundColor: darkTrdBgColor),
+    drawerTheme: const DrawerThemeData(backgroundColor: darkScdBgColor),
     textTheme: const TextTheme(
       titleLarge: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),

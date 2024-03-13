@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
 
 class UserApi extends GetxController {
   final dio = Dio();
+  final userDataController = UserDataController();
   RxString apicode = ''.obs;
   RxString url = ''.obs;
   RxString server = ''.obs;
@@ -13,16 +15,35 @@ class UserApi extends GetxController {
   RxString usuario = ''.obs;
   RxString senha = ''.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    loadUserData();
+  }
+
+  Future<void> loadUserData() async {
+    final user = await userDataController.getUserLoginInfo();
+    if (user != null) {
+      apicode.value = user.apicode;
+      url.value = user.url;
+      apiVersion.value = user.apiVersion;
+      usuario.value = user.usuario;
+      senha.value = user.senha;
+    }
+    update();
+  }
+
   Future<void> login(String user, String pass, String urlSite) async {
     String json = await rootBundle.loadString('assets/json/user/login.json');
     String result = '';
     final jsonRequest = await jsonDecode(json);
     jsonRequest["params"]["username"] = user;
     jsonRequest["params"]["password"] = pass;
+
     try {
       final response = await dio
-          .post('$url/api_jsonrpc.php',
-              data: json,
+          .post('$urlSite/api_jsonrpc.php',
+              data: jsonRequest,
               options: Options(headers: {
                 'Content-Type': 'application/json',
               }))
@@ -42,6 +63,8 @@ class UserApi extends GetxController {
         apicode.value = result;
         usuario.value = user;
         senha.value = pass;
+        await userDataController.saveUserLoginInfo(
+            result, urlSite, user, pass, '');
         update();
       }
     } on TimeoutException {
@@ -51,6 +74,7 @@ class UserApi extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
       return;
     } catch (e) {
+      print('Deu erro samerda: $e');
       if (e.toString().contains('No host specified in URI')) {
         Get.snackbar(
           'Url inválida',

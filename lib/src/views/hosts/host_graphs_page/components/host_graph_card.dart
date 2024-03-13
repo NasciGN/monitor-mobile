@@ -22,7 +22,7 @@ class _HostGraphCardState extends State<HostGraphCard> {
       decoration: _buildContainerDecoration(context),
       child: Row(children: [
         SizedBox(
-          width: 290,
+          width: 240,
           child: Text(
             widget.hostGraph.name,
             style: Theme.of(context).textTheme.labelSmall,

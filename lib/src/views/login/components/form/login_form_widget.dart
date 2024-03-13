@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/controllers/user/user_api.dart';
+import 'package:monitor_mobile/src/controllers/user/user_controller.dart';
 import 'package:monitor_mobile/src/views/login/components/server_url_dialog_widget.dart';
 
 class LoginForm extends StatefulWidget {

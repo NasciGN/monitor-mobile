@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/api/api_get_cookie.dart';
-import 'package:monitor_mobile/src/controllers/user/user_api.dart';
+import 'package:monitor_mobile/src/controllers/user/user_controller.dart';
 import 'package:dio/dio.dart';
 
 class GetData {

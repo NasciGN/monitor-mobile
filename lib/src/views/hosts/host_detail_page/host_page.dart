@@ -83,7 +83,7 @@ class _HostPageState extends State<HostPage> {
           color: Colors.white,
         ),
         onPressed: () {
-          Get.offNamed('/home');
+          Get.back();
         },
       ),
     );
