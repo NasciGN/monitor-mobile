@@ -50,7 +50,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -64,4 +64,14 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+            details.useVersion '1.8.10'
+        }
+    }
+}

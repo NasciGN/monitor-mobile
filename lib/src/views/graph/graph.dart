@@ -51,7 +51,7 @@ class _GraphState extends State<Graph> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     String urlType = Get.arguments;
     UserApi userApi = Get.find<UserApi>();
     String genericUrl =

@@ -56,11 +56,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: _buildAppBar(context),
-      drawer: const SideMenu(),
-      body: _buildBody(),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: _buildAppBar(context),
+        drawer: const SideMenu(),
+        body: _buildBody(),
+      ),
     );
   }
 

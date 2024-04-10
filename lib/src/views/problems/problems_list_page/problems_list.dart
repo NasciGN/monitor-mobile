@@ -13,7 +13,8 @@ class ProblemsListPage extends StatefulWidget {
 }
 
 class _ProblemsListPageState extends State<ProblemsListPage> {
-  List<Problem> problems = Get.arguments;
+  List<Problem> problems = Get.arguments['problems'];
+  Host host = Get.arguments['host'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +77,7 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
         itemBuilder: (context, index) {
           return HostProblemCard(
             hostProblem: problems[index],
+            host: host,
           );
         },
       ),

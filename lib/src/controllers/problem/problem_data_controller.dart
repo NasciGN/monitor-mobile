@@ -23,4 +23,22 @@ class ProblemDataController {
       return [];
     }
   }
+
+  Future<List<Problem>> fetchProblemsByTimestamp(DateTime timestamp) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/host_problem/get_host_problems.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      // jsonRequest["params"]["time_from"] = timestamp;
+      List<dynamic> problemsData = await apiGet.getData(jsonRequest);
+      print('Dados: $problemsData');
+      List<Problem> problems =
+          problemsData.map((problem) => Problem.fromJson(problem)).toList();
+      return problems;
+    } catch (e) {
+      Get.snackbar(
+          'Erro', 'Não foi possível buscar os incidentes ativos no servidor.');
+      return [];
+    }
+  }
 }

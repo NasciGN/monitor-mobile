@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/models/models.dart';
+import 'package:monitor_mobile/src/views/problems/problem_action_page/problem_action.dart';
 
 class HostProblemCard extends StatefulWidget {
   const HostProblemCard({
     super.key,
     required this.hostProblem,
+    required this.host,
   });
-
+  final Host host;
   final Problem hostProblem;
 
   @override
@@ -38,9 +40,9 @@ class _HostProblemCardState extends State<HostProblemCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
-        onLongPress: () {
-          Get.toNamed("");
+        onTap: () {
+          Get.dialog(const ProblemActionDialog(),
+              arguments: {'problem': widget.hostProblem, 'host': widget.host});
         },
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10),

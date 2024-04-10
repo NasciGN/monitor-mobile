@@ -33,10 +33,13 @@ class _HostItensListPageState extends State<HostItensListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: _buildAppBar(context),
-        body: _buildBody());
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          appBar: _buildAppBar(context),
+          body: _buildBody()),
+    );
   }
 
   _buildAppBar(BuildContext context) {

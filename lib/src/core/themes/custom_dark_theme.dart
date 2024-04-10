@@ -5,8 +5,8 @@ ThemeData customDarkTheme() {
   return ThemeData(
     colorScheme: ColorScheme.fromSwatch().copyWith(
       background: darkBgColor,
-      primary: darkScdBgColor,
-      secondary: darkTrdBgColor,
+      primary: darkPrmBgColor,
+      secondary: darkScdBgColor,
       tertiary: activeItmColor,
       error: inactiveItmColor,
     ),
@@ -23,7 +23,7 @@ ThemeData customDarkTheme() {
     ),
     dialogTheme: const DialogTheme(backgroundColor: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),
-    drawerTheme: const DrawerThemeData(backgroundColor: darkScdBgColor),
+    drawerTheme: const DrawerThemeData(backgroundColor: darkPrmBgColor),
     textTheme: const TextTheme(
       titleLarge: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),

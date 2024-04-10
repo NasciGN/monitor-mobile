@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 
 class SideMenu extends StatelessWidget {
@@ -9,6 +11,7 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserApi userapi = Get.find<UserApi>();
     return Drawer(
       shape: const LinearBorder(),
       child: Padding(
@@ -19,7 +22,8 @@ class SideMenu extends StatelessWidget {
             const Spacer(),
             GestureDetector(
                 onTap: () {
-                  print('Logout');
+                  userapi.logout();
+                  Get.offNamed('/login');
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

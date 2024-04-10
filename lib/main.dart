@@ -10,5 +10,6 @@ void main() async {
   await HiveConfig.startUserAdapter();
   await HiveConfig.openUserBox();
   Get.put(UserApi());
+
   runApp(MonitorMobile());
 }

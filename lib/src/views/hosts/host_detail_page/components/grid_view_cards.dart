@@ -6,10 +6,11 @@ import 'card_info_widget.dart';
 class GridViewCards extends StatelessWidget {
   const GridViewCards({
     super.key,
+    required this.host,
     required this.itens,
     required this.problems,
   });
-
+  final Host host;
   final List<Item> itens;
   final List<Problem> problems;
   @override
@@ -33,7 +34,8 @@ class GridViewCards extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.toNamed('/host_incidents', arguments: problems);
+            Get.toNamed('/host_incidents',
+                arguments: {'problems': problems, 'host': host});
           },
           child: CardInfo(
             title: 'Incidentes',

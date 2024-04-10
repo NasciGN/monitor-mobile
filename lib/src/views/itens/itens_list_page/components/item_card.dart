@@ -21,9 +21,6 @@ class _HostItemCardState extends State<HostItemCard> {
       onTap: () {
         Get.toNamed('/item_page', arguments: widget.hostItem);
       },
-      onLongPress: () {
-        Get.toNamed("");
-      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         height: 85,

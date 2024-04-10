@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const darkBgColor = Color.fromARGB(255, 23, 23, 24);
-const darkScdBgColor = Color(0xFF2B2B2B);
-const darkTrdBgColor = Color(0xFF454545);
+const darkPrmBgColor = Color(0xFF2B2B2B);
+const darkScdBgColor = Color(0xFF454545);
 const darkIcnColor = Color(0xFFD0D0D0);
 const darkBtnColor = Color(0xFF69808D);
 

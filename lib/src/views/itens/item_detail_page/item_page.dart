@@ -16,26 +16,10 @@ class _ItemPageState extends State<ItemPage> {
   final Item item = Get.arguments;
   ItemDataController itemDataController = ItemDataController();
   List<ItemHistory> history = [];
-  bool _isLoading = false;
-
-  Future<void> _getItemHistory() async {
-    if (mounted) {
-      setState(() {
-        _isLoading = true;
-      });
-    }
-    history = await itemDataController.fetchItemHistory(item.itemId);
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    _getItemHistory();
   }
 
   @override
@@ -171,34 +155,6 @@ class _ItemPageState extends State<ItemPage> {
           ],
         ),
       ),
-    );
-  }
-
-  _buildSelectOptionIndexedStack(context, String label) {
-    return Container(
-      height: 60,
-      width: 150,
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(5)),
-      child: Center(
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-      ),
-    );
-  }
-
-  _buildUnselectOptionIndexedStack(context, String label) {
-    return Opacity(
-        opacity: 0.5, child: _buildSelectOptionIndexedStack(context, label));
-  }
-
-  Text _buildFirstCardTitle(BuildContext context, String title) {
-    return Text(
-      title,
-      style: Theme.of(context).textTheme.displayMedium,
     );
   }
 

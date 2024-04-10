@@ -217,6 +217,7 @@ class _HostPageState extends State<HostPage> {
       child: GridViewCards(
         problems: hostProblems,
         itens: hostItens,
+        host: host,
       ),
     );
   }

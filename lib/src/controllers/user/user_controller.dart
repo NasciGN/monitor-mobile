@@ -96,5 +96,14 @@ class UserApi extends GetxController {
     }
   }
 
+  Future<void> logout() async {
+    await userDataController.clearUserLoginInfo();
+    apicode.value = '';
+    apiVersion.value = '';
+    url.value = '';
+    usuario.value = '';
+    senha.value = '';
+  }
+
   Future<void> getApiVersion() async {}
 }
