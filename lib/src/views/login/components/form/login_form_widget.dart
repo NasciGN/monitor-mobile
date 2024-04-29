@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/user/user_controller.dart';
-import 'package:monitor_mobile/src/views/login/components/server_url_dialog_widget.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -15,7 +14,7 @@ class _LoginFormState extends State<LoginForm> {
   late String serverResult;
   final UserApi userapi = Get.find<UserApi>();
   final _formKey = GlobalKey<FormState>();
-  final _controllerUrl = TextEditingController().obs;
+  final _controllerUrl = TextEditingController();
   final _controllerUser = TextEditingController();
   final _controllerPass = TextEditingController();
   bool isObscure = true;
@@ -34,9 +33,13 @@ class _LoginFormState extends State<LoginForm> {
             ),
             _buildPassField(),
             const SizedBox(
+              height: 30,
+            ),
+            _buildServerField(),
+            const SizedBox(
               height: 16,
             ),
-            _buildServerRegistrationBtn(),
+            // _buildServerRegistrationBtn(),
             _buildLoginBtn()
           ],
         ),
@@ -50,6 +53,15 @@ class _LoginFormState extends State<LoginForm> {
       style: Theme.of(context).textTheme.labelMedium,
       controller: _controllerUser,
       decoration: _buildTextFieldDecoration('Usuário', false),
+    );
+  }
+
+  _buildServerField() {
+    return TextFormField(
+      cursorColor: Colors.white,
+      style: Theme.of(context).textTheme.labelMedium,
+      controller: _controllerUrl,
+      decoration: _buildTextFieldDecoration('Servidor', false),
     );
   }
 
@@ -106,22 +118,6 @@ class _LoginFormState extends State<LoginForm> {
     return Theme.of(context).textTheme.labelMedium;
   }
 
-  _buildServerRegistrationBtn() {
-    return Align(
-        alignment: Alignment.centerLeft,
-        child: GestureDetector(
-          onTap: () async {
-            final result =
-                await Get.dialog<String>(ServerRegistration(_controllerUrl));
-
-            setState(() {
-              serverResult = result!;
-            });
-          },
-          child: _buildRegisterServerBTn(),
-        ));
-  }
-
   _buildRegisterServerBTn() {
     return SizedBox(
       height: 60,
@@ -172,6 +168,6 @@ class _LoginFormState extends State<LoginForm> {
 
   _buildCallLoginApi() async {
     return await userapi.login(
-        _controllerUser.text, _controllerPass.text, serverResult);
+        _controllerUser.text, _controllerPass.text, _controllerUrl.text);
   }
 }

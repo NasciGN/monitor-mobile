@@ -19,7 +19,7 @@ class _HostCardState extends State<HostCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/host_page", arguments: widget.host);
+        Get.offNamed("/host_page", arguments: widget.host);
       },
       onLongPress: () {},
       child: Container(
