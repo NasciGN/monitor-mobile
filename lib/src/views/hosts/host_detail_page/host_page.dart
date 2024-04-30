@@ -180,7 +180,7 @@ class _HostPageState extends State<HostPage> {
   _buildSelectOptionIndexedStack(context, String label) {
     return Container(
       height: 60,
-      width: 150,
+      width: 140,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(5)),
