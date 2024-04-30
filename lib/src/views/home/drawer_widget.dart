@@ -1,3 +1,4 @@
+import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -24,13 +25,15 @@ class SideMenu extends StatelessWidget {
                 children: [
                   _buildListOption(
                       context, 'Dashboard', FontAwesomeIcons.chartLine),
-                  _buildExpansionTileMonitoring(context),
-                  const SizedBox(height: 5),
-                  _buildExpansionTileServices(context),
-                  const SizedBox(height: 5),
-                  _buildExpansionTileCollectedData(context),
-                  const SizedBox(height: 5),
-                  _buildExpansionTileUsers(context),
+                  ExpansionTileGroup(
+                    toggleType: ToggleType.expandOnlyCurrent,
+                    children: [
+                      _buildExpansionTileMonitoring(context),
+                      _buildExpansionTileServices(context),
+                      _buildExpansionTileCollectedData(context),
+                      _buildExpansionTileUsers(context)
+                    ],
+                  )
                 ],
               ),
             ),
@@ -81,8 +84,8 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  ExpansionTile _buildExpansionTileMonitoring(BuildContext context) {
-    return ExpansionTile(
+  ExpansionTileItem _buildExpansionTileMonitoring(BuildContext context) {
+    return ExpansionTileItem(
       title: Text(
         'Monitoramento',
         style: Theme.of(context).textTheme.displaySmall,
@@ -90,8 +93,6 @@ class SideMenu extends StatelessWidget {
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
       leading: const Icon(
         FontAwesomeIcons.eye,
         color: Colors.white,
@@ -104,8 +105,8 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  ExpansionTile _buildExpansionTileServices(BuildContext context) {
-    return ExpansionTile(
+  ExpansionTileItem _buildExpansionTileServices(BuildContext context) {
+    return ExpansionTileItem(
       title: Text(
         'Serviços',
         style: Theme.of(context).textTheme.displaySmall,
@@ -113,8 +114,6 @@ class SideMenu extends StatelessWidget {
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
       leading: const Icon(
         FontAwesomeIcons.diagramProject,
         color: Colors.white,
@@ -126,8 +125,8 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  ExpansionTile _buildExpansionTileCollectedData(BuildContext context) {
-    return ExpansionTile(
+  ExpansionTileItem _buildExpansionTileCollectedData(BuildContext context) {
+    return ExpansionTileItem(
       title: Text(
         'Dados coletados',
         style: Theme.of(context).textTheme.displaySmall,
@@ -135,8 +134,6 @@ class SideMenu extends StatelessWidget {
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
       leading: const Icon(
         FontAwesomeIcons.arrowDownShortWide,
         color: Colors.white,
@@ -149,8 +146,8 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  ExpansionTile _buildExpansionTileUsers(BuildContext context) {
-    return ExpansionTile(
+  ExpansionTileItem _buildExpansionTileUsers(BuildContext context) {
+    return ExpansionTileItem(
       title: Text(
         'Usuários',
         style: Theme.of(context).textTheme.displaySmall,
@@ -158,8 +155,6 @@ class SideMenu extends StatelessWidget {
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
       leading: const Icon(
         FontAwesomeIcons.userGroup,
         color: Colors.white,
