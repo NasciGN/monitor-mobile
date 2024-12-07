@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
   TextField _buildTextField() {
     return TextField(
       onChanged: (value) => _searchData(value),
-      style: Theme.of(context).textTheme.displayMedium,
+      style: Theme.of(context).textTheme.bodyLarge,
       decoration: _buildTextFieldDecoration(),
     );
   }
@@ -139,12 +139,12 @@ class _HomePageState extends State<HomePage> {
         ),
         label: Text(
           'Pesquisar',
-          style: Theme.of(context).textTheme.displayMedium,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        labelStyle: Theme.of(context).textTheme.displayMedium,
+        labelStyle: Theme.of(context).textTheme.bodySmall,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),

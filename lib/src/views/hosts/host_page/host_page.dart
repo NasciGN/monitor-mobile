@@ -19,7 +19,8 @@ class _HostPageState extends State<HostPage> {
   final Host host = Get.arguments;
   int selectIndex = 0;
   final ItemDataController itemDataController = ItemDataController();
-  final ProblemDataController problemDataController = ProblemDataController();
+  final ProblemByHostDataController problemDataController =
+      ProblemByHostDataController();
   List<Item> hostItens = [];
   List<Problem> hostProblems = [];
   bool _isLoading = false;
@@ -93,7 +94,6 @@ class _HostPageState extends State<HostPage> {
   Padding _buildBody(BuildContext context) {
     return Padding(
       padding: _buildPadding(),
-      
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -134,7 +134,7 @@ class _HostPageState extends State<HostPage> {
         child: Row(children: [
           Text(
             'Gráficos',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const Spacer(),
           const FaIcon(
@@ -189,7 +189,7 @@ class _HostPageState extends State<HostPage> {
       child: Center(
         child: Text(
           label,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ),
     );
@@ -203,14 +203,14 @@ class _HostPageState extends State<HostPage> {
   Text _buildPageTitle(BuildContext context) {
     return Text(
       host.name,
-      style: Theme.of(context).textTheme.displayMedium,
+      style: Theme.of(context).textTheme.titleLarge,
     );
   }
 
   Text _buildFirstCardTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.displayMedium,
+      style: Theme.of(context).textTheme.bodyLarge,
     );
   }
 

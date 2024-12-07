@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 const darkBgColor = Color.fromARGB(255, 23, 23, 24);
-const darkPrmBgColor = Color(0xFF2B2B2B);
-const darkScdBgColor = Color(0xFF454545);
+const darkScdBgColor = Color(0xFF2B2B2B);
+const darkPrmBgColor = Color(0xFF454545);
+
 const darkIcnColor = Color.fromARGB(255, 189, 3, 3);
 const darkBtnColor = Color(0xFF69808D);
 
@@ -41,21 +42,24 @@ const disaster = {
   "bgColor": Color(0xFFFFA059),
 };
 
-Object map<String, int>(String severity) {
+Map<String, Color> getSeverityColors(String severity) {
   switch (severity) {
     case '0':
-      return notClassified; 
+      return notClassified;
     case '1':
-      return information; 
+      return information;
     case '2':
       return warning;
     case '3':
-      return average; 
+      return average;
     case '4':
       return high;
     case '5':
       return disaster;
     default:
-      return Colors.grey; // Cor padrão caso não haja correspondência
+      return {
+        "txtColor": Colors.grey,
+        "bgColor": Colors.grey
+      }; // Cor padrão caso não haja correspondência
   }
 }

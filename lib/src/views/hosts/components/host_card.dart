@@ -40,7 +40,7 @@ class _HostCardState extends State<HostCard> {
                   child: Text(
                     widget.host.name,
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -51,10 +51,10 @@ class _HostCardState extends State<HostCard> {
                         .any((element) => element.available.contains('1'))
                     ? Text(
                         'Ativo',
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       )
                     : Text('Inativo',
-                        style: Theme.of(context).textTheme.displaySmall)
+                        style: Theme.of(context).textTheme.bodyMedium)
               ],
             ),
             const Spacer(),
@@ -77,8 +77,7 @@ class _HostCardState extends State<HostCard> {
                             child: Text(
                                 widget
                                     .host.mainInterface[0].interfaceTypeString,
-                                style:
-                                    Theme.of(context).textTheme.displaySmall)),
+                                style: Theme.of(context).textTheme.bodyMedium)),
                       )
                     : const SizedBox.shrink(),
                 const Spacer(),

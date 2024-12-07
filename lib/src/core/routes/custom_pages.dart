@@ -10,5 +10,6 @@ List<GetPage<dynamic>> customGetPages = [
   GetPage(name: '/item_graph', page: () => const Graph()),
   GetPage(name: '/host_incidents', page: () => const ProblemsListPage()),
   GetPage(name: '/host_graphs', page: () => const HostGraphs()),
-  GetPage(name: '/problems_page', page: () => const ProblemsPage())
+  GetPage(name: '/problems_page', page: () => const ProblemsPage()),
+  GetPage(name: '/incidents_list_page', page: () => const IncidentsListPage()),
 ];

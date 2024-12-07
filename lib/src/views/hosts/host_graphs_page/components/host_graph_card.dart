@@ -25,7 +25,7 @@ class _HostGraphCardState extends State<HostGraphCard> {
           width: 240,
           child: Text(
             widget.hostGraph.name,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.bodySmall,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),

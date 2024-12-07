@@ -15,6 +15,7 @@ class SideMenu extends StatelessWidget {
     final UserApi userapi = Get.find<UserApi>();
     return Drawer(
       shape: const LinearBorder(),
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       child: Padding(
         padding: const EdgeInsets.symmetric(
             vertical: defaultpd * 4, horizontal: defaultpd * 2),
@@ -43,7 +44,7 @@ class SideMenu extends StatelessWidget {
             ListTile(
               title: Text(
                 'Desconectar',
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               leading: const Icon(
                 FontAwesomeIcons.powerOff,
@@ -69,7 +70,7 @@ class SideMenu extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.displaySmall,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       leading: Icon(
         icon,
@@ -88,7 +89,7 @@ class SideMenu extends StatelessWidget {
     return ExpansionTileItem(
       title: Text(
         'Monitoramento',
-        style: Theme.of(context).textTheme.displaySmall,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
@@ -98,7 +99,7 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
       ),
       children: [
-        _buildListItem(context, 0, 'Incidentes', '/problems_page'),
+        _buildListItem(context, 0, 'Incidentes', '/incidents_list_page'),
         _buildListItem(context, 1, 'Hosts', '/home'),
         _buildListItem(context, 2, 'Dados recentes', ''),
       ],
@@ -109,7 +110,7 @@ class SideMenu extends StatelessWidget {
     return ExpansionTileItem(
       title: Text(
         'Serviços',
-        style: Theme.of(context).textTheme.displaySmall,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
@@ -129,7 +130,7 @@ class SideMenu extends StatelessWidget {
     return ExpansionTileItem(
       title: Text(
         'Dados coletados',
-        style: Theme.of(context).textTheme.displaySmall,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
@@ -150,7 +151,7 @@ class SideMenu extends StatelessWidget {
     return ExpansionTileItem(
       title: Text(
         'Usuários',
-        style: Theme.of(context).textTheme.displaySmall,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
@@ -171,12 +172,12 @@ class SideMenu extends StatelessWidget {
     return Card(
         margin: const EdgeInsets.symmetric(
             horizontal: defaultpd, vertical: defaultpd / 2),
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
         child: ListTile(
             title: Text(
               title,
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             onTap: () {
               Navigator.of(context).pop();

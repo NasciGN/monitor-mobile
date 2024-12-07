@@ -43,10 +43,10 @@ class Host {
   factory Host.fromJson(Map<String, dynamic>? json) {
     if (json!.isNotEmpty) {
       List<Template> parentTemplates =
-          (json['parentTemplates'] as List<dynamic>)
+          (json['parentTemplates'] as List<dynamic>? ?? [])
               .map((templateJson) => Template.fromJson(templateJson))
               .toList();
-      List<Group> hostGroups = (json['hostgroups'] as List<dynamic>)
+      List<Group> hostGroups = (json['hostgroups'] as List<dynamic>? ?? [])
           .map((groupJson) => Group.fromJson(groupJson))
           .toList();
 
