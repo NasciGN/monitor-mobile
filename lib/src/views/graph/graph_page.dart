@@ -61,6 +61,7 @@ class _GraphState extends State<Graph> {
 
     return Scaffold(
       appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: _isLoading
           ? const Center(
               child: CircularProgressIndicator(),

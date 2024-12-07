@@ -15,8 +15,6 @@ class GetData {
   late String pass;
 
   GetData() : userapi = Get.find<UserApi>() {
-    userapi.apicode.value = "dc3df6b9d1f0872cc83a4656da341fad";
-    userapi.url.value = "http://177.129.127.1:65002";
     token = userapi.apicode.value;
     url = '${userapi.url.value}/api_jsonrpc.php';
     user = userapi.usuario.value;

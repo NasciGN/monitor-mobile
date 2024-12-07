@@ -42,7 +42,8 @@ class _HostGraphsState extends State<HostGraphs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
+    return Scaffold(appBar: _buildAppBar(), body: _buildBody(), backgroundColor: Theme.of(context).colorScheme.background,);
+    
   }
 
   AppBar _buildAppBar() {

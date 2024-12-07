@@ -8,6 +8,7 @@ class HostPageSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: _buildPadding(),
         child: SingleChildScrollView(

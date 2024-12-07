@@ -25,6 +25,7 @@ class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -44,6 +45,7 @@ class _ItemPageState extends State<ItemPage> {
         ),
       ),
       body: _buildInformationSection(context),
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 

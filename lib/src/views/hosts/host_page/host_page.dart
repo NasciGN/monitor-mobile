@@ -65,6 +65,7 @@ class _HostPageState extends State<HostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: _buildPadding(),
         child: _isLoading ? const HostPageSkeleton() : _buildBody(context),
@@ -92,6 +93,7 @@ class _HostPageState extends State<HostPage> {
   Padding _buildBody(BuildContext context) {
     return Padding(
       padding: _buildPadding(),
+      
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
