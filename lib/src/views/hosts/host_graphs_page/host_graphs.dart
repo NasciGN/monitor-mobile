@@ -45,56 +45,6 @@ class _HostGraphsState extends State<HostGraphs> {
     return Scaffold(appBar: _buildAppBar(), body: _buildBody());
   }
 
-  ListView _buildListView() {
-    return ListView.builder(
-      itemCount: hostGraphs.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Get.toNamed('/item_graph',
-                arguments: "/chart2.php?graphid=${hostGraphs[index].graphid}");
-          },
-          child: HostGraphCard(
-            hostGraph: hostGraphs[index],
-          ),
-        );
-      },
-    );
-  }
-
-  _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(defaultpd * 4),
-      child: _isLoading
-          ? Shimmer.fromColors(
-              baseColor: const Color.fromARGB(26, 240, 240, 240),
-              highlightColor: Theme.of(context).colorScheme.primary,
-              child: ListView.separated(
-                  itemBuilder: (context, index) =>
-                      const HostGraphCardSkeleton(),
-                  separatorBuilder: ((context, index) => const SizedBox(
-                        height: 16,
-                      )),
-                  itemCount: 12),
-            )
-          : hostGraphs.isNotEmpty
-              ? _buildListView()
-              : Container(
-                  margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
-                  child: Center(
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Text(
-                        'Este Host não possui gráficos.',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    ),
-                  ),
-                ),
-    );
-  }
-
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
@@ -113,6 +63,69 @@ class _HostGraphsState extends State<HostGraphs> {
           Get.back();
         },
       ),
+    );
+  }
+
+  _buildBody() {
+    return Padding(
+      padding: const EdgeInsets.all(defaultpd * 4),
+      child: _isLoading
+          ? BuildSkeleton(context: context)
+          : hostGraphs.isNotEmpty
+              ? _buildListView()
+              : Container(
+                  margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+                  child: Center(
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: Text(
+                        'Este Host não possui gráficos.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ),
+                  ),
+                ),
+    );
+  }
+
+  ListView _buildListView() {
+    return ListView.builder(
+      itemCount: hostGraphs.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            Get.toNamed('/item_graph',
+                arguments: "/chart2.php?graphid=${hostGraphs[index].graphid}");
+          },
+          child: HostGraphCard(
+            hostGraph: hostGraphs[index],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class BuildSkeleton extends StatelessWidget {
+  const BuildSkeleton({
+    super.key,
+    required this.context,
+  });
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: const Color.fromARGB(26, 240, 240, 240),
+      highlightColor: Theme.of(context).colorScheme.primary,
+      child: ListView.separated(
+          itemBuilder: (context, index) => const HostGraphCardSkeleton(),
+          separatorBuilder: ((context, index) => const SizedBox(
+                height: 16,
+              )),
+          itemCount: 12),
     );
   }
 }

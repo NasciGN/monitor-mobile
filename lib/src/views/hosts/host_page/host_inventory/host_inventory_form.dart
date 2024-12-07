@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail_page/host_inventory/form/form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/form/form.dart';
 
 class HostInventoryForm extends StatelessWidget {
   HostInventoryForm({super.key, required this.host});

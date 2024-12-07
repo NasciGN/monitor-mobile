@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail_page/components/custom_host_interface_itens.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail_page/components/custom_host_list_info.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/custom_host_interface_itens.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/custom_host_list_info.dart';
 
 import '../../../../controllers/host/forms/hosts_form_controller.dart';
 import '../../../../models/models.dart';

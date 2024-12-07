@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/home/drawer_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/hosts_list_page/components/host_card.dart';
+import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/components/host_card.dart';
 import 'package:shimmer/shimmer.dart';
 import 'components/host_card_skeleton.dart';
 

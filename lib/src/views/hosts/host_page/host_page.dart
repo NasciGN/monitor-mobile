@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/hosts/host_detail_page/components/host_page_skeleton.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_skeleton.dart';
 import 'components/grid_view_cards.dart';
 import 'components/indexed_stack_pages.dart';
 
