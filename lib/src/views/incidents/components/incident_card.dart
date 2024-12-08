@@ -4,9 +4,9 @@ import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 class IncidentCard extends StatefulWidget {
-  const IncidentCard({super.key, required this.trigger});
+  const IncidentCard({super.key, required this.events});
 
-  final Trigger trigger;
+  final Event events;
   @override
   State<IncidentCard> createState() => _IncidentCardState();
 }
@@ -32,7 +32,7 @@ class _IncidentCardState extends State<IncidentCard> {
               width: 10,
               height: 90,
               decoration: BoxDecoration(
-                color: getSeverityColors(widget.trigger.priority)["bgColor"],
+                color: getSeverityColors(widget.events.severity)["bgColor"],
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -44,19 +44,19 @@ class _IncidentCardState extends State<IncidentCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.trigger.description,
+                    widget.events.name,
                     style: Theme.of(context).textTheme.bodySmall,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
                   Text(
-                    widget.trigger.hosts[0].name,
+                    widget.events.hosts[0].name,
                     style: Theme.of(context).textTheme.bodyMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(widget.trigger.duration,
+                  Text(widget.events.duration,
                       style: Theme.of(context).textTheme.labelSmall)
                 ],
               ),

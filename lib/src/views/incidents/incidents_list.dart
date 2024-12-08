@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/controllers/event/event_data_controller.dart';
 import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
@@ -19,7 +20,10 @@ class IncidentsListPage extends StatefulWidget {
 class _IncidentsListPageState extends State<IncidentsListPage> {
   final GetData getData = GetData();
   TriggerDataController triggerDataController = TriggerDataController();
+  EventDataController eventDataController = EventDataController();
   List<Trigger> triggers = [];
+  List<Event> events = [];
+  List<String> ids = [];
 
   bool isLoading = false;
   int count = 0;
@@ -37,13 +41,21 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
     setState(() {
       isLoading = true;
       triggers = [];
+      events = [];
+      ids = [];
     });
 
     try {
       triggers = await triggerDataController.fetchActiveTriggers();
+      for (var trigger in triggers) {
+        ids.add(trigger.triggerId);
+      }
+      var fetchedEvents = await eventDataController.fetchEventsByTrigger(ids);
+      events = fetchedEvents.where((event) => event.suppressed == "0").toList();
       setState(() {
         isLoading = false;
         triggers;
+        events;
       });
     } catch (e) {
       setState(() {
@@ -87,7 +99,7 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   _buildBody() {
     return Column(
       children: [
-        isLoading && triggers.isEmpty
+        isLoading && events.isEmpty
             ? Expanded(
                 child: Shimmer.fromColors(
                 baseColor: const Color.fromARGB(26, 214, 214, 214),
@@ -109,9 +121,9 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   _buildIncidentListView() {
     return Expanded(
       child: ListView.builder(
-        itemCount: triggers.length,
+        itemCount: events.length,
         itemBuilder: (context, index) {
-          return IncidentCard(trigger: triggers[index]);
+          return IncidentCard(events: events[index]);
         },
       ),
     );

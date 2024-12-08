@@ -12,3 +12,6 @@ export 'item_history.dart';
 export 'graph.dart';
 export 'adapters/user_login_adapter.dart';
 export 'trigger.dart';
+export 'acknowledge.dart';
+export 'tag.dart';
+export 'supressionData.dart';

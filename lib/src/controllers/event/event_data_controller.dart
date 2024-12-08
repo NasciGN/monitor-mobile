@@ -22,4 +22,38 @@ class EventDataController {
       return [];
     }
   }
+
+  Future<List<Event>> fetchEvents() async {
+    try {
+      String getHostItensCall =
+          await rootBundle.loadString('assets/json/events/get_events.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+
+      List<dynamic> eventsData = await apiGet.getData(jsonRequest);
+
+      List<Event> events =
+          eventsData.map((item) => Event.fromJson(item)).toList();
+      return events;
+    } catch (e) {
+      print('Erro ao buscar os problemas do host pelo nome: (e)');
+      return [];
+    }
+  }
+
+  Future<List<Event>> fetchEventsByTrigger(List<String> triggers) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/events/get_events_by_trigger.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      jsonRequest["params"]["objectids"] = triggers;
+
+      List<dynamic> eventsData = await apiGet.getData(jsonRequest);
+      List<Event> events =
+          eventsData.map((item) => Event.fromJson(item)).toList();
+      return events;
+    } catch (e) {
+      print('Erro ao buscar os problemas do host pelo nome: (e)');
+      return [];
+    }
+  }
 }

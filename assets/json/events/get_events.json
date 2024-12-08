@@ -1,0 +1,18 @@
+{
+  "jsonrpc": "2.0",
+  "method": "event.get",
+  "params": {
+    "output": "extend",
+    "select_acknowledges": "extend",
+    "selectSuppressionData": "extend",
+    "selectHosts": "extend",
+    "selectTags": "extend",
+    "sortfield": ["clock", "eventid"],
+    "sortorder": "DESC",
+    "filter": {
+      "value": 1
+    }
+  },
+  "auth": "",
+  "id": 1
+}
