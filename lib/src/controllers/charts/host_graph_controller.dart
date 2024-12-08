@@ -10,7 +10,7 @@ class HostGraphDataController {
   Future<List<Graph>> fetchGraphs(String hostId) async {
     try {
       String getGraphsJson =
-          await rootBundle.loadString('assets/json/graph/get_graphs.json');
+          await rootBundle.loadString('assets/json/chart/get_chart.json');
       final jsonRequest = await jsonDecode(getGraphsJson);
       jsonRequest["params"]["hostids"] = hostId;
       List<dynamic> getInterfacesResponse = await apiGet.getData(jsonRequest);

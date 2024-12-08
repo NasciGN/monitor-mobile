@@ -26,10 +26,11 @@ class GetCookie {
           return cookie;
         }
       }
-      print('User authorization failed: Login name or password is incorrect.');
+      print(
+          'Falha na autorização do usuário: O nome de login ou a senha estão incorretos.');
       return 'null';
     } catch (e) {
-      print('Error during HTTP request: $e');
+      print('Erro durante solicitação HTTPt: $e');
       return 'null';
     }
   }

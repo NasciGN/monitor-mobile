@@ -8,8 +8,8 @@ class ItemDataController {
 
   Future<void> fetchItems() async {}
   Future<List<Item>> fetchItemsByHost(String hostId) async {
-    String getHostItensCall = await rootBundle
-        .loadString('assets/json/host_item/get_host_itens.json');
+    String getHostItensCall =
+        await rootBundle.loadString('assets/json/items/get_items_by_host.json');
     final jsonRequest = await jsonDecode(getHostItensCall);
     jsonRequest["params"]["hostids"] = hostId;
     List<dynamic> itensData = await apiGet.getData(jsonRequest);

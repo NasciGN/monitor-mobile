@@ -10,7 +10,7 @@ class EventDataController {
   Future<List<Event>> fetchEventByHost(String hostId) async {
     try {
       String getHostItensCall = await rootBundle
-          .loadString('assets/json/host_event/get_host_events.json');
+          .loadString('assets/json/events/get_events_by_host.json');
       final jsonRequest = await jsonDecode(getHostItensCall);
       jsonRequest["params"]["hostids"] = hostId;
       List<dynamic> eventsData = await apiGet.getData(jsonRequest);

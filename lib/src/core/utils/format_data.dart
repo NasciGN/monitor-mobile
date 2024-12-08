@@ -303,33 +303,73 @@ class FormatData {
   }
 
   String formatDuration(String timestamp) {
-    String formattedDuration = '';
     DateTime now = DateTime.now();
     DateTime dateTime =
         DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestamp)! * 1000);
     Duration duration = now.difference(dateTime);
+
     if (duration.inDays >= 30) {
+      // Formatação para meses
       int months = duration.inDays ~/ 30;
-      formattedDuration = '${months}m ';
-      duration -= Duration(days: months * 30);
+      int days = duration.inDays % 30;
+      int hours = duration.inHours % 24;
+      return hours > 0
+          ? '${months}m ${days}d ${hours}h'
+          : '${months}m ${days}d';
+    } else if (duration.inDays >= 1) {
+      // Formatação para dias
+      int days = duration.inDays;
+      int hours = duration.inHours % 24;
+      int minutes = duration.inMinutes % 60;
+      if (hours > 0) {
+        return '${days}d ${hours}h ${minutes}m';
+      } else {
+        return '${days}d ${minutes}m';
+      }
+    } else {
+      int hours = duration.inHours;
+      int minutes = duration.inMinutes % 60;
+      int seconds = duration.inSeconds % 60;
+
+      String result = '';
+      if (hours > 0) {
+        result += '${hours.toString().padLeft(2, '0')}h ';
+      }
+      result += '${minutes.toString().padLeft(2, '0')}m ';
+      result += '${seconds.toString().padLeft(2, '0')}s';
+
+      return result.trim();
     }
-    if (duration.inDays >= 1) {
-      formattedDuration += '${duration.inDays}d ';
-      duration -= Duration(days: duration.inDays);
-    }
-    if (duration.inHours >= 1) {
-      formattedDuration += '${duration.inHours}h ';
-      duration -= Duration(hours: duration.inHours);
-    }
-    if (duration.inMinutes >= 1) {
-      formattedDuration += '${duration.inMinutes}m ';
-      duration -= Duration(minutes: duration.inMinutes);
-    }
-    if (duration.inSeconds > 0 && duration.inDays < 1) {
-      formattedDuration += '${duration.inSeconds}s';
-    }
-    return formattedDuration.trim();
   }
+
+  // String formatDuration(String timestamp) {
+  //   String formattedDuration = '';
+  //   DateTime now = DateTime.now();
+  //   DateTime dateTime =
+  //       DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestamp)! * 1000);
+  //   Duration duration = now.difference(dateTime);
+  //   if (duration.inDays >= 30) {
+  //     int months = duration.inDays ~/ 30;
+  //     formattedDuration = '${months}m ';
+  //     duration -= Duration(days: months * 30);
+  //   }
+  //   if (duration.inDays >= 1) {
+  //     formattedDuration += '${duration.inDays}d ';
+  //     duration -= Duration(days: duration.inDays);
+  //   }
+  //   if (duration.inHours >= 1) {
+  //     formattedDuration += '${duration.inHours}h ';
+  //     duration -= Duration(hours: duration.inHours);
+  //   }
+  //   if (duration.inMinutes >= 1) {
+  //     formattedDuration += '${duration.inMinutes}m ';
+  //     duration -= Duration(minutes: duration.inMinutes);
+  //   }
+  //   if (duration.inSeconds > 0 && duration.inDays < 1) {
+  //     formattedDuration += '${duration.inSeconds}s';
+  //   }
+  //   return formattedDuration.trim();
+  // }
 
   String typeItensValueMap(String value) {
     switch (value) {

@@ -24,8 +24,8 @@ class SideMenu extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  _buildListOption(
-                      context, 'Dashboard', FontAwesomeIcons.chartLine),
+                  _buildListOption(context, 'Dashboard',
+                      FontAwesomeIcons.chartLine, 'dashboard'),
                   ExpansionTileGroup(
                     toggleType: ToggleType.expandOnlyCurrent,
                     children: [
@@ -38,8 +38,6 @@ class SideMenu extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 5),
-            _buildListOption(context, 'Ajuda', FontAwesomeIcons.question),
             const SizedBox(height: 5),
             ListTile(
               title: Text(
@@ -66,7 +64,8 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  ListTile _buildListOption(BuildContext context, String title, IconData icon) {
+  ListTile _buildListOption(
+      BuildContext context, String title, IconData icon, String route) {
     return ListTile(
       title: Text(
         title,
@@ -81,7 +80,10 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
         size: 15,
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pop();
+        Get.offNamed(route);
+      },
     );
   }
 
@@ -100,8 +102,7 @@ class SideMenu extends StatelessWidget {
       ),
       children: [
         _buildListItem(context, 0, 'Incidentes', '/incidents_list_page'),
-        _buildListItem(context, 1, 'Hosts', '/home'),
-        _buildListItem(context, 2, 'Dados recentes', ''),
+        _buildListItem(context, 1, 'Hosts', '/hosts'),
       ],
     );
   }

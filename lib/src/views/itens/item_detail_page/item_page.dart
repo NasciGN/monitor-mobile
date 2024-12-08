@@ -25,7 +25,6 @@ class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -69,7 +68,7 @@ class _ItemPageState extends State<ItemPage> {
                       width: double.infinity,
                       child: Row(children: [
                         Text('Informações',
-                            style: Theme.of(context).textTheme.displayMedium),
+                            style: Theme.of(context).textTheme.titleMedium),
                         const Spacer(),
                         item.valueType == "0" || item.valueType == "3"
                             ? IconButton(

@@ -23,7 +23,6 @@ class _HostItemCardState extends State<HostItemCard> {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 85,
         width: double.infinity,
         padding:
             const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
@@ -37,11 +36,8 @@ class _HostItemCardState extends State<HostItemCard> {
             Text(
               widget.hostItem.name,
               maxLines: 2,
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
               overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(
-              height: 5,
             ),
             Text(
               "Último valor: ${widget.hostItem.newLastValue} ${widget.hostItem.newUnits}",

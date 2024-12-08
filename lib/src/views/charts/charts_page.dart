@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class Graph extends StatefulWidget {
-  const Graph({super.key});
+class Chart extends StatefulWidget {
+  const Chart({super.key});
 
   @override
-  State<Graph> createState() => _GraphState();
+  State<Chart> createState() => _ChartState();
 }
 
-class _GraphState extends State<Graph> {
+class _ChartState extends State<Chart> {
   final String itemID = Get.arguments;
   final getData = GetData();
   bool _isLoading = false;

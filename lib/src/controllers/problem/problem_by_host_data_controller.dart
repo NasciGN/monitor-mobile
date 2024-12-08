@@ -11,7 +11,7 @@ class ProblemByHostDataController {
   Future<List<Problem>> fetchProblemsByHost(String hostId) async {
     try {
       String getHostItensCall = await rootBundle
-          .loadString('assets/json/host_problem/get_host_problems.json');
+          .loadString('assets/json/problems/get_problems_by_host.json');
       final jsonRequest = await jsonDecode(getHostItensCall);
       jsonRequest["params"]["hostids"] = hostId;
       List<dynamic> problemsData = await apiGet.getData(jsonRequest);
@@ -26,8 +26,8 @@ class ProblemByHostDataController {
 
   Future<List<Problem>> fetchProblemsByTimestamp(DateTime timestamp) async {
     try {
-      String getHostItensCall = await rootBundle
-          .loadString('assets/json/host_problem/get_host_problems.json');
+      String getHostItensCall = await rootBundle.loadString(
+          'assets/json/problems/get_problems_by_host_timestamp.json');
       final jsonRequest = await jsonDecode(getHostItensCall);
       // jsonRequest["params"]["time_from"] = timestamp;
       List<dynamic> problemsData = await apiGet.getData(jsonRequest);

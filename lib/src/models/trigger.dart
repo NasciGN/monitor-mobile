@@ -1,3 +1,4 @@
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 class Trigger {
@@ -24,6 +25,7 @@ class Trigger {
   String eventName;
   String uuid;
   String urlName;
+  String duration;
   List<Host> hosts;
 
   Trigger({
@@ -51,10 +53,12 @@ class Trigger {
     required this.uuid,
     required this.urlName,
     required this.hosts,
+    this.duration = '',
   });
 
   factory Trigger.fromJson(Map<String, dynamic> json) {
-    return Trigger(
+    FormatData formatData = FormatData();
+    Trigger trigger = Trigger(
       triggerId: json['triggerid'] ?? '',
       expression: json['expression'] ?? '',
       description: json['description'] ?? '',
@@ -81,8 +85,10 @@ class Trigger {
       hosts: (json['hosts'] as List<dynamic>? ?? [])
           .map((hostJson) => Host.fromJson(hostJson))
           .toList(),
-     
     );
+    trigger.duration = formatData.formatDuration(json['lastchange']);
+
+    return trigger;
   }
 
   Map<String, dynamic> toMap() {

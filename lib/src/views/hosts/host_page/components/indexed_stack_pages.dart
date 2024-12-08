@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../models/models.dart';
-import '../host_details/host_detail_form.dart';
+import '../host_infos/host_detail_form.dart';
 import '../host_inventory/host_inventory_form.dart';
 
 class IndexedStackPages extends StatelessWidget {

@@ -9,8 +9,8 @@ class TriggerDataController {
 
   Future<Trigger> fetchTriggerById(String triggerid) async {
     try {
-      String getTriggers =
-          await rootBundle.loadString('assets/json/trigger/get_trigger.json');
+      String getTriggers = await rootBundle
+          .loadString('assets/json/trigger/get_trigger_by_id.json');
       final jsonRequest = await jsonDecode(getTriggers);
       jsonRequest["params"]["triggerids"] = triggerid;
       List<dynamic> triggersData = await apiGet.getData(jsonRequest);

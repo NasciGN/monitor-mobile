@@ -8,14 +8,14 @@ import 'package:monitor_mobile/src/views/hosts/components/host_card.dart';
 import 'package:shimmer/shimmer.dart';
 import 'components/host_card_skeleton.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HostsPage extends StatefulWidget {
+  const HostsPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HostsPage> createState() => _HostsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HostsPageState extends State<HostsPage> {
   final GetData getData = GetData();
   final HostsDataController hostsDataController = HostsDataController();
   List<Host> hosts = [];
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       scrolledUnderElevation: 0,
       elevation: 0,
       title: Text(
-        'Dashboard',
+        'Hosts',
         style: Theme.of(context).textTheme.titleLarge,
       ),
       iconTheme: Theme.of(context).iconTheme,
@@ -139,12 +139,11 @@ class _HomePageState extends State<HomePage> {
         ),
         label: Text(
           'Pesquisar',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        labelStyle: Theme.of(context).textTheme.bodySmall,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),

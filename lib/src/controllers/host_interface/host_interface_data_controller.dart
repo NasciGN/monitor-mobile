@@ -10,7 +10,7 @@ class HostInterfaceDataController {
   Future<List<Interface>> fetchInterfaces() async {
     try {
       String getInterfacesJson = await rootBundle
-          .loadString('assets/json/host_interface/get_host_interfaces.json');
+          .loadString('assets/json/interfaces/get_interfaces.json');
       final jsonRequest = await jsonDecode(getInterfacesJson);
       List<dynamic> getInterfacesResponse = await apiGet.getData(jsonRequest);
       List<Interface> interfaces = getInterfacesResponse

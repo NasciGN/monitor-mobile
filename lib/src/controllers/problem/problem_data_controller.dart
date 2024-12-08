@@ -8,9 +8,9 @@ class ProblemDataController {
   final GetData apiGet = GetData();
   Future<List<Problem>> fetchProblems() async {
     try {
-      String getHostItensCall = await rootBundle
-          .loadString('assets/json/problem/get_problem.json');
-          
+      String getHostItensCall =
+          await rootBundle.loadString('assets/json/problems/get_problems.json');
+
       final jsonRequest = await jsonDecode(getHostItensCall);
       List<dynamic> problemsData = await apiGet.getData(jsonRequest);
       List<Problem> problems =

@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/hosts/host_graphs_page/components/host_graph_card.dart';
-import 'package:monitor_mobile/src/views/hosts/host_graphs_page/components/host_graph_card_skeleton.dart';
+import 'package:monitor_mobile/src/views/hosts/host_charts/components/host_graph_card.dart';
+import 'package:monitor_mobile/src/views/hosts/host_charts/components/host_graph_card_skeleton.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HostGraphs extends StatefulWidget {
@@ -42,8 +42,11 @@ class _HostGraphsState extends State<HostGraphs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppBar(), body: _buildBody(), backgroundColor: Theme.of(context).colorScheme.background,);
-    
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
+      backgroundColor: Theme.of(context).colorScheme.background,
+    );
   }
 
   AppBar _buildAppBar() {

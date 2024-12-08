@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/problems/problems_list_page/components/problem_card.dart';
+import 'package:monitor_mobile/src/views/problems/components/problem_card.dart';
 
 class ProblemsListPage extends StatefulWidget {
   const ProblemsListPage({super.key});
