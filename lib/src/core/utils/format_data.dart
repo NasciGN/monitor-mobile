@@ -382,4 +382,23 @@ class FormatData {
         return "";
     }
   }
+
+  String getSeverityDescription(String severity) {
+    switch (severity) {
+      case '0':
+        return "Não Classificado";
+      case '1':
+        return "Informação";
+      case '2':
+        return "Aviso";
+      case '3':
+        return "Média";
+      case '4':
+        return "Alta";
+      case '5':
+        return "Desastre";
+      default:
+        return "Desconhecida";
+    }
+  }
 }

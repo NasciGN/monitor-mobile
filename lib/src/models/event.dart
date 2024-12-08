@@ -25,6 +25,7 @@ class Event {
   List<Tag> tags;
   List<SuppressionData> suppressionData;
   String duration;
+  String newClock;
 
   Event({
     required this.eventId,
@@ -50,6 +51,7 @@ class Event {
     required this.tags,
     required this.suppressionData,
     this.duration = '',
+    this.newClock = '',
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -87,6 +89,7 @@ class Event {
           .toList(),
     );
     event.duration = formatData.formatDuration(json['clock']);
+    event.newClock = formatData.calcularTempoDecorrido(json['clock']);
     return event;
   }
 

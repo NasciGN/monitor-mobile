@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
@@ -15,7 +16,9 @@ class _IncidentCardState extends State<IncidentCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed('incident_page', arguments: widget.events);
+      },
       onLongPress: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),

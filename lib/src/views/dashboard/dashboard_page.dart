@@ -4,6 +4,7 @@ import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
+import 'package:monitor_mobile/src/views/dashboard/widget/dashboard_skeleton.dart';
 import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -61,6 +62,10 @@ class _DashboardPageState extends State<DashboardPage> {
     _fetchData();
   }
 
+  Future<void> _handleRefresh() async {
+    await _fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +74,8 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer: const SideMenu(),
       body: Padding(
         padding: _buildPadding(),
-        child: _buildBody(),
+        child: RefreshIndicator(
+            child: _buildBody(), onRefresh: () => _fetchData()),
       ),
     );
   }
@@ -91,7 +97,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   _buildBody() {
     return isLoading && hosts.isEmpty && triggers.isEmpty
-        ? const Text('Carregando...')
+        ? const DashboardPageSkeleton()
         : SingleChildScrollView(
             child: Column(
               children: [
