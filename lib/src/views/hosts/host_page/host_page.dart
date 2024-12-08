@@ -74,6 +74,7 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
   AppBar _buildAppBar() {
     return AppBar(
       scrolledUnderElevation: 0,
@@ -91,37 +92,30 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  Padding _buildBody(BuildContext context) {
-    return Padding(
-      padding: _buildPadding(),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPageTitle(context),
-            Container(
-              height: 220,
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              padding: const EdgeInsets.all(20),
-              width: double.infinity,
-              decoration: _buildContainerDecoration(context),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildFirstCardTitle(context, 'Geral'),
-                    _buildGridView(context),
-                  ]),
-            ),
-            _buildGraphSection(context),
-            _buildInformationSection(context),
-          ],
-        ),
+  _buildBody(BuildContext context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPageTitle(context),
+          const SizedBox(
+            height: defaultpd * 2,
+          ),
+          _buildGridSection(context),
+          const SizedBox(
+            height: defaultpd * 2,
+          ),
+          _buildGraphSection(context),
+          const SizedBox(
+            height: defaultpd * 2,
+          ),
+          _buildInformationSection(context),
+        ],
       ),
     );
   }
 
-  EdgeInsets _buildPadding() => const EdgeInsets.all(16);
   _buildGraphSection(context) {
     return GestureDetector(
       onTap: () {
@@ -129,7 +123,7 @@ class _HostPageState extends State<HostPage> {
       },
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(defaultpd * 2),
+        padding: _buildPadding(),
         decoration: _buildContainerDecoration(context),
         child: Row(children: [
           Text(
@@ -146,12 +140,32 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  Container _buildInformationSection(BuildContext context) {
+  _buildGridSection(BuildContext context) {
+    return Container(
+      padding: _buildPadding(),
+      width: double.infinity,
+      decoration: _buildContainerDecoration(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCardTitle(context, 'Geral'),
+          SizedBox(
+            height: 180,
+            child: GridViewCards(
+              problems: hostProblems,
+              itens: hostItens,
+              host: host,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildInformationSection(BuildContext context) {
     return Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: _buildContainerDecoration(context),
-        margin: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             Padding(
@@ -207,20 +221,10 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  Text _buildFirstCardTitle(BuildContext context, String title) {
+  _buildCardTitle(BuildContext context, String title) {
     return Text(
       title,
       style: Theme.of(context).textTheme.bodyLarge,
-    );
-  }
-
-  Expanded _buildGridView(BuildContext context) {
-    return Expanded(
-      child: GridViewCards(
-        problems: hostProblems,
-        itens: hostItens,
-        host: host,
-      ),
     );
   }
 

@@ -1,11 +1,11 @@
 {
-    "jsonrpc": "2.0",
-    "method": "trigger.get",
-    "params": {
-        "triggerids": "",
-        "output": "extend",
-        "selectHosts": "extend"
-    },
-    "auth": "",
-    "id": 1
+  "jsonrpc": "2.0",
+  "method": "trigger.get",
+  "params": {
+    "triggerids": "",
+    "output": "extend",
+    "selectHosts": "extend"
+  },
+  "auth": "",
+  "id": 1
 }

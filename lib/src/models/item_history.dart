@@ -1,34 +1,32 @@
-import 'package:monitor_mobile/src/core/utils/format_data.dart';
+class History {
+  String itemId, clock, value, ns;
 
-class ItemHistory {
-  String itemId, clock, value, ns, newClock, newValue, newNs;
-
-  ItemHistory({
-    this.itemId = '',
-    this.clock = '',
-    this.value = '',
-    this.ns = '',
-    this.newClock = '',
-    this.newValue = '',
-    this.newNs = '',
+  History({
+    required this.itemId,
+    required this.clock,
+    required this.value,
+    required this.ns,
   });
 
-  factory ItemHistory.fromJson(Map<String, dynamic> json) {
-    if (json.isNotEmpty) {
-      ItemHistory history = ItemHistory(
+  Map<String, dynamic> toMap() {
+    return {
+      'itemid': itemId,
+      'clock': clock,
+      'value': value,
+      'ns': ns,
+    };
+  }
+
+  factory History.fromJson(Map<String, dynamic>? json) {
+    if (json != null && json.isNotEmpty) {
+      return History(
         itemId: json['itemid'],
         clock: json['clock'],
         value: json['value'],
         ns: json['ns'],
       );
-
-      final FormatData formatData = FormatData();
-
-      history.newClock =
-          formatData.calcularTempoDecorrido(json['clock']).toString();
-      return history;
     } else {
-      return ItemHistory();
+      return History(itemId: '', clock: '', value: '', ns: '');
     }
   }
 }

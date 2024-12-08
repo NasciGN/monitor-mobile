@@ -17,6 +17,11 @@ const activeItmColor = Color(0xFF42C039);
 const inactiveItmColor = Color(0xFFFF485A);
 const linkColor = Color(0xFF3B96BA);
 
+const availabilityAvailable = Color(0xFF42C039);
+const availabilityUnavailable = Color(0xFFE45959);
+const availabilityUnknown = Color(0xFF97AAB3);
+const availabilityTotal = Color(0xFF131619);
+
 const notClassified = {
   "txtColor": Color(0xFF97AAB3),
   "bgColor": Color(0xFF97AAB3),
@@ -35,11 +40,11 @@ const average = {
 };
 const high = {
   "txtColor": Color(0xFF52190B),
-  "bgColor": Color(0xFFFFA059),
+  "bgColor": Color(0xFFE97659),
 };
 const disaster = {
   "txtColor": Color(0xFFFFA059),
-  "bgColor": Color(0xFFFFA059),
+  "bgColor": Color(0xFFE45959),
 };
 
 Map<String, Color> getSeverityColors(String severity) {

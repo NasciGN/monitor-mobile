@@ -54,6 +54,10 @@ class _HostsPageState extends State<HostsPage> {
     }
   }
 
+  Future<void> _handleRefresh() async {
+    await _fetchHosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -62,10 +66,13 @@ class _HostsPageState extends State<HostsPage> {
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: _buildAppBar(context),
         drawer: const SideMenu(),
-        body: _buildBody(),
+        body: RefreshIndicator(
+            child: _buildBody(), onRefresh: () => _handleRefresh()),
       ),
     );
   }
+
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
 
   _buildAppBar(BuildContext context) {
     return AppBar(
@@ -82,7 +89,7 @@ class _HostsPageState extends State<HostsPage> {
 
   _buildBody() {
     return Padding(
-      padding: const EdgeInsets.all(defaultpd * 4),
+      padding: _buildPadding(),
       child: _buildColumn(),
     );
   }

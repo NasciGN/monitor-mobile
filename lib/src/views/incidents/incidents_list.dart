@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
-import 'package:monitor_mobile/src/controllers/problem/problem_data_controller.dart';
 import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
@@ -20,9 +18,7 @@ class IncidentsListPage extends StatefulWidget {
 
 class _IncidentsListPageState extends State<IncidentsListPage> {
   final GetData getData = GetData();
-  ProblemDataController problemDataController = ProblemDataController();
   TriggerDataController triggerDataController = TriggerDataController();
-  List<Problem> problems = [];
   List<Trigger> triggers = [];
 
   bool isLoading = false;
@@ -40,14 +36,11 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   Future<void> _fetchIncidents() async {
     setState(() {
       isLoading = true;
+      triggers = [];
     });
+
     try {
-      problems = await problemDataController.fetchProblems();
-      for (var problem in problems) {
-        Trigger trigger =
-            await triggerDataController.fetchTriggerById(problem.objectid);
-        triggers.add(trigger);
-      }
+      triggers = await triggerDataController.fetchActiveTriggers();
       setState(() {
         isLoading = false;
         triggers;
@@ -59,14 +52,24 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
     }
   }
 
+  Future<void> _handleRefresh() async {
+    await _fetchIncidents();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: _buildAppBar(context),
       drawer: const SideMenu(),
-      body: _buildBody(),
+      body: Padding(
+        padding: _buildPadding(),
+        child: RefreshIndicator(
+            child: _buildBody(), onRefresh: () => _handleRefresh()),
+      ),
     );
   }
+
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
 
   _buildAppBar(BuildContext context) {
     return AppBar(
@@ -82,13 +85,6 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   }
 
   _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(defaultpd * 4),
-      child: _buildColumn(),
-    );
-  }
-
-  _buildColumn() {
     return Column(
       children: [
         isLoading && triggers.isEmpty

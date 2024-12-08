@@ -38,9 +38,14 @@ class _HostItensListPageState extends State<HostItensListPage> {
       child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: _buildAppBar(context),
-          body: _buildBody()),
+          body: Padding(
+            padding: _buildPadding(),
+            child: _buildBody(),
+          )),
     );
   }
+
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
 
   _buildAppBar(BuildContext context) {
     return AppBar(
@@ -63,13 +68,6 @@ class _HostItensListPageState extends State<HostItensListPage> {
   }
 
   _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(8 * 4),
-      child: _buildColumn(),
-    );
-  }
-
-  _buildColumn() {
     return Column(
       children: [
         _buildTextField(),

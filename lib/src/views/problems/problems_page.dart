@@ -20,9 +20,14 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: _buildAppBar(context),
-      body: _buildBody(),
+      body: Padding(
+        padding: _buildPadding(),
+        child: _buildBody(),
+      ),
     );
   }
+
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
 
   _buildAppBar(BuildContext context) {
     return AppBar(
@@ -45,24 +50,21 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
   }
 
   _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(8 * 4),
-      child: problems.isNotEmpty
-          ? _buildColumn()
-          : Container(
-              margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
-              child: Center(
-                child: Opacity(
-                  opacity: 0.5,
-                  child: Text(
-                    'Este Host não possui incidentes ativos.',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
+    return problems.isNotEmpty
+        ? _buildColumn()
+        : Container(
+            margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+            child: Center(
+              child: Opacity(
+                opacity: 0.5,
+                child: Text(
+                  'Este Host não possui incidentes ativos.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
             ),
-    );
+          );
   }
 
   _buildColumn() {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
@@ -20,15 +21,22 @@ class ItemDataController {
     return itens;
   }
 
-  Future<List<ItemHistory>> fetchItemHistory(String itemID) async {
-    String getHostItensCall = await rootBundle
-        .loadString('assets/json/item_history/get_item_history.json');
-    final jsonRequest = await jsonDecode(getHostItensCall);
-    jsonRequest["params"]["itemids"] = itemID;
-    List<dynamic> historyData = await apiGet.getData(jsonRequest);
-    List<ItemHistory> history =
-        historyData.map((item) => ItemHistory.fromJson(item)).toList();
-    return history;
+  Future<List<History>> fetchHistory(String itemsid, String unit) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/problems/get_item_history.json');
+
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      jsonRequest["params"]["itemsid"] = itemsid;
+      List<dynamic> historyData = await apiGet.getData(jsonRequest);
+      List<History> history =
+          historyData.map((item) => History.fromJson(item)).toList();
+      return history;
+    } catch (e) {
+      print(e);
+      Get.snackbar('Erro', 'Não foi possível buscar os incidentes deste Host.');
+      return [];
+    }
   }
 
   List<Item> searchItensFilter(String query, List<Item> items) {

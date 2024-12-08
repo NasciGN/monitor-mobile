@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 class ItemPage extends StatefulWidget {
@@ -15,11 +16,28 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   final Item item = Get.arguments;
   ItemDataController itemDataController = ItemDataController();
-  List<ItemHistory> history = [];
+  List<History> history = [];
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void _loadHistory() async {
+    setState(() => _isLoading = true);
+    try {
+      final fetchedHistory =
+          await itemDataController.fetchHistory(item.itemId, item.units);
+
+      setState(() {
+        history = fetchedHistory;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() => _isLoading = false);
+      debugPrint('Erro ao buscar histórico: $e');
+    }
   }
 
   @override
@@ -43,91 +61,88 @@ class _ItemPageState extends State<ItemPage> {
           },
         ),
       ),
-      body: _buildInformationSection(context),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildInformationSection(context),
+            const SizedBox(height: 20),
+            _buildHistorySection(context), // Adiciona o histórico
+          ],
+        ),
+      ),
       backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 
-  EdgeInsets _buildPadding() => const EdgeInsets.all(16);
+  EdgeInsets _buildPadding() =>
+      const EdgeInsets.symmetric(horizontal: defaultpd * 2);
 
   _buildInformationSection(BuildContext context) {
     return Padding(
       padding: _buildPadding(),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+      child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(
+              vertical: defaultpd * 2, horizontal: defaultpd * 2),
+          decoration: _buildContainerDecoration(context),
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Row(children: [
+                  Text('Informações',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  const Spacer(),
+                  item.valueType == "0" || item.valueType == "3"
+                      ? IconButton(
+                          onPressed: () {
+                            Get.toNamed('/item_graph',
+                                arguments:
+                                    '/chart.php?itemids%5B0%5D=${item.itemId}');
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.chartColumn,
+                            color: Colors.white,
+                          ))
+                      : const SizedBox.shrink(),
+                ]),
+              ),
+              _buildCardInformation(context, 'Nome', item.name),
+              _buildCardInformation(context, 'Status', item.newStatus),
+              _buildCardInformation(context, 'Ultimo valor: ',
+                  '${item.newLastValue} ${item.newUnits}'),
+              _buildCardInformation(
+                  context, 'Última checagem', item.newLastClock),
+              _buildCardInformation(context, 'Intervalo', item.delay),
+            ],
+          )),
+    );
+  }
+
+  _buildHistorySection(context) {
+    final formatData = FormatData();
+
+    return Padding(
+      padding: _buildPadding(),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+            vertical: defaultpd * 2, horizontal: defaultpd * 2),
+        decoration: _buildContainerDecoration(context),
         child: Column(
           children: [
-            Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                    vertical: defaultpd * 2, horizontal: defaultpd * 2),
-                decoration: _buildContainerDecoration(context),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(children: [
-                        Text('Informações',
-                            style: Theme.of(context).textTheme.titleMedium),
-                        const Spacer(),
-                        item.valueType == "0" || item.valueType == "3"
-                            ? IconButton(
-                                onPressed: () {
-                                  Get.toNamed('/item_graph',
-                                      arguments:
-                                          '/chart.php?itemids%5B0%5D=${item.itemId}');
-                                },
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.chartColumn,
-                                  color: Colors.white,
-                                ))
-                            : const SizedBox.shrink(),
-                      ]),
-                    ),
-                    _buildCardInformation(context, 'Nome', item.name),
-                    _buildCardInformation(context, 'Status', item.newStatus),
-                    _buildCardInformation(context, 'Ultimo valor: ',
-                        '${item.newLastValue} ${item.newUnits}'),
-                    _buildCardInformation(
-                        context, 'Última checagem', item.newLastClock),
-                    _buildCardInformation(context, 'Intervalo', item.delay),
-                  ],
-                )),
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Histórico',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            const SizedBox(height: 10),
           ],
         ),
       ),
     );
   }
-
-  // _buildHistorySection(context) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(vertical: defaultpd * 2),
-  //     padding: const EdgeInsets.symmetric(
-  //         vertical: defaultpd * 2, horizontal: defaultpd * 2),
-  //     decoration: _buildContainerDecoration(context),
-  //     child: Column(children: [
-  //       SizedBox(
-  //         width: double.infinity,
-  //         child: Text('Histórico',
-  //             style: Theme.of(context).textTheme.displayMedium),
-  //       ),
-  //       (history.isEmpty || history.length < 10) && _isLoading
-  //           ? SizedBox(
-  //               width: double.infinity,
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: defaultpd * 4),
-  //                 child: Center(
-  //                     child: Text(
-  //                   'Nenhum histórico para listar',
-  //                   style: Theme.of(context).textTheme.labelMedium,
-  //                 )),
-  //               ),
-  //             )
-  //           : _buildCardInformation(
-  //               context, history[0].newClock, history[0].value)
-  //     ]),
-  //   );
-  // }
 
   _buildCardInformation(context, String label, String value) {
     return Container(

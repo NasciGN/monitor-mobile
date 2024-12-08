@@ -27,7 +27,7 @@ class Item {
       newLastClock,
       newStatus,
       newType;
-  List<ItemHistory> historyList;
+  List<History> historyList;
 
   Item({
     required this.itemId,

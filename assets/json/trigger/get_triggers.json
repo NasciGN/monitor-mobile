@@ -1,0 +1,18 @@
+{
+  "jsonrpc": "2.0",
+  "method": "trigger.get",
+  "params": {
+    "filter": {
+      "value": 1
+    },
+    "monitored": true,
+    "skipDependent": true,
+    "selectHosts": "extend",
+    "sortfield": "lastchange",
+    "sortorder": "DESC",
+    "limit": 0,
+    "output": "extend"
+  },
+  "auth": "c6c6e3cdfabc115ec7b918adbded6857",
+  "id": 1
+}

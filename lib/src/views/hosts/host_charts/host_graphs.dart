@@ -43,12 +43,16 @@ class _HostGraphsState extends State<HostGraphs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: _buildAppBar(),
+      body: Padding(
+        padding: _buildPadding(),
+        child: _buildBody(),
+      ),
     );
   }
 
+  EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
@@ -71,26 +75,23 @@ class _HostGraphsState extends State<HostGraphs> {
   }
 
   _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(defaultpd * 4),
-      child: _isLoading
-          ? BuildSkeleton(context: context)
-          : hostGraphs.isNotEmpty
-              ? _buildListView()
-              : Container(
-                  margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
-                  child: Center(
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Text(
-                        'Este Host não possui gráficos.',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
+    return _isLoading
+        ? BuildSkeleton(context: context)
+        : hostGraphs.isNotEmpty
+            ? _buildListView()
+            : Container(
+                margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
+                child: Center(
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Text(
+                      'Este Host não possui gráficos.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
                 ),
-    );
+              );
   }
 
   ListView _buildListView() {
