@@ -5,6 +5,8 @@ import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_skeleton.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/host_infos/host_detail_form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/host_inventory_form.dart';
 import 'components/grid_view_cards.dart';
 import 'components/indexed_stack_pages.dart';
 
@@ -168,50 +170,62 @@ class _HostPageState extends State<HostPage> {
         decoration: _buildContainerDecoration(context),
         child: Column(
           children: [
-            Padding(
-              padding: _buildPadding(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                      onTap: () => _onItemTapped(0),
-                      child: selectIndex == 0
-                          ? _buildSelectOptionIndexedStack(context, 'Host')
-                          : _buildUnselectOptionIndexedStack(context, 'Host')),
-                  GestureDetector(
-                    onTap: () => _onItemTapped(1),
-                    child: selectIndex == 1
-                        ? _buildSelectOptionIndexedStack(context, 'Inventário')
-                        : _buildUnselectOptionIndexedStack(
-                            context, 'Inventário'),
-                  )
-                ],
-              ),
+            const SizedBox(
+              height: defaultpd * 2,
             ),
-            IndexedStackPages(selectIndex: selectIndex, host: host)
+            _buildPageSelector(),
+            const SizedBox(
+              height: defaultpd * 2,
+            ),
+            if (selectIndex == 0) ...[
+              HostDetailForm(host: host)
+            ] else ...[
+              HostInventoryForm(host: host)
+            ]
           ],
         ));
   }
 
-  _buildSelectOptionIndexedStack(context, String label) {
-    return Container(
-      height: 60,
-      width: 140,
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(5)),
-      child: Center(
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-      ),
+  Widget _buildPageSelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _buildSelectorButton(0, 'Host'),
+        _buildSelectorButton(1, 'Inventário')
+      ],
     );
   }
 
-  _buildUnselectOptionIndexedStack(context, String label) {
-    return Opacity(
-        opacity: 0.5, child: _buildSelectOptionIndexedStack(context, label));
+  Widget _buildSelectorButton(int index, String label) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectIndex = index;
+        });
+      },
+      child: Container(
+        padding: _buildPadding(),
+        width: 150,
+        decoration: BoxDecoration(
+          color: selectIndex == index
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.primary.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Opacity(
+            opacity: selectIndex == index ? 1.0 : 0.5,
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Text _buildPageTitle(BuildContext context) {
