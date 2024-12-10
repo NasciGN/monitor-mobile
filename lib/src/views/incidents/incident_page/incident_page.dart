@@ -26,10 +26,7 @@ class _IncidentPageState extends State<IncidentPage> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Padding(
           padding: const EdgeInsets.all(defaultpd * 2),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: _buildInformationSection(context),
-          ),
+          child: _buildInformationSection(context),
         ),
       ),
     );
@@ -60,28 +57,42 @@ class _IncidentPageState extends State<IncidentPage> {
   }
 
   Widget _buildInformationSection(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: _buildContainerDecoration(context),
-      child: Padding(
-        padding: const EdgeInsets.all(defaultpd * 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPageSelector(),
-            const SizedBox(height: 16), // Espaço entre o menu e as informações
-            if (_currentIndex == 0) ...[
-              IncidentInfoPage(
-                event: event,
-              ),
-            ] else ...[
-              IncidentUpdatePage(
-                event: event,
-              )
-            ],
-          ],
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            padding: _buildPadding(),
+            decoration: _buildContainerDecoration(context),
+            child: _buildPageSelector()),
+        const SizedBox(height: defaultpd * 2),
+        if (_currentIndex == 0) ...[
+          IncidentInfoPage(
+            event: event,
+          ),
+        ] else ...[
+          Expanded(
+            child: Container(
+              padding: _buildPadding(),
+              decoration: _buildContainerDecoration(context),
+              child: event.acknowledges.isEmpty
+                  ? Center(
+                      child: Text('Nada aqui',
+                          style: Theme.of(context).textTheme.labelMedium))
+                  : ListView.builder(
+                      itemCount: event.acknowledges.length,
+                      itemBuilder: (context, index) {
+                        return EventAcknowledgesChatCard(
+                            acknowledged: event.acknowledges[index]);
+                      },
+                    ),
+            ),
+          ),
+          const SizedBox(height: defaultpd * 2),
+          IncidentUpdatePage(
+            event: event,
+          ),
+        ],
+      ],
     );
   }
 

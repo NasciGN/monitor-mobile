@@ -28,19 +28,11 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
+    return Container(
+      decoration: _buildContainerDecoration(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: ListView.builder(
-                itemCount: widget.event.acknowledges.length,
-                itemBuilder: (context, index) {
-                  return EventAcknowledgesChatCard(
-                      acknowledged: widget.event.acknowledges[index]);
-                }),
-          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: GestureDetector(
@@ -70,7 +62,6 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              // Adicione a lógica de atualização aqui
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Incidente atualizado!')),
               );
@@ -81,6 +72,15 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
       ),
     );
   }
+}
+
+EdgeInsets _buildPadding() => const EdgeInsets.all(defaultpd * 2);
+
+BoxDecoration _buildContainerDecoration(BuildContext context) {
+  return BoxDecoration(
+    color: Theme.of(context).colorScheme.secondary,
+    borderRadius: BorderRadius.circular(10),
+  );
 }
 
 class EventAcknowledgesChatCard extends StatefulWidget {
