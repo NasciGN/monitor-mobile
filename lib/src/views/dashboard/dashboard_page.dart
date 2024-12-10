@@ -193,11 +193,11 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             Text(
               label,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
               count,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),

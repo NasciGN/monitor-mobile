@@ -23,7 +23,7 @@ class _CustomHostFormState extends State<CustomHostForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.bodyMedium,
       enabled: _hostFormControler.isEdit,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.host,
@@ -46,7 +46,6 @@ class _CustomHostFormState extends State<CustomHostForm> {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        labelStyle: Theme.of(context).textTheme.labelMedium,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),

@@ -51,7 +51,7 @@ class _CustomInventoryTypeFormState extends State<CustomInventoryTypeForm> {
           'Type',
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),

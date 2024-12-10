@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 
 class IncidentCard extends StatefulWidget {
@@ -13,11 +15,20 @@ class IncidentCard extends StatefulWidget {
 }
 
 class _IncidentCardState extends State<IncidentCard> {
+  FormatData formatData = FormatData();
+
   @override
   Widget build(BuildContext context) {
+    List<String> actions = widget.events.acknowledges.isNotEmpty
+        ? widget.events.acknowledges
+            .map((ack) => formatData.identifyAction(ack.action))
+            .expand((list) => list)
+            .toList()
+        : [];
+
     return GestureDetector(
       onTap: () {
-        Get.toNamed('incident_page', arguments: widget.events);
+        Get.offNamed('incident_page', arguments: widget.events);
       },
       onLongPress: () {},
       child: Container(
@@ -46,11 +57,29 @@ class _IncidentCardState extends State<IncidentCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.events.name,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    children: [
+                      Text(
+                        widget.events.name,
+                        style: Theme.of(context).textTheme.bodySmall,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Spacer(),
+                      if (actions.contains("Adicionar mensagem"))
+                        const FaIcon(
+                          FontAwesomeIcons.message,
+                          size: defaultpd * 2,
+                        ),
+                      const SizedBox(
+                        width: defaultpd,
+                      ),
+                      if (actions.contains("Reconhecer evento"))
+                        const FaIcon(
+                          FontAwesomeIcons.check,
+                          size: defaultpd * 2,
+                        ),
+                    ],
                   ),
                   const Spacer(),
                   Text(

@@ -45,7 +45,7 @@ class CustomHostInterfacesList extends StatelessWidget {
                             host.hostInterfaces[index].useIp == '1'
                                 ? host.hostInterfaces[index].ip
                                 : host.hostInterfaces[index].dns,
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

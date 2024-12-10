@@ -121,8 +121,8 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
       ),
       children: [
-        _buildListItem(context, 0, 'Serviços', ''),
-        _buildListItem(context, 1, 'SLA', ''),
+        _buildListItem(context, 0, 'Serviços', '/shortly'),
+        _buildListItem(context, 1, 'SLA', '/shortly'),
       ],
     );
   }
@@ -141,9 +141,9 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
       ),
       children: [
-        _buildListItem(context, 0, 'Grupos de Modelos', ''),
-        _buildListItem(context, 1, 'Grupos de Hosts', ''),
-        _buildListItem(context, 2, 'Templates', ''),
+        _buildListItem(context, 0, 'Grupos de Modelos', '/shortly'),
+        _buildListItem(context, 1, 'Grupos de Hosts', '/shortly'),
+        _buildListItem(context, 2, 'Templates', '/shortly'),
       ],
     );
   }
@@ -162,8 +162,8 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
       ),
       children: [
-        _buildListItem(context, 0, 'Grupos de usuários', ''),
-        _buildListItem(context, 1, 'Usuários', ''),
+        _buildListItem(context, 0, 'Grupos de usuários', '/shortly'),
+        _buildListItem(context, 1, 'Usuários', '/shortly'),
       ],
     );
   }

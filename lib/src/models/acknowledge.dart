@@ -1,3 +1,5 @@
+import 'package:monitor_mobile/src/core/utils/format_data.dart';
+
 class Acknowledge {
   String acknowledgeId;
   String userId;
@@ -12,25 +14,27 @@ class Acknowledge {
   String username;
   String name;
   String surname;
+  String newClock;
 
-  Acknowledge({
-    required this.acknowledgeId,
-    required this.userId,
-    required this.eventId,
-    required this.clock,
-    required this.message,
-    required this.action,
-    required this.oldSeverity,
-    required this.newSeverity,
-    required this.suppressUntil,
-    required this.taskId,
-    required this.username,
-    required this.name,
-    required this.surname,
-  });
+  Acknowledge(
+      {required this.acknowledgeId,
+      required this.userId,
+      required this.eventId,
+      required this.clock,
+      required this.message,
+      required this.action,
+      required this.oldSeverity,
+      required this.newSeverity,
+      required this.suppressUntil,
+      required this.taskId,
+      required this.username,
+      required this.name,
+      required this.surname,
+      this.newClock = ''});
 
   factory Acknowledge.fromJson(Map<String, dynamic> json) {
-    return Acknowledge(
+    FormatData formatData = FormatData();
+    Acknowledge acknowledge = Acknowledge(
       acknowledgeId: json['acknowledgeid'] ?? '',
       userId: json['userid'] ?? '',
       eventId: json['eventid'] ?? '',
@@ -45,6 +49,8 @@ class Acknowledge {
       name: json['name'] ?? '',
       surname: json['surname'] ?? '',
     );
+    acknowledge.newClock = formatData.calcularTempoDecorrido(json['clock']);
+    return acknowledge;
   }
 
   Map<String, dynamic> toMap() {

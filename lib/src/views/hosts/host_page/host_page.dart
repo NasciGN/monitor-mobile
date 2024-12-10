@@ -8,7 +8,6 @@ import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_sk
 import 'package:monitor_mobile/src/views/hosts/host_page/host_infos/host_detail_form.dart';
 import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/host_inventory_form.dart';
 import 'components/grid_view_cards.dart';
-import 'components/indexed_stack_pages.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({super.key});

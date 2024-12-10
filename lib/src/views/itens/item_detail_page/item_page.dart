@@ -120,8 +120,6 @@ class _ItemPageState extends State<ItemPage> {
   }
 
   _buildHistorySection(context) {
-    final formatData = FormatData();
-
     return Padding(
       padding: _buildPadding(),
       child: Container(

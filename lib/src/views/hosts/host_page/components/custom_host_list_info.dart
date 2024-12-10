@@ -40,7 +40,7 @@ class CustomHostListInfo extends StatelessWidget {
                     child: Center(
                       child: Text(
                         host[index].name,
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

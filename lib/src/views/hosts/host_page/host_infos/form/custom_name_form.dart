@@ -26,7 +26,7 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: _hostFormControler.isEdit,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.bodyMedium,
       textInputAction: TextInputAction.next,
       controller: _hostFormControler.name,
       minLines: 1,
@@ -48,7 +48,6 @@ class _CustomHostNameFormState extends State<CustomHostNameForm> {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        labelStyle: Theme.of(context).textTheme.labelMedium,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),

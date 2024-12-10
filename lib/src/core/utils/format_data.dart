@@ -274,13 +274,14 @@ class FormatData {
   }
 
   String calcularTempoDecorrido(String timestamp) {
-    DateTime agora = DateTime.now();
+    const Duration fusoHorario = Duration(hours: -4);
+    DateTime agora = DateTime.now().toUtc().add(fusoHorario);
     DateTime timeStamp =
-        DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
-
+        DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000)
+            .toUtc()
+            .add(fusoHorario);
     Duration diferenca = agora.difference(timeStamp);
     DateTime dataExata = agora.subtract(diferenca);
-
     return formatarData(dataExata);
   }
 
@@ -400,5 +401,30 @@ class FormatData {
       default:
         return "Desconhecida";
     }
+  }
+
+  List<String> identifyAction(String number) {
+    int action = int.parse(number);
+    Map<int, String> actions = {
+      1: "Fechar problema",
+      2: "Reconhecer evento",
+      4: "Adicionar mensagem",
+      8: "Alterar severidade",
+      16: "Suprimir evento",
+      32: "Remover supressão do evento",
+      64: "Classificar como causa principal",
+      128: "Classificar como sintoma"
+    };
+    bool isBitSet(int action, int bit) {
+      return (action & bit) == bit;
+    }
+
+    List<String> identifiedActions = [];
+    actions.forEach((bit, description) {
+      if (isBitSet(action, bit)) {
+        identifiedActions.add(description);
+      }
+    });
+    return identifiedActions;
   }
 }

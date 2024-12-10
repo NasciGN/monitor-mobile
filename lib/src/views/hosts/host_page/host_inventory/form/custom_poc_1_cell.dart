@@ -29,7 +29,7 @@ class _CustomInventoryPoc1Cell1cellFormState
     return Column(
       children: [
         TextFormField(
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.bodyMedium,
           enabled: _hostInventoryFormControler.isEdit,
           textInputAction: TextInputAction.next,
           controller: _hostInventoryFormControler.poc_1Cell,

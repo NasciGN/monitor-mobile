@@ -25,7 +25,7 @@ class _CustomDescriptionFormState extends State<CustomDescriptionForm> {
     return Column(
       children: [
         TextFormField(
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.bodyMedium,
           minLines: 1,
           maxLines: 10,
           enabled: _hostFormControler.isEdit,

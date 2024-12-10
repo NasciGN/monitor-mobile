@@ -46,7 +46,7 @@ ThemeData customDarkTheme() {
       labelLarge: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
       labelMedium: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 20),
       labelSmall: TextStyle(
           color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 15),
     ),
