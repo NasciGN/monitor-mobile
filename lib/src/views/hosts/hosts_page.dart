@@ -101,7 +101,7 @@ class _HostsPageState extends State<HostsPage> {
         const SizedBox(
           height: 20,
         ),
-        isLoading && searchHosts.isEmpty
+        isLoading
             ? Expanded(
                 child: Shimmer.fromColors(
                 baseColor: const Color.fromARGB(26, 214, 214, 214),
@@ -114,7 +114,32 @@ class _HostsPageState extends State<HostsPage> {
                         )),
                     itemCount: 6),
               ))
-            : _buildHostsListView()
+            : searchHosts.isEmpty
+                ? Expanded(
+                    child: ListView(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: defaultpd * 10,
+                            ),
+                            const FaIcon(
+                              FontAwesomeIcons.boxOpen,
+                              size: defaultpd * 4,
+                              color: Colors.white70,
+                            ),
+                            Text(
+                              'Sem dados encontrados.',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : _buildHostsListView()
       ],
     );
   }

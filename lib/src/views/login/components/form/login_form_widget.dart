@@ -50,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
   _buildUserField() {
     return TextFormField(
       cursorColor: Colors.white,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.bodyMedium,
       controller: _controllerUser,
       decoration: _buildTextFieldDecoration('Usuário', false),
     );
@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
   _buildServerField() {
     return TextFormField(
       cursorColor: Colors.white,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.bodyMedium,
       controller: _controllerUrl,
       decoration: _buildTextFieldDecoration('Servidor', false),
     );
@@ -68,7 +68,7 @@ class _LoginFormState extends State<LoginForm> {
   _buildPassField() {
     return TextFormField(
       cursorColor: Colors.white,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.bodyMedium,
       controller: _controllerPass,
       obscureText: isObscure ? true : false,
       decoration: _buildTextFieldDecoration('Senha', true),
@@ -154,7 +154,7 @@ class _LoginFormState extends State<LoginForm> {
           }
         });
         if (userapi.apicode.isNotEmpty) {
-          Get.offNamed("/home");
+          Get.offNamed("/dashboard");
         }
       } catch (e) {
         setState(() {

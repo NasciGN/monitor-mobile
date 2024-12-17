@@ -3,8 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/event.dart';
-import 'package:monitor_mobile/src/views/incidents/components/incident_info_page.dart';
-import 'package:monitor_mobile/src/views/incidents/components/incidente_update_page.dart';
+import 'package:monitor_mobile/src/views/incidents/components/event_acknowledges_chat_card.dart';
+import 'package:monitor_mobile/src/views/incidents/pages/incident_info_page.dart';
+import 'package:monitor_mobile/src/views/incidents/pages/incidente_update_page.dart';
 
 class IncidentPage extends StatefulWidget {
   const IncidentPage({super.key});
@@ -61,23 +62,46 @@ class _IncidentPageState extends State<IncidentPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            padding: _buildPadding(),
-            decoration: _buildContainerDecoration(context),
-            child: _buildPageSelector()),
+          padding: _buildPadding(),
+          decoration: _buildContainerDecoration(context),
+          child: _buildPageSelector(),
+        ),
         const SizedBox(height: defaultpd * 2),
-        if (_currentIndex == 0) ...[
-          IncidentInfoPage(
-            event: event,
-          ),
-        ] else ...[
+        if (_currentIndex == 0)
+          Expanded(
+            child: SingleChildScrollView(
+              child: IncidentInfoPage(
+                event: event,
+              ),
+            ),
+          )
+        else
           Expanded(
             child: Container(
               padding: _buildPadding(),
               decoration: _buildContainerDecoration(context),
               child: event.acknowledges.isEmpty
-                  ? Center(
-                      child: Text('Nada aqui',
-                          style: Theme.of(context).textTheme.labelMedium))
+                  ? SizedBox(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const FaIcon(
+                            FontAwesomeIcons.triangleExclamation,
+                            size: defaultpd * 4,
+                          ),
+                          const SizedBox(
+                            height: defaultpd,
+                          ),
+                          Text(
+                            'Nenhuma ação efetuada.',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          )
+                        ],
+                      ),
+                    )
                   : ListView.builder(
                       itemCount: event.acknowledges.length,
                       itemBuilder: (context, index) {
@@ -87,6 +111,7 @@ class _IncidentPageState extends State<IncidentPage> {
                     ),
             ),
           ),
+        if (_currentIndex == 1) ...[
           const SizedBox(height: defaultpd * 2),
           IncidentUpdatePage(
             event: event,
@@ -135,39 +160,6 @@ class _IncidentPageState extends State<IncidentPage> {
           ),
         ),
       ),
-    );
-  }
-
-  TextField _buildTextField() {
-    return TextField(
-      style: Theme.of(context).textTheme.bodyLarge,
-      decoration: _buildTextFieldDecoration(),
-    );
-  }
-
-  InputDecoration _buildTextFieldDecoration() {
-    return InputDecoration(
-        suffix: const FaIcon(
-          FontAwesomeIcons.magnifyingGlass,
-          color: Colors.white,
-        ),
-        label: Text(
-          'Pesquisar',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        focusColor: Theme.of(context).colorScheme.tertiary);
-  }
-
-  Text _buildPageTitle(BuildContext context, String text) {
-    return Text(
-      text,
-      style: Theme.of(context).textTheme.titleLarge,
     );
   }
 

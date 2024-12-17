@@ -68,11 +68,11 @@ class HostDetailForm extends StatelessWidget {
                         .any((element) => element.available.contains("1"))
                     ? Text(
                         "Ativo",
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       )
                     : Text(
                         "Inativo",
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
               ),
             ),

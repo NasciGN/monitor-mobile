@@ -47,8 +47,7 @@ class _HostCardState extends State<HostCard> {
                 const SizedBox(
                   width: 20,
                 ),
-                widget.host.hostInterfaces
-                        .any((element) => element.available.contains('1'))
+                widget.host.status == '0'
                     ? Text(
                         'Ativo',
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -86,7 +85,7 @@ class _HostCardState extends State<HostCard> {
                         widget.host.mainInterface[0].useIp == '1'
                             ? widget.host.mainInterface[0].ip
                             : widget.host.mainInterface[0].dns,
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       )
                     : const SizedBox.shrink(),
               ],

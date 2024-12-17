@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
-import 'package:monitor_mobile/src/core/utils/format_data.dart';
+
 import 'package:monitor_mobile/src/models/models.dart';
 
 class ItemPage extends StatefulWidget {
@@ -66,7 +66,7 @@ class _ItemPageState extends State<ItemPage> {
           children: [
             _buildInformationSection(context),
             const SizedBox(height: 20),
-            _buildHistorySection(context), // Adiciona o histórico
+            _buildHistorySection(context),
           ],
         ),
       ),
@@ -163,7 +163,7 @@ class _ItemPageState extends State<ItemPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 value,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ],

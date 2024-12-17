@@ -91,7 +91,7 @@ flutter:
     - assets/json/api/get_api_info.json
     - assets/json/chart/get_chart.json
     - assets/json/events/get_events_by_host.json
-    - assets/json/events/get_events_by_trigger.json
+    - assets/json/events/get_events_by_id.json
     - assets/json/events/get_events.json
     - assets/json/hosts/add_host.json
     - assets/json/hosts/delete_host.json

@@ -26,7 +26,7 @@ class CardInfo extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const Spacer(),
             const FaIcon(

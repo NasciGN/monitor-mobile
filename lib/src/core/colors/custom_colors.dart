@@ -5,7 +5,7 @@ const darkScdBgColor = Color(0xFF2B2B2B);
 const darkPrmBgColor = Color(0xFF454545);
 
 const darkIcnColor = Color.fromARGB(255, 189, 3, 3);
-const darkBtnColor = Color(0xFF69808D);
+const darkBtnColor = Color(0xFF3B96BA);
 
 const whiteBgColor = Color(0xFFEBEEF0);
 const whiteScdBgColor = Color(0xFFFFFFFF);

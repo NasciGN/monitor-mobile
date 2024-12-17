@@ -7,7 +7,7 @@
     "selectSuppressionData": "extend",
     "selectHosts": "extend",
     "selectTags": "extend",
-    "objectids": [],
+    "eventids": [],
     "sortfield": ["clock", "eventid"],
     "sortorder": "DESC",
     "filter": {

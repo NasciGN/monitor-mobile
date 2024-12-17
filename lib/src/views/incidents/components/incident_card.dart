@@ -58,27 +58,36 @@ class _IncidentCardState extends State<IncidentCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.events.name,
-                        style: Theme.of(context).textTheme.bodySmall,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const Spacer(),
-                      if (actions.contains("Adicionar mensagem"))
-                        const FaIcon(
-                          FontAwesomeIcons.message,
-                          size: defaultpd * 2,
+                      Flexible(
+                        child: Text(
+                          widget.events.name,
+                          style: Theme.of(context).textTheme.bodySmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      const SizedBox(
-                        width: defaultpd,
                       ),
-                      if (actions.contains("Reconhecer evento"))
-                        const FaIcon(
-                          FontAwesomeIcons.check,
-                          size: defaultpd * 2,
+                      Container(
+                        margin: const EdgeInsets.only(left: defaultpd),
+                        child: Row(
+                          children: [
+                            if (actions.contains("Adicionar mensagem"))
+                              const FaIcon(
+                                FontAwesomeIcons.message,
+                                size: defaultpd * 2,
+                              ),
+                            const SizedBox(
+                              width: defaultpd,
+                            ),
+                            if (actions.contains("Reconhecer evento"))
+                              const FaIcon(
+                                FontAwesomeIcons.check,
+                                size: defaultpd * 2,
+                              ),
+                          ],
                         ),
+                      )
                     ],
                   ),
                   const Spacer(),

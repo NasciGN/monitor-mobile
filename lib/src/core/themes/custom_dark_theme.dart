@@ -12,14 +12,16 @@ ThemeData customDarkTheme() {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: const MaterialStatePropertyAll(darkBtnColor),
-          textStyle: MaterialStateProperty.all(
-            const TextStyle(
-              color: Colors.white, // Cor do texto
-              fontSize: 20, // Tamanho do texto
-              fontWeight: FontWeight.bold, // Peso da fonte
-            ),
-          )),
+        backgroundColor: const WidgetStatePropertyAll(darkBtnColor),
+        foregroundColor:
+            const WidgetStatePropertyAll(Colors.white), // Define a cor do texto
+        textStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontSize: 20, // Tamanho do texto
+            fontWeight: FontWeight.bold, // Peso da fonte
+          ),
+        ),
+      ),
     ),
     dialogTheme: const DialogTheme(backgroundColor: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),

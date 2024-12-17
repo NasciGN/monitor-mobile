@@ -9,5 +9,5 @@ export 'package:monitor_mobile/src/views/hosts/host_charts/host_graphs.dart';
 export 'package:monitor_mobile/src/views/problems/problem_page/problem_page.dart';
 export 'package:monitor_mobile/src/views/incidents/incidents_list.dart';
 export 'package:monitor_mobile/src/views/dashboard/dashboard_page.dart';
-export 'package:monitor_mobile/src/views/incidents/incident_page/incident_page.dart';
+export 'package:monitor_mobile/src/views/incidents/pages/incident_page/incident_page.dart';
 export 'package:monitor_mobile/src/views/shortly/shortly_page.dart';

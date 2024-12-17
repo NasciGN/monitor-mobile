@@ -40,12 +40,12 @@ class EventDataController {
     }
   }
 
-  Future<List<Event>> fetchEventsByTrigger(List<String> triggers) async {
+  Future<List<Event>> fetchEventsByTrigger(List<String> eventids) async {
     try {
       String getHostItensCall = await rootBundle
-          .loadString('assets/json/events/get_events_by_trigger.json');
+          .loadString('assets/json/events/get_events_by_id.json');
       final jsonRequest = await jsonDecode(getHostItensCall);
-      jsonRequest["params"]["objectids"] = triggers;
+      jsonRequest["params"]["eventids"] = eventids;
 
       List<dynamic> eventsData = await apiGet.getData(jsonRequest);
       List<Event> events =

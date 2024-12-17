@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/controllers/event/event_data_controller.dart';
-import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller.dart';
+import 'package:monitor_mobile/src/controllers/problem/problem_data_controller.dart';
+
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
@@ -19,11 +21,12 @@ class IncidentsListPage extends StatefulWidget {
 
 class _IncidentsListPageState extends State<IncidentsListPage> {
   final GetData getData = GetData();
-  TriggerDataController triggerDataController = TriggerDataController();
   EventDataController eventDataController = EventDataController();
-  List<Trigger> triggers = [];
+  ProblemDataController problemDataController = ProblemDataController();
+
   List<Event> events = [];
   List<String> ids = [];
+  List<Problem> problems = [];
 
   bool isLoading = false;
   int count = 0;
@@ -40,21 +43,23 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   Future<void> _fetchIncidents() async {
     setState(() {
       isLoading = true;
-      triggers = [];
+      problems = [];
       events = [];
       ids = [];
     });
 
     try {
-      triggers = await triggerDataController.fetchActiveTriggers();
-      for (var trigger in triggers) {
-        ids.add(trigger.triggerId);
+      problems = await problemDataController.fetchProblems();
+
+      for (var problem in problems) {
+        ids.add(problem.eventid);
       }
-      var fetchedEvents = await eventDataController.fetchEventsByTrigger(ids);
-      events = fetchedEvents.where((event) => event.suppressed == "0").toList();
+
+      events = await eventDataController.fetchEventsByTrigger(ids);
+
       setState(() {
         isLoading = false;
-        triggers;
+        problems;
         events;
       });
     } catch (e) {
@@ -76,7 +81,7 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
       body: Padding(
         padding: _buildPadding(),
         child: RefreshIndicator(
-            child: _buildBody(), onRefresh: () => _handleRefresh()),
+            child: _buildBody(context), onRefresh: () => _handleRefresh()),
       ),
     );
   }
@@ -96,36 +101,53 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
     );
   }
 
-  _buildBody() {
-    return Column(
-      children: [
-        isLoading && events.isEmpty
-            ? Expanded(
-                child: Shimmer.fromColors(
-                baseColor: const Color.fromARGB(26, 214, 214, 214),
-                highlightColor: Theme.of(context).colorScheme.primary,
-                child: ListView.separated(
-                    itemBuilder: (context, index) => CardHostSkeleton(
-                          context: context,
-                        ),
-                    separatorBuilder: ((context, index) => const SizedBox(
-                          height: 16,
-                        )),
-                    itemCount: 6),
-              ))
-            : _buildIncidentListView(),
-      ],
-    );
+  _buildBody(BuildContext context) {
+    return isLoading
+        ? Shimmer.fromColors(
+            baseColor: const Color.fromARGB(26, 214, 214, 214),
+            highlightColor: Theme.of(context).colorScheme.primary,
+            child: ListView.separated(
+              itemBuilder: (context, index) => CardHostSkeleton(
+                context: context,
+              ),
+              separatorBuilder: ((context, index) => const SizedBox(
+                    height: 16,
+                  )),
+              itemCount: 6,
+            ),
+          )
+        : events.isEmpty
+            ? ListView(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: defaultpd * 10,
+                      ),
+                      const FaIcon(
+                        FontAwesomeIcons.boxOpen,
+                        size: defaultpd * 4,
+                        color: Colors.white70,
+                      ),
+                      Text(
+                        'Sem dados encontrados.',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            : _buildIncidentListView();
   }
 
   _buildIncidentListView() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          return IncidentCard(events: events[index]);
-        },
-      ),
+    return ListView.builder(
+      itemCount: events.length,
+      itemBuilder: (context, index) {
+        return IncidentCard(events: events[index]);
+      },
     );
   }
 }
