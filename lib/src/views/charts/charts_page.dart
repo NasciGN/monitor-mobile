@@ -61,7 +61,7 @@ class _ChartState extends State<Chart> {
 
     return Scaffold(
       appBar: _buildAppBar(),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: _isLoading
           ? const Center(
               child: CircularProgressIndicator(),

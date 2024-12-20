@@ -28,7 +28,7 @@ class _IncidentCardState extends State<IncidentCard> {
 
     return GestureDetector(
       onTap: () {
-        Get.offNamed('incident_page', arguments: widget.events);
+        Get.offNamed('incident_page', arguments: {'event': widget.events});
       },
       onLongPress: () {},
       child: Container(

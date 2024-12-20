@@ -17,7 +17,6 @@ class _ItemPageState extends State<ItemPage> {
   final Item item = Get.arguments;
   ItemDataController itemDataController = ItemDataController();
   List<History> history = [];
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -25,17 +24,14 @@ class _ItemPageState extends State<ItemPage> {
   }
 
   void _loadHistory() async {
-    setState(() => _isLoading = true);
     try {
       final fetchedHistory =
           await itemDataController.fetchHistory(item.itemId, item.units);
 
       setState(() {
         history = fetchedHistory;
-        _isLoading = false;
       });
     } catch (e) {
-      setState(() => _isLoading = false);
       debugPrint('Erro ao buscar histórico: $e');
     }
   }
@@ -70,7 +66,7 @@ class _ItemPageState extends State<ItemPage> {
           ],
         ),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 

@@ -62,7 +62,7 @@ class CustomHostInterfacesList extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 host.hostInterfaces[index].interfaceTypeString,
-                                style: Theme.of(context).textTheme.labelMedium,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             )),
                       ],

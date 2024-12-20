@@ -18,7 +18,7 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(context),
       body: Padding(
         padding: _buildPadding(),

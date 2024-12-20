@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "method": "event.acknowledge",
+  "params": {
+    "eventids": "",
+    "message": "",
+    "severity": "",
+    "action": ""
+  },
+  "auth": "",
+  "id": 1
+}

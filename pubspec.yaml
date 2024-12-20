@@ -90,6 +90,7 @@ flutter:
   assets:
     - assets/json/api/get_api_info.json
     - assets/json/chart/get_chart.json
+    - assets/json/events/acknowledge_event.json
     - assets/json/events/get_events_by_host.json
     - assets/json/events/get_events_by_id.json
     - assets/json/events/get_events.json

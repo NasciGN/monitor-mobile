@@ -427,4 +427,19 @@ class FormatData {
     });
     return identifiedActions;
   }
+
+  List<String> setAction() {
+    Map<int, String> actions = {
+      1: "Fechar problema",
+      2: "Reconhecer evento",
+      4: "Adicionar mensagem",
+      8: "Alterar severidade",
+      16: "Remover reconhecimento",
+      32: "Suprimir evento",
+      64: "Remover supressão",
+      128: "Alterar classificação para causa",
+      256: "Alterar classificação para sintoma",
+    };
+    return actions.values.toList();
+  }
 }

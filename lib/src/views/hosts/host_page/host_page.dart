@@ -67,7 +67,7 @@ class _HostPageState extends State<HostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: _buildPadding(),
         child: _isLoading ? const HostPageSkeleton() : _buildBody(context),

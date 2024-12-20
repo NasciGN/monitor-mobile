@@ -9,7 +9,7 @@ import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
 import 'package:monitor_mobile/src/views/hosts/components/host_card_skeleton.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:get/get.dart';
 import 'components/incident_card.dart';
 
 class IncidentsListPage extends StatefulWidget {
@@ -24,20 +24,18 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
   EventDataController eventDataController = EventDataController();
   ProblemDataController problemDataController = ProblemDataController();
 
-  List<Event> events = [];
   List<String> ids = [];
   List<Problem> problems = [];
-
+  List<Event> events = [];
+  List<Event> filteredEvents = [];
   bool isLoading = false;
-  int count = 0;
+  String selectedSeverity = '';
 
   @override
   void initState() {
     super.initState();
     _fetchIncidents();
-    setState(() {
-      count = 0;
-    });
+    selectedSeverity = Get.arguments ?? '';
   }
 
   Future<void> _fetchIncidents() async {
@@ -56,6 +54,7 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
       }
 
       events = await eventDataController.fetchEventsByTrigger(ids);
+      _applySeverityFilter();
 
       setState(() {
         isLoading = false;
@@ -69,13 +68,26 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
     }
   }
 
+  void _applySeverityFilter() {
+    setState(() {
+      if (selectedSeverity == '') {
+        filteredEvents = events;
+      } else {
+        filteredEvents = events
+            .where((event) => event.severity == selectedSeverity)
+            .toList();
+      }
+    });
+  }
+
   Future<void> _handleRefresh() async {
     await _fetchIncidents();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(context),
       drawer: const SideMenu(),
       body: Padding(
@@ -98,6 +110,20 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
         style: Theme.of(context).textTheme.titleLarge,
       ),
       iconTheme: Theme.of(context).iconTheme,
+      actions: selectedSeverity.isNotEmpty
+          ? [
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.filterCircleXmark),
+                tooltip: 'Remover filtro',
+                onPressed: () {
+                  setState(() {
+                    selectedSeverity = '';
+                    _applySeverityFilter();
+                  });
+                },
+              ),
+            ]
+          : null,
     );
   }
 
@@ -144,9 +170,9 @@ class _IncidentsListPageState extends State<IncidentsListPage> {
 
   _buildIncidentListView() {
     return ListView.builder(
-      itemCount: events.length,
+      itemCount: filteredEvents.length,
       itemBuilder: (context, index) {
-        return IncidentCard(events: events[index]);
+        return IncidentCard(events: filteredEvents[index]);
       },
     );
   }

@@ -15,13 +15,21 @@ class IncidentPage extends StatefulWidget {
 }
 
 class _IncidentPageState extends State<IncidentPage> {
-  final event = Get.arguments as Event;
+  late Event event;
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final arguments = Get.arguments as Map<String, dynamic>;
+    event = arguments['event'] as Event;
+    _currentIndex = arguments['index'] ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(context),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/event/event_data_controller.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
@@ -13,6 +15,8 @@ class IncidentUpdatePage extends StatefulWidget {
 
 class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
   bool isAcknowledged = false;
+  EventDataController eventDataController = EventDataController();
+  final TextEditingController _messageController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -23,6 +27,55 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
   void _checkIsAcknowledged() {
     if (widget.event.acknowledged == '1') {
       isAcknowledged = true;
+    }
+  }
+
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _updateEvent() async {
+    try {
+      int actionsBitmask = 0;
+
+      if (_messageController.text.isNotEmpty) {
+        actionsBitmask |= 4; // Adicionar mensagem
+      }
+
+      if (isAcknowledged != (widget.event.acknowledged == '1')) {
+        actionsBitmask |= isAcknowledged ? 2 : 16;
+      }
+
+      if (selectedSeverity != widget.event.severity) {
+        actionsBitmask |= 8;
+      }
+
+      if (actionsBitmask == 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Nenhuma alteração foi detectada.')),
+        );
+        return;
+      }
+      final success = await eventDataController.acknowledgeEvent(
+          widget.event.eventId.toString(),
+          _messageController.text,
+          selectedSeverity,
+          actionsBitmask.toString());
+
+      if (success) {
+        final updatedEvent = await eventDataController
+            .fetchEventsByTrigger([widget.event.eventId.toString()]);
+        print(updatedEvent);
+        if (updatedEvent.isNotEmpty) {
+          Get.offAndToNamed('/incident_page',
+              arguments: {'event': updatedEvent[0], 'index': 1});
+        }
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao atualizar evento: $e')),
+      );
     }
   }
 
@@ -42,10 +95,7 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
       case '5':
         return disaster;
       default:
-        return {
-          "txtColor": Colors.grey,
-          "bgColor": Colors.grey
-        }; // Cor padrão caso não haja correspondência
+        return {"txtColor": Colors.grey, "bgColor": Colors.grey};
     }
   }
 
@@ -154,10 +204,8 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
                 child: const Text('Cancelar'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Incidente atualizado!')),
-                  );
+                onPressed: () async {
+                  await _updateEvent();
                 },
                 child: const Text('Atualizar'),
               ),
@@ -221,7 +269,7 @@ class _IncidentUpdatePageState extends State<IncidentUpdatePage> {
 
   TextField _buildTextField(BuildContext context) {
     return TextField(
-      //onChanged: (value) => _searchData(value),
+      controller: _messageController,
       style: Theme.of(context).textTheme.bodySmall,
       decoration: _buildTextFieldDecoration(context),
     );

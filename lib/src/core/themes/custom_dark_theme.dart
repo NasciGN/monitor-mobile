@@ -4,7 +4,7 @@ import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 ThemeData customDarkTheme() {
   return ThemeData(
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      background: darkBgColor,
+      surface: darkBgColor,
       primary: darkPrmBgColor,
       secondary: darkScdBgColor,
       tertiary: activeItmColor,

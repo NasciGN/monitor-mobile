@@ -67,8 +67,8 @@ class _ProblemActionDialogState extends State<ProblemActionDialog> {
                   'Compartilhar',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                Spacer(),
-                FaIcon(FontAwesomeIcons.arrowUpFromBracket)
+                const Spacer(),
+                const FaIcon(FontAwesomeIcons.arrowUpFromBracket)
               ],
             ),
           ),

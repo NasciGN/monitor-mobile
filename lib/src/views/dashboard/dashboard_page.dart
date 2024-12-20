@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
@@ -69,7 +70,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(context),
       drawer: const SideMenu(),
       body: Padding(
@@ -143,18 +144,18 @@ class _DashboardPageState extends State<DashboardPage> {
     int disaster = triggers.where((trigger) => trigger.priority == '5').length;
     return Column(
       children: [
+        _buildIncidentRow('Desastre', '5', getSeverityColors('5')["bgColor"],
+            disaster.toString()),
         _buildIncidentRow(
-            'Desastre', getSeverityColors('5')["bgColor"], disaster.toString()),
-        _buildIncidentRow(
-            'Alta', getSeverityColors('4')["bgColor"], high.toString()),
-        _buildIncidentRow(
-            'Média', getSeverityColors('3')["bgColor"], average.toString()),
-        _buildIncidentRow(
-            'Atenção', getSeverityColors('2')["bgColor"], warning.toString()),
-        _buildIncidentRow('Informação', getSeverityColors('1')["bgColor"],
+            'Alta', '4', getSeverityColors('4')["bgColor"], high.toString()),
+        _buildIncidentRow('Média', '3', getSeverityColors('3')["bgColor"],
+            average.toString()),
+        _buildIncidentRow('Atenção', '2', getSeverityColors('2')["bgColor"],
+            warning.toString()),
+        _buildIncidentRow('Informação', '1', getSeverityColors('1')["bgColor"],
             information.toString()),
-        _buildIncidentRow('Não Classificado', getSeverityColors('0')["bgColor"],
-            notClassified.toString()),
+        _buildIncidentRow('Não Classificado', '0',
+            getSeverityColors('0')["bgColor"], notClassified.toString()),
       ],
     );
   }
@@ -168,18 +169,50 @@ class _DashboardPageState extends State<DashboardPage> {
         triggers.where((trigger) => trigger.priority == '1').length;
     return Column(
       children: [
-        _buildIncidentRow(
+        _buildHostsRow(
             'Disponível', availabilityAvailable, hostsAvailable.toString()),
-        _buildIncidentRow('Indisponível', availabilityUnavailable,
+        _buildHostsRow('Indisponível', availabilityUnavailable,
             hostsUnavailable.toString()),
-        _buildIncidentRow(
+        _buildHostsRow(
             'Desconhecido', availabilityUnknown, hostsUnknown.toString()),
-        _buildIncidentRow('Total', availabilityTotal, hosts.length.toString()),
+        _buildHostsRow('Total', availabilityTotal, hosts.length.toString()),
       ],
     );
   }
 
-  Widget _buildIncidentRow(String label, Color? color, String count) {
+  Widget _buildIncidentRow(
+      String label, String severity, Color? color, String count) {
+    return GestureDetector(
+      onTap: () {
+        Get.offNamed('/incidents_list_page', arguments: severity);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: _buildPadding(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              Text(
+                count,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHostsRow(String label, Color? color, String count) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Container(

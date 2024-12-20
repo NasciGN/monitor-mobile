@@ -63,7 +63,7 @@ class _HostsPageState extends State<HostsPage> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: _buildAppBar(context),
         drawer: const SideMenu(),
         body: RefreshIndicator(

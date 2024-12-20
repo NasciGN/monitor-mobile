@@ -56,4 +56,31 @@ class EventDataController {
       return [];
     }
   }
+
+  Future<bool> acknowledgeEvent(
+      String eventId, String message, String severity, String action) async {
+    try {
+      String acknowledgedEventCall = await rootBundle
+          .loadString('assets/json/events/acknowledge_event.json');
+      final jsonRequest = await jsonDecode(acknowledgedEventCall);
+      jsonRequest["params"]["eventids"] = eventId;
+      jsonRequest["params"]["message"] = message ?? "";
+      jsonRequest["params"]["severity"] = severity ?? "";
+      jsonRequest["params"]["action"] = action;
+
+      final eventResponse = await apiGet.getData(jsonRequest);
+      if (eventResponse is Map<String, dynamic> &&
+          eventResponse.containsKey("result") &&
+          eventResponse["result"].containsKey("eventids")) {
+        final eventIds = eventResponse["result"]["eventids"];
+        if (eventIds is List && eventIds.isNotEmpty) {
+          return true;
+        }
+      }
+      return true;
+    } catch (e) {
+      print('Erro ao atualizar o evento: ($e)');
+      return false;
+    }
+  }
 }

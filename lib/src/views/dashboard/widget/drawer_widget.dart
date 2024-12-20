@@ -95,7 +95,7 @@ class SideMenu extends StatelessWidget {
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       leading: const Icon(
         FontAwesomeIcons.eye,
         color: Colors.white,
@@ -115,7 +115,7 @@ class SideMenu extends StatelessWidget {
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       leading: const Icon(
         FontAwesomeIcons.diagramProject,
         color: Colors.white,
@@ -135,7 +135,7 @@ class SideMenu extends StatelessWidget {
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       leading: const Icon(
         FontAwesomeIcons.arrowDownShortWide,
         color: Colors.white,
@@ -156,7 +156,7 @@ class SideMenu extends StatelessWidget {
       ),
       iconColor: Colors.white,
       collapsedIconColor: Colors.white,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       leading: const Icon(
         FontAwesomeIcons.userGroup,
         color: Colors.white,
