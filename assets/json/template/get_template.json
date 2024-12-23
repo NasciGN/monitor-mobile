@@ -1,9 +1,0 @@
-{
-    "jsonrpc": "2.0",
-    "method": "template.get",
-    "params": {
-        "output": "extend"
-    },
-    "auth": "",
-    "id": 1
-}

@@ -54,6 +54,7 @@ class TriggerDataController {
       String getTriggers =
           await rootBundle.loadString('assets/json/trigger/get_triggers.json');
       final jsonRequest = await jsonDecode(getTriggers);
+
       List<dynamic> triggersData = await apiGet.getData(jsonRequest);
       List<Trigger> triggers = triggersData.map((item) {
         return Trigger.fromJson(item);
@@ -63,6 +64,25 @@ class TriggerDataController {
     } catch (e) {
       print(e);
       Get.snackbar('Erro', 'Não foi possível buscar os incidentes.');
+      return [];
+    }
+  }
+
+  Future<List<Trigger>> fetchActiveTriggersByHost(String hostid) async {
+    try {
+      String getTriggers = await rootBundle
+          .loadString('assets/json/trigger/get_triggers_by_host.json');
+      final jsonRequest = await jsonDecode(getTriggers);
+      jsonRequest["params"]["hostids"] = hostid;
+      List<dynamic> triggersData = await apiGet.getData(jsonRequest);
+      List<Trigger> triggers = triggersData.map((item) {
+        return Trigger.fromJson(item);
+      }).toList();
+
+      return triggers;
+    } catch (e) {
+      print(e);
+      Get.snackbar('Erro', 'Não foi possível buscar os eventos deste host.');
       return [];
     }
   }

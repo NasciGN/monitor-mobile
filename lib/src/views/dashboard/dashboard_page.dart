@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
-import 'package:monitor_mobile/src/controllers/triggers/triggers_data_controller.dart';
+import 'package:monitor_mobile/src/controllers/triggers/trigger_data_controller.dart';
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';

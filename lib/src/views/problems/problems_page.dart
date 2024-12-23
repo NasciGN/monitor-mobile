@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/controllers/event/event_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/problems/components/problem_card.dart';
+import 'package:monitor_mobile/src/views/hosts/components/host_card_skeleton.dart';
+import 'package:monitor_mobile/src/views/incidents/components/incident_card.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProblemsListPage extends StatefulWidget {
   const ProblemsListPage({super.key});
@@ -13,8 +16,44 @@ class ProblemsListPage extends StatefulWidget {
 }
 
 class _ProblemsListPageState extends State<ProblemsListPage> {
+  EventDataController eventDataController = EventDataController();
   List<Problem> problems = Get.arguments['problems'];
+  List<Event> events = [];
+  List<String> ids = [];
   Host host = Get.arguments['host'];
+  bool isLoading = false;
+
+  Future<void> _fetchIncidents() async {
+    setState(() {
+      isLoading = true;
+      events = [];
+      ids = [];
+    });
+    print(problems);
+    try {
+      for (var problem in problems) {
+        ids.add(problem.eventid);
+      }
+      events = await eventDataController.fetchEventsByTrigger(ids);
+
+      setState(() {
+        isLoading = false;
+        problems;
+        events;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  initState() {
+    super.initState();
+    _fetchIncidents();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +61,7 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
       appBar: _buildAppBar(context),
       body: Padding(
         padding: _buildPadding(),
-        child: _buildBody(),
+        child: _buildBody(context),
       ),
     );
   }
@@ -49,41 +88,53 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
     );
   }
 
-  _buildBody() {
-    return problems.isNotEmpty
-        ? _buildColumn()
-        : Container(
-            margin: const EdgeInsets.symmetric(horizontal: defaultpd * 2),
-            child: Center(
-              child: Opacity(
-                opacity: 0.5,
-                child: Text(
-                  'Este Host não possui incidentes ativos.',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
+  _buildBody(BuildContext context) {
+    return isLoading
+        ? Shimmer.fromColors(
+            baseColor: const Color.fromARGB(26, 214, 214, 214),
+            highlightColor: Theme.of(context).colorScheme.primary,
+            child: ListView.separated(
+              itemBuilder: (context, index) => CardHostSkeleton(
+                context: context,
               ),
+              separatorBuilder: ((context, index) => const SizedBox(
+                    height: 16,
+                  )),
+              itemCount: 6,
             ),
-          );
+          )
+        : events.isEmpty
+            ? ListView(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: defaultpd * 10,
+                      ),
+                      const FaIcon(
+                        FontAwesomeIcons.boxOpen,
+                        size: defaultpd * 4,
+                        color: Colors.white70,
+                      ),
+                      Text(
+                        'Sem dados encontrados.',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            : _buildIncidentListView();
   }
 
-  _buildColumn() {
-    return Column(
-      children: [_buildHostItensListView()],
-    );
-  }
-
-  _buildHostItensListView() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: problems.length,
-        itemBuilder: (context, index) {
-          return HostProblemCard(
-            hostProblem: problems[index],
-            host: host,
-          );
-        },
-      ),
+  _buildIncidentListView() {
+    return ListView.builder(
+      itemCount: events.length,
+      itemBuilder: (context, index) {
+        return IncidentCard(events: events[index]);
+      },
     );
   }
 }

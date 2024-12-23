@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
+import 'package:monitor_mobile/src/controllers/problem/problem_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_skeleton.dart';
@@ -20,17 +21,10 @@ class _HostPageState extends State<HostPage> {
   final Host host = Get.arguments;
   int selectIndex = 0;
   final ItemDataController itemDataController = ItemDataController();
-  final ProblemByHostDataController problemDataController =
-      ProblemByHostDataController();
+  final ProblemDataController problemDataController = ProblemDataController();
   List<Item> hostItens = [];
   List<Problem> hostProblems = [];
   bool _isLoading = false;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectIndex = index;
-    });
-  }
 
   Future<void> fetchItens() async {
     hostItens.clear();
@@ -42,7 +36,7 @@ class _HostPageState extends State<HostPage> {
     hostProblems = await problemDataController.fetchProblemsByHost(host.id);
   }
 
-  Future<void> fetchData() async {
+  Future<void> _fetchData() async {
     if (mounted) {
       setState(() {
         _isLoading = true;
@@ -60,7 +54,7 @@ class _HostPageState extends State<HostPage> {
   @override
   void initState() {
     super.initState();
-    fetchData();
+    _fetchData();
   }
 
   @override

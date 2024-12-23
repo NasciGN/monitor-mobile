@@ -143,7 +143,7 @@ class SideMenu extends StatelessWidget {
       children: [
         _buildListItem(context, 0, 'Grupos de Modelos', '/shortly'),
         _buildListItem(context, 1, 'Grupos de Hosts', '/shortly'),
-        _buildListItem(context, 2, 'Templates', '/shortly'),
+        _buildListItem(context, 2, 'Templates', '/templates'),
       ],
     );
   }
