@@ -23,4 +23,12 @@ class TemplateDataController {
       return [];
     }
   }
+
+  List<Template> searchTemplatesFilter(String query, List<Template> templates) {
+    return templates
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toLowerCase()) ||
+            element.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
 }

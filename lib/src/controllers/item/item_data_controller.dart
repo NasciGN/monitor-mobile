@@ -21,6 +21,22 @@ class ItemDataController {
     return itens;
   }
 
+  Future<List<Item>> fetchItensByTempalte(String templateId) async {
+    try {
+      String getHostItensCall = await rootBundle
+          .loadString('assets/json/items/get_items_by_template.json');
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      jsonRequest["params"]["templateids"] = templateId;
+      List<dynamic> itensData = await apiGet.getData(jsonRequest);
+      List<Item> itens = itensData.map((item) => Item.fromJson(item)).toList();
+      return itens;
+    } catch (e) {
+      print(e);
+      Get.snackbar('Erro', 'Não foi possível buscar os itens deste Template.');
+      return [];
+    }
+  }
+
   Future<List<History>> fetchHistory(String itemsid, String unit) async {
     try {
       String getHostItensCall = await rootBundle

@@ -2,7 +2,8 @@
   "jsonrpc": "2.0",
   "method": "template.get",
   "params": {
-    "output": "extend"
+    "output": "extend",
+    "selectTags": "extend"
   },
   "auth": "",
   "id": 1

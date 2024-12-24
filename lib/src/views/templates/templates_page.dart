@@ -5,6 +5,8 @@ import 'package:monitor_mobile/src/controllers/templates/template_data_controlle
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/components/host_card_skeleton.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TemplatesPage extends StatefulWidget {
   const TemplatesPage({super.key});
@@ -17,6 +19,7 @@ class _TemplatesPageState extends State<TemplatesPage> {
   final TemplateDataController _templateDataController =
       TemplateDataController();
   List<Template> templates = [];
+  List<Template> searchTemplates = [];
   bool _isLoading = false;
 
   Future<void> _fetchTemplates() async {
@@ -29,19 +32,30 @@ class _TemplatesPageState extends State<TemplatesPage> {
       print(e);
     } finally {
       setState(() {
+        searchTemplates = List.from(templates);
         _isLoading = false;
       });
     }
   }
 
   @override
-  @override
   void initState() {
     super.initState();
     _fetchTemplates();
   }
 
-  Future<void> _handleRefresh() async {}
+  void _searchData(String query) {
+    if (mounted) {
+      setState(() {
+        searchTemplates =
+            _templateDataController.searchTemplatesFilter(query, templates);
+      });
+    }
+  }
+
+  Future<void> _handleRefresh() async {
+    _fetchTemplates();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,23 +87,117 @@ class _TemplatesPageState extends State<TemplatesPage> {
   }
 
   _buildBody(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        //Get.offNamed();
-      },
-      onLongPress: () {},
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 120,
-        width: double.infinity,
-        padding:
-            const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(5)),
-        child: const Row(
-          children: [],
+    return Column(
+      children: [
+        _buildTextField(),
+        const SizedBox(
+          height: 20,
         ),
+        _isLoading
+            ? Expanded(
+                child: Shimmer.fromColors(
+                  baseColor: const Color.fromARGB(26, 214, 214, 214),
+                  highlightColor: Theme.of(context).colorScheme.primary,
+                  child: ListView.separated(
+                    itemBuilder: (context, index) => CardHostSkeleton(
+                      context: context,
+                    ),
+                    separatorBuilder: ((context, index) => const SizedBox(
+                          height: 16,
+                        )),
+                    itemCount: 6,
+                  ),
+                ),
+              )
+            : templates.isEmpty
+                ? Expanded(
+                    child: ListView(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: defaultpd * 10,
+                            ),
+                            const FaIcon(
+                              FontAwesomeIcons.boxOpen,
+                              size: defaultpd * 4,
+                              color: Colors.white70,
+                            ),
+                            Text(
+                              'Sem dados encontrados.',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : _buildTemplateListView(),
+      ],
+    );
+  }
+
+  TextField _buildTextField() {
+    return TextField(
+      onChanged: (value) => _searchData(value),
+      style: Theme.of(context).textTheme.bodyLarge,
+      decoration: _buildTextFieldDecoration(),
+    );
+  }
+
+  InputDecoration _buildTextFieldDecoration() {
+    return InputDecoration(
+        suffix: const FaIcon(
+          FontAwesomeIcons.magnifyingGlass,
+          color: Colors.white,
+        ),
+        label: Text(
+          'Pesquisar',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        focusColor: Theme.of(context).colorScheme.tertiary);
+  }
+
+  _buildTemplateListView() {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: searchTemplates.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Get.toNamed('/template_page', arguments: searchTemplates[index]);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              width: double.infinity,
+              padding: const EdgeInsets.only(
+                  top: 10, bottom: 10, left: 10, right: 20),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(5)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    searchTemplates[index].name,
+                    maxLines: 2,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

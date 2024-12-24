@@ -43,6 +43,22 @@ class HostsDataController {
     }
   }
 
+  Future<String> fetchCountHostsByTemplates(String templateId) async {
+    try {
+      String getHostsJson = await rootBundle
+          .loadString('assets/json/hosts/get_count_hosts_by_template.json');
+      Map<String, dynamic> jsonRequest = jsonDecode(getHostsJson);
+      jsonRequest["params"]["templateids"] = [templateId];
+      final getHostsResponse = await apiGet.getData(jsonRequest);
+
+      String result = getHostsResponse.toString();
+      return result;
+    } catch (e) {
+      print('Erro ao buscar hosts com a API: $e');
+      return '';
+    }
+  }
+
   void sortByNameHosts(List<Host> hosts) {
     hosts.sort((Host a, Host b) => a.host.compareTo(b.host));
   }

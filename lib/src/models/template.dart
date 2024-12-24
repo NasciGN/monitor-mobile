@@ -1,3 +1,5 @@
+import 'package:monitor_mobile/src/models/models.dart';
+
 class Template {
   String templateId;
   String name;
@@ -26,6 +28,7 @@ class Template {
   String uuid;
   String vendorName;
   String vendorVersion;
+  List<Tag> tags;
 
   Template({
     required this.templateId,
@@ -55,6 +58,7 @@ class Template {
     required this.uuid,
     required this.vendorName,
     required this.vendorVersion,
+    required this.tags,
   });
 
   Map<String, dynamic> toMap() {
@@ -86,6 +90,7 @@ class Template {
       'uuid': uuid,
       'vendor_name': vendorName,
       'vendor_version': vendorVersion,
+      'tags': tags.map((tag) => tag.toMap()).toList(),
     };
   }
 
@@ -119,37 +124,40 @@ class Template {
         uuid: json['uuid'] ?? '',
         vendorName: json['vendor_name'] ?? '',
         vendorVersion: json['vendor_version'] ?? '',
+        tags: (json['tags'] as List<dynamic>? ?? [])
+            .map((tagJson) => Tag.fromJson(tagJson))
+            .toList(),
       );
     } else {
       return Template(
-        templateId: '',
-        name: '',
-        description: '',
-        proxyHostId: '',
-        host: '',
-        status: '',
-        ipmiAuthtype: '',
-        ipmiPrivilege: '',
-        ipmiUsername: '',
-        ipmiPassword: '',
-        maintenanceId: '',
-        maintenanceStatus: '',
-        maintenanceType: '',
-        maintenanceFrom: '',
-        flags: '',
-        tlsConnect: '',
-        tlsAccept: '',
-        tlsIssuer: '',
-        tlsSubject: '',
-        tlsPskIdentity: '',
-        tlsPsk: '',
-        proxyAddress: '',
-        autoCompress: '',
-        customInterfaces: '',
-        uuid: '',
-        vendorName: '',
-        vendorVersion: '',
-      );
+          templateId: '',
+          name: '',
+          description: '',
+          proxyHostId: '',
+          host: '',
+          status: '',
+          ipmiAuthtype: '',
+          ipmiPrivilege: '',
+          ipmiUsername: '',
+          ipmiPassword: '',
+          maintenanceId: '',
+          maintenanceStatus: '',
+          maintenanceType: '',
+          maintenanceFrom: '',
+          flags: '',
+          tlsConnect: '',
+          tlsAccept: '',
+          tlsIssuer: '',
+          tlsSubject: '',
+          tlsPskIdentity: '',
+          tlsPsk: '',
+          proxyAddress: '',
+          autoCompress: '',
+          customInterfaces: '',
+          uuid: '',
+          vendorName: '',
+          vendorVersion: '',
+          tags: []);
     }
   }
 }

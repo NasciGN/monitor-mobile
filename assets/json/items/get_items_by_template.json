@@ -7,7 +7,8 @@
     "with_triggers": true,
     "selectTags": "extend",
     "selectValueMap": ["mappings"],
-    "sortfield": "name"
+    "sortfield": "name",
+    "templateids": ""
   },
   "id": 1,
   "auth": ""

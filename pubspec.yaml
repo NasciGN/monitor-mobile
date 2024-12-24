@@ -98,10 +98,12 @@ flutter:
     - assets/json/hosts/delete_host.json
     - assets/json/hosts/get_hosts.json
     - assets/json/hosts/update_host.json
+    - assets/json/hosts/get_count_hosts_by_template.json
     - assets/json/interfaces/get_interfaces.json
     - assets/json/inventory/get_inventory.json
     - assets/json/items/get_item_history.json
     - assets/json/items/get_items_by_host.json
+    - assets/json/items/get_items_by_template.json
     - assets/json/templates/get_templates.json
     - assets/json/problems/get_problems.json
     - assets/json/problems/get_problems_by_host_timestamp.json

@@ -12,3 +12,4 @@ export 'package:monitor_mobile/src/views/dashboard/dashboard_page.dart';
 export 'package:monitor_mobile/src/views/incidents/pages/incident_page/incident_page.dart';
 export 'package:monitor_mobile/src/views/shortly/shortly_page.dart';
 export 'package:monitor_mobile/src/views/templates/templates_page.dart';
+export 'package:monitor_mobile/src/views/templates/template_page.dart';
