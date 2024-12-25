@@ -18,6 +18,7 @@ class HostInterfaceDataController {
           .toList();
       return interfaces;
     } catch (e) {
+      // ignore: avoid_print
       print('Erro ao buscar as interfaces de host: $e');
       return [];
     }

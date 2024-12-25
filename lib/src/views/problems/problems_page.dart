@@ -4,18 +4,18 @@ import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/event/event_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/hosts/components/host_card_skeleton.dart';
+import 'package:monitor_mobile/src/views/hosts/hosts_page/components/host_card_skeleton.dart';
 import 'package:monitor_mobile/src/views/incidents/components/incident_card.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ProblemsListPage extends StatefulWidget {
-  const ProblemsListPage({super.key});
+class HostIncidentsPage extends StatefulWidget {
+  const HostIncidentsPage({super.key});
 
   @override
-  State<ProblemsListPage> createState() => _ProblemsListPageState();
+  State<HostIncidentsPage> createState() => _HostIncidentsPageState();
 }
 
-class _ProblemsListPageState extends State<ProblemsListPage> {
+class _HostIncidentsPageState extends State<HostIncidentsPage> {
   EventDataController eventDataController = EventDataController();
   List<Problem> problems = Get.arguments['problems'];
   List<Event> events = [];
@@ -29,7 +29,6 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
       events = [];
       ids = [];
     });
-    print(problems);
     try {
       for (var problem in problems) {
         ids.add(problem.eventid);
@@ -42,6 +41,7 @@ class _ProblemsListPageState extends State<ProblemsListPage> {
         events;
       });
     } catch (e) {
+      print('Incidents error (_fetchIncidents): $e');
       setState(() {
         isLoading = false;
       });

@@ -13,12 +13,11 @@ ThemeData customDarkTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(darkBtnColor),
-        foregroundColor:
-            const WidgetStatePropertyAll(Colors.white), // Define a cor do texto
+        foregroundColor: const WidgetStatePropertyAll(Colors.white),
         textStyle: WidgetStateProperty.all(
           const TextStyle(
-            fontSize: 20, // Tamanho do texto
-            fontWeight: FontWeight.bold, // Peso da fonte
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

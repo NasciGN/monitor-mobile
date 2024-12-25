@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
-import 'package:monitor_mobile/src/controllers/triggers/trigger_data_controller.dart';
+
 import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/dashboard/widget/dashboard_skeleton.dart';
-import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/dashboard/components/dashboard_skeleton.dart';
+import 'package:monitor_mobile/src/views/dashboard/components/drawer_widget.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -25,14 +25,16 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<void> _fetchIncidents() async {
     try {
       triggers = await triggerDataController.fetchActiveTriggers();
-    } catch (e) {}
+    } catch (e) {
+      print('Dashboard error (_fetchIncidents): $e');
+    }
   }
 
   Future<void> _fetchHosts() async {
     try {
       hosts = await hostsDataController.fetchHosts();
     } catch (e) {
-      print('Erro ao atribuir as listas de hosts para a lista de pesquisa: $e');
+      print('Dashboard error (_fetchHosts): $e');
     }
   }
 
@@ -53,7 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
         triggers;
       });
     } catch (e) {
-      print('Erro ao buscar dados: $e');
+      print('Dashboard error (_fetchData): $e');
     }
   }
 
@@ -61,10 +63,6 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     _fetchData();
-  }
-
-  Future<void> _handleRefresh() async {
-    await _fetchData();
   }
 
   @override
@@ -184,7 +182,7 @@ class _DashboardPageState extends State<DashboardPage> {
       String label, String severity, Color? color, String count) {
     return GestureDetector(
       onTap: () {
-        Get.offNamed('/incidents_list_page', arguments: severity);
+        Get.offNamed('/incidents', arguments: severity);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4.0),

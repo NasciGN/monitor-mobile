@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
-import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/dashboard/components/drawer_widget.dart';
 
 class ShortlyPage extends StatelessWidget {
   const ShortlyPage({super.key});

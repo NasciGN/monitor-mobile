@@ -1,7 +1,7 @@
-import 'host_interface.dart';
+import 'interface.dart';
 import 'group.dart';
 import 'template.dart';
-import 'host_inventory.dart';
+import 'inventory.dart';
 
 class Host {
   String id, host, name, description, status, inventoryMode, activeAvailable;

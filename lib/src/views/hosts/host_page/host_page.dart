@@ -6,8 +6,8 @@ import 'package:monitor_mobile/src/controllers/problem/problem_data_controller.d
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_skeleton.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/host_infos/host_detail_form.dart';
-import 'package:monitor_mobile/src/views/hosts/host_page/host_inventory/host_inventory_form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/forms/host_infos/host_detail_form.dart';
+import 'package:monitor_mobile/src/views/hosts/host_page/components/forms/host_inventory/host_inventory_form.dart';
 import 'components/grid_view_cards.dart';
 
 class HostPage extends StatefulWidget {
@@ -114,7 +114,7 @@ class _HostPageState extends State<HostPage> {
   _buildGraphSection(context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/host_graphs', arguments: host.id);
+        Get.toNamed('/host_charts', arguments: host.id);
       },
       child: Container(
         width: double.infinity,

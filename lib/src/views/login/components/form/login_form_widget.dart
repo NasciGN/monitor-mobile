@@ -39,7 +39,6 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(
               height: 16,
             ),
-            // _buildServerRegistrationBtn(),
             _buildLoginBtn()
           ],
         ),
@@ -61,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
       cursorColor: Colors.white,
       style: Theme.of(context).textTheme.bodyMedium,
       controller: _controllerUrl,
-      decoration: _buildTextFieldDecoration('Servidor', false),
+      decoration: _buildTextFieldDecoration('http(s)://zabbix.com', false),
     );
   }
 
@@ -116,17 +115,6 @@ class _LoginFormState extends State<LoginForm> {
 
   _buildTextLabelStyle() {
     return Theme.of(context).textTheme.labelMedium;
-  }
-
-  _buildRegisterServerBTn() {
-    return SizedBox(
-      height: 60,
-      width: 500,
-      child: Text(
-        'Cadastrar Servidor',
-        style: Theme.of(context).textTheme.labelSmall,
-      ),
-    );
   }
 
   _buildLoginBtn() {

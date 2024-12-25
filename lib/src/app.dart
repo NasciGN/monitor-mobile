@@ -21,7 +21,7 @@ class MonitorMobile extends StatelessWidget {
               title: 'Monitor Mobile',
               theme: customDarkTheme(),
               getPages: customGetPages,
-              initialRoute: isLoggedIn ? '/hosts' : '/login',
+              initialRoute: isLoggedIn ? '/dashboard' : '/login',
             );
           }
         }));

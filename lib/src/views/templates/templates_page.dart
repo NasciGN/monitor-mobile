@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:monitor_mobile/src/controllers/templates/template_data_controller.dart';
+import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
-import 'package:monitor_mobile/src/views/dashboard/widget/drawer_widget.dart';
-import 'package:monitor_mobile/src/views/hosts/components/host_card_skeleton.dart';
+import 'package:monitor_mobile/src/views/dashboard/components/drawer_widget.dart';
+import 'package:monitor_mobile/src/views/hosts/hosts_page/components/host_card_skeleton.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'components/template_card.dart';
 
 class TemplatesPage extends StatefulWidget {
   const TemplatesPage({super.key});
@@ -171,32 +172,7 @@ class _TemplatesPageState extends State<TemplatesPage> {
       child: ListView.builder(
         itemCount: searchTemplates.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Get.toNamed('/template_page', arguments: searchTemplates[index]);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              width: double.infinity,
-              padding: const EdgeInsets.only(
-                  top: 10, bottom: 10, left: 10, right: 20),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(5)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    searchTemplates[index].name,
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          );
+          return TemplateCard(searchTemplates: searchTemplates[index]);
         },
       ),
     );

@@ -62,9 +62,6 @@ Map<String, Color> getSeverityColors(String severity) {
     case '5':
       return disaster;
     default:
-      return {
-        "txtColor": Colors.grey,
-        "bgColor": Colors.grey
-      }; // Cor padrão caso não haja correspondência
+      return {"txtColor": Colors.grey, "bgColor": Colors.grey};
   }
 }

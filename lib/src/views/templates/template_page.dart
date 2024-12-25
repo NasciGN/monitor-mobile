@@ -38,7 +38,7 @@ class _TemplatePageState extends State<TemplatePage> {
       hosts =
           await hostsDataController.fetchHostsByTemplates(template.templateId);
     } catch (e) {
-      print(e);
+      print('Template error (_fetchHosts): $e');
     } finally {
       setState(() {});
     }
@@ -50,7 +50,7 @@ class _TemplatePageState extends State<TemplatePage> {
       itens =
           await itemDataController.fetchItensByTempalte(template.templateId);
     } catch (e) {
-      print(e);
+      print('Template error (_fetchItens): $e');
     } finally {
       setState(() {});
     }
@@ -63,7 +63,6 @@ class _TemplatePageState extends State<TemplatePage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: _buildPadding(),
-        //child: _isLoading ? const HostPageSkeleton() : _buildBody(context),
         child: _buildBody(context),
       ),
     );
