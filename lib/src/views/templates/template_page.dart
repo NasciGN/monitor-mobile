@@ -20,7 +20,6 @@ class _TemplatePageState extends State<TemplatePage> {
   ItemDataController itemDataController = ItemDataController();
   List<Host> hosts = [];
   List<Item> itens = [];
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -35,34 +34,25 @@ class _TemplatePageState extends State<TemplatePage> {
 
   Future<void> _fecthHosts() async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      setState(() {});
       hosts =
           await hostsDataController.fetchHostsByTemplates(template.templateId);
-      print(hosts.length);
     } catch (e) {
       print(e);
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() {});
     }
   }
 
   Future<void> _fetchItens() async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      setState(() {});
       itens =
           await itemDataController.fetchItensByTempalte(template.templateId);
     } catch (e) {
       print(e);
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() {});
     }
   }
 
@@ -152,6 +142,24 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   _buildCardInformation(context, String label, String value) {
+    return TemplateCardWidget(label: label, value: value);
+  }
+
+  BoxDecoration _buildContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: BorderRadius.circular(10));
+  }
+}
+
+class TemplateCardWidget extends StatelessWidget {
+  const TemplateCardWidget(
+      {super.key, required this.label, required this.value});
+
+  final String label;
+  final String value;
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: defaultpd),
       width: double.infinity,
@@ -179,11 +187,5 @@ class _TemplatePageState extends State<TemplatePage> {
         ),
       ),
     );
-  }
-
-  BoxDecoration _buildContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(10));
   }
 }

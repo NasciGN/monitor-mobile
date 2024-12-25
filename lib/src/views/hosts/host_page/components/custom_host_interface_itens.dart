@@ -165,9 +165,9 @@ class _SNMPContainerState extends State<SNMPContainer> {
               _buildRow(
                 context,
                 'Endereço IP',
-                widget.interfaceData.ip ?? 'N/A',
+                widget.interfaceData.ip,
                 'Porta',
-                widget.interfaceData.port ?? 'N/A',
+                widget.interfaceData.port,
               ),
               const SizedBox(height: 16),
               Row(
@@ -177,7 +177,7 @@ class _SNMPContainerState extends State<SNMPContainer> {
                       style: Theme.of(context).textTheme.bodyMedium,
                       enabled: false,
                       textInputAction: TextInputAction.next,
-                      initialValue: widget.interfaceData.dns ?? 'N/A',
+                      initialValue: widget.interfaceData.dns,
                       minLines: 1,
                       maxLines: 2,
                       decoration: _buildDecoration(context, 'DNS'),
@@ -259,8 +259,7 @@ class _SNMPContainerState extends State<SNMPContainer> {
                       style: Theme.of(context).textTheme.bodyMedium,
                       enabled: false,
                       textInputAction: TextInputAction.next,
-                      initialValue:
-                          widget.interfaceData.details.community ?? 'N/A',
+                      initialValue: widget.interfaceData.details.community,
                       minLines: 1,
                       maxLines: 2,
                       decoration: _buildDecoration(context, 'Comunidade SNMP'),
@@ -272,8 +271,7 @@ class _SNMPContainerState extends State<SNMPContainer> {
                       style: Theme.of(context).textTheme.bodyMedium,
                       enabled: false,
                       textInputAction: TextInputAction.next,
-                      initialValue:
-                          widget.interfaceData.details.version ?? 'N/A',
+                      initialValue: widget.interfaceData.details.version,
                       minLines: 1,
                       maxLines: 2,
                       decoration: _buildDecoration(context, 'Versão SNMP'),

@@ -64,8 +64,8 @@ class EventDataController {
           .loadString('assets/json/events/acknowledge_event.json');
       final jsonRequest = await jsonDecode(acknowledgedEventCall);
       jsonRequest["params"]["eventids"] = eventId;
-      jsonRequest["params"]["message"] = message ?? "";
-      jsonRequest["params"]["severity"] = severity ?? "";
+      jsonRequest["params"]["message"] = message;
+      jsonRequest["params"]["severity"] = severity;
       jsonRequest["params"]["action"] = action;
 
       final eventResponse = await apiGet.getData(jsonRequest);
