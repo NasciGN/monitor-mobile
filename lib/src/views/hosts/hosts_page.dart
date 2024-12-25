@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
@@ -20,26 +21,37 @@ class _HostsPageState extends State<HostsPage> {
   final HostsDataController hostsDataController = HostsDataController();
   List<Host> hosts = [];
   List<Host> searchHosts = [];
+  List<Host> filterHosts = [];
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchHosts();
+    _fetchData();
+  }
+
+  void _fetchData() async {
+    await _fetchHosts();
+    filterHosts = Get.arguments ?? [];
+    if (filterHosts.isEmpty) {
+      searchHosts = List.from(hosts);
+    } else {
+      searchHosts = List.from(filterHosts);
+    }
   }
 
   Future<void> _fetchHosts() async {
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     try {
       hosts = await hostsDataController.fetchHosts();
-      setState(() {
-        searchHosts = List.from(hosts);
-        isLoading = false;
-      });
     } catch (e) {
       print('Erro ao atribuir as listas de hosts para a lista de pesquisa: $e');
+    }
+    if (mounted) {
       setState(() {
         isLoading = false;
       });
@@ -56,6 +68,7 @@ class _HostsPageState extends State<HostsPage> {
 
   Future<void> _handleRefresh() async {
     await _fetchHosts();
+    _fetchData();
   }
 
   @override
@@ -84,6 +97,20 @@ class _HostsPageState extends State<HostsPage> {
         style: Theme.of(context).textTheme.titleLarge,
       ),
       iconTheme: Theme.of(context).iconTheme,
+      actions: filterHosts.isNotEmpty
+          ? [
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.filterCircleXmark),
+                tooltip: 'Remover filtro',
+                onPressed: () {
+                  setState(() {
+                    filterHosts = [];
+                    searchHosts = List.from(hosts);
+                  });
+                },
+              ),
+            ]
+          : null,
     );
   }
 

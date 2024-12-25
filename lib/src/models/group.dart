@@ -20,10 +20,10 @@ class Group {
   factory Group.fromJson(Map<String, dynamic>? json) {
     if (json != null && json.isNotEmpty) {
       return Group(
-        groupId: json['groupid'],
-        name: json['name'],
-        flags: json['flags'],
-        uuid: json['uuid'],
+        groupId: json['groupid'] ?? "",
+        name: json['name'] ?? "",
+        flags: json['flags'] ?? "",
+        uuid: json['uuid'] ?? "",
       );
     } else {
       return Group(groupId: '', name: '', flags: '', uuid: '');

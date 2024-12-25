@@ -2,8 +2,8 @@
   "jsonrpc": "2.0",
   "method": "host.get",
   "params": {
-    "templateids": "",
-    "countOutput": "True"
+    "output": "extend",
+    "selectGroups": "extend"
   },
   "auth": "",
   "id": 3

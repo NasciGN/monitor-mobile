@@ -148,7 +148,7 @@ class _IncidentPageState extends State<IncidentPage> {
       },
       child: Container(
         padding: _buildPadding(),
-        width: 150,
+        width: 180,
         decoration: BoxDecoration(
           color: _currentIndex == index
               ? Theme.of(context).colorScheme.primary

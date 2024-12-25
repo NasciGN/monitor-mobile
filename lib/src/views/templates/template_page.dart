@@ -18,7 +18,7 @@ class _TemplatePageState extends State<TemplatePage> {
   HostsDataController hostsDataController = HostsDataController();
 
   ItemDataController itemDataController = ItemDataController();
-  String hostsCount = '';
+  List<Host> hosts = [];
   List<Item> itens = [];
   bool _isLoading = false;
 
@@ -38,8 +38,9 @@ class _TemplatePageState extends State<TemplatePage> {
       setState(() {
         _isLoading = true;
       });
-      hostsCount = await hostsDataController
-          .fetchCountHostsByTemplates(template.templateId);
+      hosts =
+          await hostsDataController.fetchHostsByTemplates(template.templateId);
+      print(hosts.length);
     } catch (e) {
       print(e);
     } finally {
@@ -56,7 +57,6 @@ class _TemplatePageState extends State<TemplatePage> {
       });
       itens =
           await itemDataController.fetchItensByTempalte(template.templateId);
-      print(itens.length);
     } catch (e) {
       print(e);
     } finally {
@@ -132,10 +132,19 @@ class _TemplatePageState extends State<TemplatePage> {
           children: [
             Text('Informações', style: Theme.of(context).textTheme.titleMedium),
             _buildCardInformation(context, 'Nome', template.name),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed('hosts', arguments: hosts);
+              },
+              child: _buildCardInformation(context, 'Hosts',
+                  hosts.isEmpty ? '(0)' : '(${hosts.length})'),
+            ),
             _buildCardInformation(
-                context, 'Hosts', hostsCount.isEmpty ? '' : hostsCount),
-            _buildCardInformation(
-                context, 'Itens', itens.isEmpty ? '' : itens.length.toString()),
+                context, 'Itens', itens.isEmpty ? '(0)' : '(${itens.length})'),
+            _buildCardInformation(context, 'Triggers',
+                itens.isEmpty ? '(0)' : '(${itens.length})'),
+            _buildCardInformation(context, 'Fornecedor', template.vendorName),
+            _buildCardInformation(context, 'Versão', template.vendorVersion),
             TagSection(tags: template.tags),
             _buildCardInformation(context, 'Descrição', template.description),
           ],

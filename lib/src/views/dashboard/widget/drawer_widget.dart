@@ -141,8 +141,8 @@ class SideMenu extends StatelessWidget {
         color: Colors.white,
       ),
       children: [
-        _buildListItem(context, 0, 'Grupos de Modelos', '/shortly'),
-        _buildListItem(context, 1, 'Grupos de Hosts', '/shortly'),
+        //_buildListItem(context, 0, 'Grupos de Modelos', '/shortly'),
+        _buildListItem(context, 1, 'Grupos de Hosts', '/groups'),
         _buildListItem(context, 2, 'Templates', '/templates'),
       ],
     );

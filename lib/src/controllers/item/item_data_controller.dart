@@ -28,6 +28,7 @@ class ItemDataController {
       final jsonRequest = await jsonDecode(getHostItensCall);
       jsonRequest["params"]["templateids"] = templateId;
       List<dynamic> itensData = await apiGet.getData(jsonRequest);
+
       List<Item> itens = itensData.map((item) => Item.fromJson(item)).toList();
       return itens;
     } catch (e) {

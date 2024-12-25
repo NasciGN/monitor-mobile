@@ -35,9 +35,18 @@ class _EventAcknowledgesChatCardState extends State<EventAcknowledgesChatCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '${widget.acknowledged.username} (${widget.acknowledged.name} ${widget.acknowledged.surname})',
-                  style: Theme.of(context).textTheme.labelSmall,
+                Expanded(
+                  child: Text(
+                    '${widget.acknowledged.username} '
+                    '(${widget.acknowledged.name} ${widget.acknowledged.surname})',
+                    style: Theme.of(context).textTheme.labelSmall,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    softWrap: false,
+                  ),
+                ),
+                const SizedBox(
+                  width: defaultpd,
                 ),
                 Container(
                   decoration: _buildContainerDecoration(context),

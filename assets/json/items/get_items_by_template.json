@@ -3,7 +3,6 @@
   "method": "item.get",
   "params": {
     "output": "extend",
-    "hostids": "",
     "with_triggers": true,
     "selectTags": "extend",
     "selectValueMap": ["mappings"],
