@@ -6,6 +6,7 @@ import 'package:monitor_mobile/src/models/models.dart';
 
 class ProblemDataController {
   final GetData apiGet = GetData();
+
   Future<List<Problem>> fetchProblems() async {
     try {
       String getHostItensCall =
@@ -54,6 +55,22 @@ class ProblemDataController {
     } catch (e) {
       Get.snackbar(
           'Erro', 'Não foi possível buscar os incidentes ativos no servidor.');
+      return [];
+    }
+  }
+
+  Future<List<Problem>> fetchProblemsWithToken(String token) async {
+    try {
+      String getHostItensCall =
+          await rootBundle.loadString('assets/json/problems/get_problems.json');
+
+      final jsonRequest = await jsonDecode(getHostItensCall);
+      List<dynamic> problemsData = await apiGet.getData(jsonRequest);
+      List<Problem> problems =
+          problemsData.map((item) => Problem.fromJson(item)).toList();
+      return problems;
+    } catch (e) {
+      print(e);
       return [];
     }
   }

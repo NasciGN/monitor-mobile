@@ -21,8 +21,9 @@ class GetData {
     pass = userapi.senha.value;
   }
 
-  Future<dynamic> getData(var json) async {
-    json["auth"] = token;
+  Future<dynamic> getData(var json, [String? code]) async {
+    json["auth"] = code ?? token;
+
     try {
       final response = await dio
           .post(url,

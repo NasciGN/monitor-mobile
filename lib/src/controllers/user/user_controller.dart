@@ -74,7 +74,6 @@ class UserApi extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
       return;
     } catch (e) {
-      print('Deu erro samerda: $e');
       if (e.toString().contains('No host specified in URI')) {
         Get.snackbar(
           'Url inválida',

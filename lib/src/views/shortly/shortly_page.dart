@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monitor_mobile/src/controllers/backgroud_task/backgroud_service.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/views/dashboard/components/drawer_widget.dart';
 
@@ -34,12 +35,22 @@ class ShortlyPage extends StatelessWidget {
   _buildBody() {
     return Padding(
       padding: _buildPadding(),
-      child: const Center(
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.personDigging),
-            Text('Página em construção')
+            const FaIcon(FontAwesomeIcons.personDigging),
+            const Text('Página em construção'),
+            ElevatedButton(
+              onPressed: () async {
+                final incidents = await BackgroundService()
+                    .problemDataController
+                    .fetchProblems();
+                print(
+                    "🔍 Teste Manual: ${incidents.length} incidentes encontrados.");
+              },
+              child: Text("Testar API Zabbix"),
+            )
           ],
         ),
       ),
