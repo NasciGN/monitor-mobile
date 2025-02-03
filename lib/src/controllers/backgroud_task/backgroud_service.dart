@@ -7,17 +7,9 @@ import 'package:monitor_mobile/src/controllers/controllers.dart';
 import 'package:monitor_mobile/src/controllers/notification/notification_service.dart';
 import 'package:monitor_mobile/src/models/adapters/user_login_adapter.dart';
 
-// Classe para gerenciar o Background Fetch e Notificações
 class BackgroundService with WidgetsBindingObserver {
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
-    'zabbix_alerts_channel',
-    'Zabbix Alerts',
-    description: 'Notificações para incidentes do Zabbix',
-    importance: Importance.high,
-  );
 
   final UserDataController userDataController = UserDataController();
   final ProblemDataController problemDataController = ProblemDataController();
@@ -84,7 +76,9 @@ class BackgroundService with WidgetsBindingObserver {
     final incidents =
         await problemDataController.fetchProblemsWithToken(user!.apicode);
 
-    handleIncidents(incidents);
+    if (incidents.isNotEmpty) {
+      handleIncidents(incidents);
+    }
 
     BackgroundFetch.finish(taskId);
   }
@@ -115,15 +109,15 @@ class BackgroundService with WidgetsBindingObserver {
 
       final incidents =
           await problemDataController.fetchProblemsWithToken(user!.apicode);
-      handleIncidents(incidents);
+
+      if (incidents.isNotEmpty) {
+        handleIncidents(incidents);
+      }
 
       BackgroundFetch.finish(taskId);
     }, (String taskId) async {
-      print("[BackgroundFetch] ❌ Timeout da tarefa: $taskId");
       BackgroundFetch.finish(taskId);
     });
-
-    print("[BackgroundFetch] ✅ Configuração bem-sucedida: $status");
 
     BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
   }

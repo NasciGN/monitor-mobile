@@ -35,22 +35,12 @@ class ShortlyPage extends StatelessWidget {
   _buildBody() {
     return Padding(
       padding: _buildPadding(),
-      child: Center(
+      child: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const FaIcon(FontAwesomeIcons.personDigging),
-            const Text('Página em construção'),
-            ElevatedButton(
-              onPressed: () async {
-                final incidents = await BackgroundService()
-                    .problemDataController
-                    .fetchProblems();
-                print(
-                    "🔍 Teste Manual: ${incidents.length} incidentes encontrados.");
-              },
-              child: Text("Testar API Zabbix"),
-            )
+            FaIcon(FontAwesomeIcons.personDigging),
+            Text('Página em construção'),
           ],
         ),
       ),

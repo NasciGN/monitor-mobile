@@ -11,7 +11,7 @@ class NotificationService {
     if (_isInitialized) return;
 
     const initSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/monitor_mobile_monochrome');
 
     const initSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: true,

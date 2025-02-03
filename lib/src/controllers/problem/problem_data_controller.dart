@@ -60,14 +60,18 @@ class ProblemDataController {
   }
 
   Future<List<Problem>> fetchProblemsWithToken(String token) async {
+    int currentTimestamp = (DateTime.now().millisecondsSinceEpoch ~/ 1000);
+    int timeThreshold = currentTimestamp - 960;
     try {
       String getHostItensCall =
           await rootBundle.loadString('assets/json/problems/get_problems.json');
 
       final jsonRequest = await jsonDecode(getHostItensCall);
       List<dynamic> problemsData = await apiGet.getData(jsonRequest);
-      List<Problem> problems =
-          problemsData.map((item) => Problem.fromJson(item)).toList();
+      List<Problem> problems = problemsData
+          .map((item) => Problem.fromJson(item))
+          .where((problem) => int.parse(problem.clock) >= timeThreshold)
+          .toList();
       return problems;
     } catch (e) {
       print(e);
