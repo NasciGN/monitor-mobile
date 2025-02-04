@@ -133,7 +133,7 @@ class _IncidentPageState extends State<IncidentPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _buildSelectorButton(0, 'Informações'),
+        _buildSelectorButton(0, 'Detalhes'),
         _buildSelectorButton(1, 'Atualizar'),
       ],
     );
@@ -148,7 +148,6 @@ class _IncidentPageState extends State<IncidentPage> {
       },
       child: Container(
         padding: _buildPadding(),
-        width: 180,
         decoration: BoxDecoration(
           color: _currentIndex == index
               ? Theme.of(context).colorScheme.primary

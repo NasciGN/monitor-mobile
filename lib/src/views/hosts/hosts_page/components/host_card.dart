@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/host.dart';
 
 class HostCard extends StatefulWidget {
@@ -24,7 +25,7 @@ class _HostCardState extends State<HostCard> {
       onLongPress: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 100,
+        // height: 120,
         width: double.infinity,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -44,9 +45,6 @@ class _HostCardState extends State<HostCard> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
                 widget.host.status == '0'
                     ? Text(
                         'Ativo',
@@ -56,7 +54,9 @@ class _HostCardState extends State<HostCard> {
                         style: Theme.of(context).textTheme.bodyMedium)
               ],
             ),
-            const Spacer(),
+            const SizedBox(
+              height: defaultpd * 4,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +79,7 @@ class _HostCardState extends State<HostCard> {
                                 style: Theme.of(context).textTheme.bodyMedium)),
                       )
                     : const SizedBox.shrink(),
-                const Spacer(),
+                //const Spacer(),
                 widget.host.mainInterface.isNotEmpty
                     ? Text(
                         widget.host.mainInterface[0].useIp == '1'

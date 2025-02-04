@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:monitor_mobile/src/controllers/controllers.dart';
-import 'package:monitor_mobile/src/controllers/problem/problem_data_controller.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:monitor_mobile/src/views/hosts/host_page/components/host_page_skeleton.dart';

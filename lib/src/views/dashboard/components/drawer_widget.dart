@@ -18,7 +18,7 @@ class SideMenu extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.secondary,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            vertical: defaultpd * 4, horizontal: defaultpd * 2),
+            vertical: defaultpd * 4, horizontal: defaultpd),
         child: Column(
           children: [
             Expanded(

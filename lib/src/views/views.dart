@@ -10,7 +10,6 @@ export 'incidents/incidents_page.dart';
 export 'items/item_page.dart';
 export 'items/items_page.dart';
 export 'login/login_page.dart';
-export 'problems/problem_page.dart';
 export 'problems/problems_page.dart';
 export 'shortly/shortly_page.dart';
 export 'templates/template_page.dart';

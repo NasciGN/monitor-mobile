@@ -5,6 +5,7 @@ import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/core/utils/constants.dart';
 import 'package:monitor_mobile/src/core/utils/format_data.dart';
 import 'package:monitor_mobile/src/models/models.dart';
+import 'package:monitor_mobile/src/views/incidents/components/event_action_dialog.dart';
 
 class IncidentCard extends StatefulWidget {
   const IncidentCard({super.key, required this.events});
@@ -27,10 +28,15 @@ class _IncidentCardState extends State<IncidentCard> {
         : [];
 
     return GestureDetector(
+      onLongPress: () {
+        Get.dialog(const EventActionDialog(), arguments: {
+          'event': widget.events,
+          'host': widget.events.hosts[0],
+        });
+      },
       onTap: () {
         Get.offNamed('incident_page', arguments: {'event': widget.events});
       },
-      onLongPress: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         height: 120,

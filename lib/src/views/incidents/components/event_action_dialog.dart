@@ -5,14 +5,14 @@ import 'package:monitor_mobile/src/core/colors/custom_colors.dart';
 import 'package:monitor_mobile/src/models/models.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ProblemActionDialog extends StatefulWidget {
-  const ProblemActionDialog({super.key});
+class EventActionDialog extends StatefulWidget {
+  const EventActionDialog({super.key});
 
   @override
-  State<ProblemActionDialog> createState() => _ProblemActionDialogState();
+  State<EventActionDialog> createState() => _EventActionDialogState();
 }
 
-class _ProblemActionDialogState extends State<ProblemActionDialog> {
+class _EventActionDialogState extends State<EventActionDialog> {
   String getSeverity(String severity) {
     switch (severity) {
       case '0':
@@ -32,7 +32,7 @@ class _ProblemActionDialogState extends State<ProblemActionDialog> {
     }
   }
 
-  Problem problem = Get.arguments['problem'];
+  Event event = Get.arguments['event'];
   Host host = Get.arguments['host'];
 
   @override
@@ -44,21 +44,10 @@ class _ProblemActionDialogState extends State<ProblemActionDialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Text(
-                'Suprimir incidente',
-                style: Theme.of(context).textTheme.labelMedium,
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
           GestureDetector(
             onTap: () {
               Share.share(
-                  'Incidente\nHost: ${host.name}\n${problem.name}\n\n\nDuração: ${problem.newClock}\nIP do Host: ${host.mainInterface.isNotEmpty ? host.mainInterface[0].ip : 0}\nSeveridade: ${getSeverity(problem.severity)}',
+                  'Incidente\nHost: ${host.name}\n${event.name}\n\n\nDuração: ${event.newClock}\nSeveridade: ${getSeverity(event.severity)}',
                   subject: 'Incidente');
             },
             child: Row(
